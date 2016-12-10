@@ -7,13 +7,9 @@ $reactive(this).attach($scope);
 	this.panelId = "";
 	this.tipoPeriodo = 'costo';
 
-	this.subscribe('users',()=>{
-	return Meteor.users.findOne[{ _id: Meteor.userId() }];
-    });
-
-	   this.subscribe('meses',()=>{
-	return [{estatus:true}] 
-    });
+	this.subscribe('meses',()=>{
+		return [{estatus:true}]
+	});
 
 	this.subscribe('obras',()=>{
 		return [{estatus:true}]

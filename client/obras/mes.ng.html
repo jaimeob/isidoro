@@ -1,0 +1,62 @@
+
+	<h2>Agregar Tiempo</h2>
+  <div class="row">
+   <div class="col-sm-12">
+		  <div class="col-sm-1">
+			<a class="btn btn-primary btn-lg"
+			ng-click="mes.nuevoMes()"><i class="fa fa-plus"></i></a><br/><br>
+			  </div>
+
+			   	<div class="col-sm-4">
+					    <input placeholder="Asignar fecha" ng-show="mes.accionMes" lang="spanish" date-time class="form-control" view="year" max-view="year" min-view="month" ng-model="mes.mes.fecha"/>
+			    	</div>
+
+
+		  
+			   <!-- <div class="col-sm-2" ng-show="mes.accionMes">
+						<select class="form-control select2" placeholder="Seleccione Obra" ng-show="mes.accionMes" ng-model="mes.mes.obra_id">
+							<option ng-repeat="obra in mes.obras" value="{{obra._id}}">{{obra.nombre}}</option>
+						</select>
+				</div>-->
+
+			     <div class="col-sm-2">
+					       <a class="btn btn-primary" ng-click="mes.guardar(mes.mes)" ng-show="mes.accionMes">
+					      Asignar Fecha</a>
+				 </div>
+    </div>
+  </div>
+
+
+  <div class="well">	  
+	<div class="row"> 
+		<div class="col-sm-12">	
+			<div class="col-lg-3" ng-repeat="Mes in mes.meses">
+				<a href="#" ng-click="mes.mostrarListas(Mes._id)">
+					<div class="panel panel-{{mes.panelId == Mes._id ? 'warning' : 'info'}}"> 
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-6">
+								  <i class="fa fa-calendar fa-5x"></i>
+								</div>
+								<div class="col-xs-6 text-right">
+								  <h1 style="font-size:40pt;"><strong></strong></h1>
+								  <p class="announcement-text">{{Mes.mes | date:"MMMM-yyyy"}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer announcement-bottom">
+							<div class="row">
+							  <div class="col-xs-6" >
+							    Ver...
+							  </div>
+							  <div class="col-xs-6 text-right">
+							    <i class="fa fa-times"  ng-click="mes.cambiarEstatus(Mes._id)"></i>
+							  </div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div> 
+		</div>
+	</div> 
+</div>
