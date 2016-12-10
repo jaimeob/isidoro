@@ -1,0 +1,215 @@
+<h1  style="color:#646464"> <i class="fa fa-reorder"></i> {{ct.obras[0].nombre}}</h1><br/>
+
+<div class="well" >
+
+<div class="row">
+<label style="font-size: 20px;"><strong>Control y Evaluación de Acuerdos</strong></label>					  
+	<div class="col-sm-12">
+   </div> 
+</div>
+
+<br/>
+
+<div class="row" >
+<div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-2" data-widget-editbutton="false" role="widget">						
+		<header role="heading"><div class="jarviswidget-ctrls" role="menu"><a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> </div>
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			<!--<h2>Resumen</h2>-->
+		<span class="jarviswidget-loader" style="display: none;"><i class="fa fa-refresh fa-spin"></i></span></header>
+		<div role="content" style="display: block;">
+			<div class="widget-body no-padding">
+				<div class="table-responsive">			
+						
+					<table class="table table-hover">
+				   
+						   <thead>
+						    <tr>
+							    <th style="font-size: 18px;"><div class="text-center">Conceptos</div></th>
+							    <th style="font-size: 18px;"><div class="text-center">Presupuestos</div></th>
+							    <th style="font-size: 18px;"><div class="text-center">Ahorros</div></th>
+							    <th style="font-size: 18px;"><div class="text-center">Nuevo Presupuesto</div></th>
+							    <th style="font-size: 18px;"><div class="text-center">Egresos</div></th>
+							    <!-- <th style="font-size: 18px;"><div class="text-center">Resultados logrados</div></th> -->
+							    <th style="font-size: 18px;"><div class="text-center">Gasto real</div></th>
+							    <th style="font-size: 18px;"><div class="text-center">Ahorro</div></th>
+						    </tr>
+						   </thead>
+							<tbody>	
+							<tr ng-repeat="costo in ct.costosTotales">						
+							<!--{{ct.plan}}-->
+							<div class="row" ng-show="ct.panel">
+								<div class="col-sm-12">
+									<a ng-click="ct.mostrarMedidas()" class="btn btn-link" style="font-size: 18px;">Medidas Potenciales (Que se va hacer)</a>
+									<a ng-click="ct.mostrarPlanTrabajo()"  class="btn btn-link" style="font-size: 18px;">Plan de Trabajo(Como se va a desarrollar)</a>
+									<a ng-click="ct.mostrarForma()"  class="btn btn-link" style="font-size: 18px;">Forma de Medición</a>
+									<a ng-click="ct.mostrarResponsables()"  class="btn btn-link" style="font-size: 18px;">Responsables</a>
+								</div>
+							</div><br/>
+
+<!-- 							/////////////////////////////////////////////////////////////
+
+ -->							
+							<div class="panel panel-default"> 
+							<div class="col-sm-12">
+								<div class="panel-body status">
+									<div class="text" >
+									<h2>{{ct.nada}}</h2>
+									<div class="row">
+									<a class="btn btn-primary pull-right" ng-show="ct.medidasSave" ng-click="ct.guardar(ct.control)">Guardar comentarios</a>&nbsp;
+									</div><br/>
+									<div class="row">
+								    <a class="btn btn-primary pull-right" ng-show="!ct.medidasSave" ng-click="ct.actualizar(ct.control)">Actualizar Comentarios</a>
+									<a class="btn btn-success pull-right" ng-show="ct.panel" ng-click="ct.ocultar()">Ocultar</a><br/>
+									</div>
+									
+									<!--///////////////////////////MEDIDAS////////////////////////////////-->
+									<div class="col-sm-12"   ng-show="ct.medidas" ng-if="ct.costo_id != ''">
+									<h4>Medidas Potenciales</h4><br/>	
+									<!-- <h4 ng-repeat="control in ct.controles">{{control.descripcion}}<br/> &nbsp;&nbsp;<a class="btn btn-warning btn-xs" ng-click="ct.editar(control._id)">Editar</a>
+									<a class="btn btn-danger btn-xs" ng-click="ct.borrar(control._id)">Borrar</a></h4><br/> -->
+									<textarea class="form-control" ng-show="ct.medidasText" ng-model="ct.control.descripcion"></textarea><br/>
+										
+									</div>
+									 <!--///////////////////////////PLAN DE TRABAJO////////////////////////////////-->
+									<div class="col-sm-12"  ng-show="ct.planTrabajo">
+									<h4>Plan de Trabajo</h4><br/>	
+									<!--  &nbsp;&nbsp;<a class="btn btn-warning btn-xs" ng-click="ct.editarPlan(control._id)">Editar</a>
+									<a class="btn btn-danger btn-xs" ng-click="ct.borrarPlan(control._id)">Borrar</a></h4><br/> -->
+									<textarea class="form-control"  ng-model="ct.control.descripcionTrabajo"></textarea><br/>
+										<!-- <a class="btn btn-primary" ng-show="ct.planTrabajoSave" ng-click="ct.guardar(ct.control)">Guardar todos los comentarios</a>
+										<a class="btn btn-primary" ng-show="!ct.actTrabajo" ng-click="ct.actualizarPlan(ct.control)">Actualizar</a> -->
+									</div>
+										<!--///////////////////////////FORMA ////////////////////////////////-->
+									<div class="col-sm-12" ng-show="ct.forma">
+									<h4>Forma de Medición</h4><br/>
+									<!-- <h4 ng-repeat="control in ct.controles">{{control.descripcionForma}}<br/> &nbsp;&nbsp;<a class="btn btn-warning btn-xs" ng-click="ct.editarForma(control._id)">Editar</a>
+									<a class="btn btn-danger btn-xs" ng-click="ct.borrarForma(control._id)">Borrar</a></h4><br/> -->
+									<textarea class="form-control"  ng-model="ct.control.descripcionForma"></textarea><br/>
+										<!-- <a class="btn btn-primary" ng-show="ct.formaSave" ng-click="ct.guardar(ct.control)">Guardar todos los comentarios</a>
+										<a class="btn btn-primary" ng-show="!ct.actForma" ng-click="ct.actualizar(ct.control)">Actualizar</a> -->
+									</div>
+									</div>
+										<!--///////////////////////////RESPONSABLES////////////////////////////////-->
+									<div class="col-sm-12" ng-show="ct.responsables">
+									<h4>Responsables</h4><br/>
+								<!-- 	<h4 ng-repeat="control in ct.controlesResponsables">{{control.descripcionResponsables}}<br/> &nbsp;&nbsp;<a class="btn btn-warning btn-xs" ng-click="ct.editarResponsables(control._id)">Editar</a>
+									<a class="btn btn-danger btn-xs" ng-click="ct.borrarResponsables(control._id)">Borrar</a></h4><br/> -->
+									<textarea class="form-control"  ng-model="ct.control.descripcionResponsables"></textarea><br/>
+										<!-- <a class="btn btn-primary" ng-show="ct.responsablesSave" ng-click="ct.guardar(ct.control)">Guardar todos los comentarios</a>
+										<a class="btn btn-primary" ng-show="!ct.actResponsables" ng-click="ct.actualizar(ct.control)">Actualizar</a> -->
+									</div>
+									</div>
+									
+								
+							  </div>
+
+<!--  <div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th width="20%"><div class="text-center">Medidas Potenciales</div></th>
+					<th width="20%"><div class="text-center">Plan de Trabajo</div></th>
+					<th width="20%"><div class="text-center">Forma de Medicion</div></th>
+					<th width="20%"><div class="text-center">Responsables</div></th>
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="control in ct.controles">
+			    <td>{{control.descripcion}}</td>
+			    <td>{{control.descripcionTrabajo}}</td>
+			    <td>{{control.descripcionForma}}</td>
+			    <td>{{control.descripcionResponsables}}</td>
+		    </tr>
+			</tbody>
+		</table>
+	</div>
+</div> -->
+
+
+
+							</div>
+								<th style="font-size: 15px;"><div class="text-center"><a ng-click="ct.mostrar(costo.costo_id,costo.costo)" >{{costo.costo}}</a></div></th>
+								<th style="font-size: 15px;"><div class="text-center">{{costo.total | currency}}</div></th>
+								<th style="font-size: 15px;"><div class="text-center">{{(costo.total) - ((costo.total) - (costo.total * costo.factor) / 100) | currency}}</div></th>
+								<th style="font-size: 15px;" ><div class="text-center">{{(costo.total) - (costo.total * costo.factor) / 100 | currency}}</div></th>
+								<th style="font-size: 15px;"><div class="text-center">{{costo.real | currency}}</div></th>
+								<!-- <th style="font-size: 15px;"><div class="text-center">{{costo.real | currency}}</div></th> -->
+								<th style="font-size: 15px;"><div class="text-center">{{(costo.real) / ((costo.total) - (costo.total * costo.factor) / 100) * 100 | number: 2}}%</div></th>
+								<th style="font-size: 15px;"><div class="text-center">{{100 - ((costo.real) / ((costo.total) - (costo.total * costo.factor) / 100) * 100) | number: 2 }}%</div></th>
+							</tr>
+						</tbody>
+
+					</table>
+					 <!-- //////////// Modal content////////////////////////////////////////-->
+
+                       <!--  <div class="container">
+
+						  <div class="modal fade" id="myModal" role="dialog">
+						    <div class="modal-dialog">  
+						      <div class="modal-content">
+						        <div class="modal-header">
+						         <input type="text" class="form-control" placeholder="Escribe tu comentario aqui" ng-model="ct.control.titulo">
+						         <textarea class="form-control" ng-model="ct.control.descripcion"></textarea><br/>
+						         <a class="btn btn-primary" ng-click="ct.guardarModal(ct.control)">Guardar</a>
+						          
+						        </div>
+						        <div class="modal-header">
+						        	<h4 ng-repeat="control in ct.controlesCostos">{{control.titulo}}</h4>
+						        	<a class="btn btn-primary" ng-click="ct.guardarModal(ct.control)">Actualizar</a>
+						        </div>
+						        <div class="modal-body" >
+						      
+						            <p ng-repeat="control in ct.controlesCostos">{{control.descripcion}}</p>
+						          
+							            <div class="pull-right col-sm-6">
+							               <div class="row" >
+
+							  					             
+							              </div>
+							            </div><br>
+						        </div>
+						        <div class="modal-footer">
+						          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						        </div>
+						      </div>
+						      
+						    </div>
+						  </div>
+						</div> -->
+							<!-- ////////////////////////////Modal////////////////////-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+ <div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+				<!-- <th width="20%"><div class="text-center">Conceptos</div></th> -->
+					<th width="20%" style="font-size: 18px;"><div class="text-center">Medidas Potenciales</div></th>
+					<th width="20%" style="font-size: 18px;"><div class="text-center">Plan de Trabajo</div></th>
+					<th width="20%" style="font-size: 18px;"><div class="text-center">Forma de Medicion</div></th>
+					<th width="20%" style="font-size: 18px;"><div class="text-center">Responsables</div></th>
+					<th width="10%" style="font-size: 18px;"><div class="text-center">Acciones</div></th>
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="costo in ct.controles">
+		       <!-- <td>{{costo.costo}}</td> -->
+			    <td style="font-size: 15px;" >{{costo.descripcion}}</td>
+			    <td style="font-size: 15px;" >{{costo.descripcionTrabajo}}</td>
+			    <td style="font-size: 15px;" >{{costo.descripcionForma}}</td>
+			    <td style="font-size: 15px;" >{{costo.descripcionResponsables}}</td>
+			    <td><a class="btn btn-warning btn-xs" ng-click="ct.editar(costo._id)">Editar</a>
+			    <a class="btn btn-danger btn-xs" ng-click="ct.borrar(costo._id)">Borrar</a>
+			    </td>
+		    </tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>

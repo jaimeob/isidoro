@@ -1,0 +1,123 @@
+<h2 style="font-size: 18px;">Obras</h2>
+<div class="row">
+	<div class="col-sm-12">
+		<a class="btn btn-{{obr.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+			href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="nuevoobra" ng-click="obr.nuevoObra()">
+		 {{obr.nuevo == true ? 'Nuevo' : 'Cancelar'}}
+		</a>
+		<!-- <a class="btn btn-success pull-right " ui-sref="root.addGasto">Gastos de oficina</a> -->
+		<div class="collapse" id="collapseExample">
+			<form class="form-horizontal" role="form" data-parsley-validate>
+		  	<div class="well">	    
+			    <div class="row">
+	          <div class="col-sm-4">
+					    <label style="font-size: 18px;">Nombre</label>
+				    	<input type="text" class="form-control" placeholder="Nombre" ng-model="obr.obra.nombre" required>
+				    </div>
+				     <div class="col-sm-4">
+					    <label style="font-size: 18px;"> Nombre corto</label>
+				    	<input type="text" class="form-control" placeholder="Nombre corto" ng-model="obr.obra.nombreCorto" required>
+				    </div>
+				     <div class="col-sm-4" >
+					    <label style="font-size: 18px;">Ubicación</label>
+				    	<input type="text" class="form-control" placeholder="Ubicación" ng-model="obr.obra.ubicacion" required>
+				    </div>
+			     	<div class="col-sm-4">
+				    	<label style="font-size: 18px;">Colonia</label>
+			    		<input type="text" class="form-control" placeholder="Colonia" ng-model="obr.obra.colonia" required>
+			    	</div>
+				    <div class="col-sm-4">
+					  	<label style="font-size: 18px;">Código Postal</label>
+				    	<input type="text" class="form-control" placeholder="Código Postal" ng-model="obr.obra.cp" required>
+				    </div>
+						<div class="col-sm-4">
+					    <label style="font-size: 18px;">Ciudad</label>
+				    	<input type="text" class="form-control" placeholder="Ciudad" ng-model="obr.obra.ciudad" required>
+				    </div>
+						<div class="col-sm-4">
+					    <label style="font-size: 18px;">Teléfonos </label>
+				    	<input type="text" class="form-control" placeholder="Teléfonos" ng-model="obr.obra.telefonos" required>
+				    </div>
+				    <div class="col-sm-4">
+					    <label style="font-size: 18px;">Superintendente </label>
+				    	<input type="text" class="form-control" placeholder="Superintendente" ng-model="obr.obra.superintendente" required>
+				    </div>
+				    <div class="col-sm-4">
+					    <label style="font-size: 18px;">Residente </label>
+				    	<input type="text" class="form-control" placeholder="Residente " ng-model="obr.obra.recidente" required>
+						</div>
+			    	<div class="col-sm-4">
+							<label  style="font-size: 18px;">Empresa</label>
+							<select class="form-control select2" placeholder="Seleccione" ng-model="obr.obra.empresa_id">
+								<option ng-repeat="empresa in obr.empresas" value="{{empresa._id}}">{{empresa.nombre}}</option>
+							</select>
+						</div>
+	    	  </div>
+					<div class="row">
+						<br>
+						<div class="col-sm-12">
+							<input type="submit" ng-click="obr.guardar(obr.obra)" value="Guardar" class="btn btn-primary" ng-show="obr.action">
+							<input type="submit" ng-click="obr.actualizar(obr.obra)" value="Actualizar" class="btn btn-primary" ng-show="!obr.action">	
+						</div>
+					</div>
+		  	</div>
+	  	</form>
+		</div>
+	</div>
+</div>
+<br/>
+<!-- List -->
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th width="20%" style="font-size: 18px;"><div class="text-center">Nombre</div></th>
+					<th width="20%" style="font-size: 18px;"><div class="text-center">Nombre Corto</div></th>
+					<th width="20%" style="font-size: 18px;"><div class="text-center">Ciudad</div></th>
+					<th width="10%">
+						<div class="text-center" style="font-size: 18px;">
+							Estatus
+						</div>
+					</th>
+					<th width="10%" style="font-size: 18px;">
+						<div class="text-center">
+							Acciones
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="obra in obr.obras">
+			    <td style="font-size: 15px;"><a href="/obra/{{obra._id}}">{{obra.nombre}}</a></td>
+			    <td style="font-size: 15px;">{{obra.nombreCorto}}</td>
+			    <td style="font-size: 15px;">{{obra.ciudad}}</td>
+			    <td>
+				    <div class="text-center">
+				    	<span ng-if="obra.estatus" class="label label-success" style="font-size: 15px;">
+							  Activo
+							</span>
+							<span ng-if="!obra.estatus" class="label label-danger" style="font-size: 15px;">
+							  Inactivo
+							</span>
+				    </div>
+			    </td>
+			    <td>
+				    <div class="text-center">
+					    <div class="btn-group">
+							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="caret"></span>
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <ul class="dropdown-menu text-left">
+							    <li><a href="#" ng-click="obr.editar(obra._id)" style="font-size: 15px;"><i class="fa fa-pencil"></i> Editar</a></li>
+							  <li><a href="#" ng-click="obr.cambiarEstatus(obra._id)" style="font-size: 15px;"><i class="fa fa-trash"></i> Desactivar</a></li>
+							  </ul>
+							</div>
+				    </div>				    
+			    </td>
+		    </tr>
+			</tbody>
+		</table>
+	</div>
+</div>

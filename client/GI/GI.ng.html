@@ -1,0 +1,268 @@
+
+    <div class="row " >
+
+    <div class="col-sm-12 pull-right">
+<!--     <a class="btn-success btn" ui-sref="root.verGastos">Ver Gastos Indirectos</a>
+ -->
+    <a class="btn btn-success  " ui-sref="root.addGasto" style="font-size: 18px;">Gastos de Oficina</a> 
+    </div>
+     </div>
+    <br/>
+    <div class="well">	  
+	<div class="row"> 
+		<div class="col-sm-12">	
+			<div class="col-lg-3" ng-repeat="Mes in GI.meses">
+				<a href="#" ng-click="GI.mostrarMeses(Mes._id,Mes.mes)">
+					<div class="panel panel-{{GI.panelId == Mes._id ? 'warning' : 'info'}}"> 
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-6">
+								  <i class="fa fa-bars fa-5x"></i>
+								</div>
+								<div class="col-xs-6 text-right">
+								  <h1 style="font-size:40pt;"><strong></strong></h1>
+								  <p class="announcement-text" style="font-size: 18px;">{{Mes.mes | date:"MMMM-yyyy"}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer announcement-bottom">
+							<div class="row">
+							  <div class="col-xs-6" >
+							    Ver...
+							  </div>
+							  <div class="col-xs-6 text-right">
+							    
+							  </div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div> 
+		</div>
+	</div> 
+</div>
+<br/>
+
+<div class="well" >
+
+<br/>
+<div class="row" >
+<div class="row" ng-show="GI.campos">
+    <div class="col-sm-12">
+			<div class="col-sm-4">
+					   <input placeholder="Presupuesto de Gasto de Campo" type="number" class="form-control"  ng-model="GI.obra.gastosPCampo"/>
+				</div>
+				<div class="col-sm-2">
+					   <a class="btn btn-primary" ng-click="GI.guardarPreGC(GI.obra)">Guardar</a>
+					   <!--<a class="btn btn-primary" ng-click="GI.BorrarGC(GI.obra._id)">Borrar</a><br/>-->
+				</div>
+				</div>
+			</div>
+
+
+	<br/>
+
+<div class="col-sm-12">
+		<div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-2" data-widget-editbutton="false" role="widget">						
+		<header role="heading"><div class="jarviswidget-ctrls" role="menu"><a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> </div>
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			 <h2>{{GI.mesSeleccionado}}</h2>
+		<span class="jarviswidget-loader" style="display: none;"><i class="fa fa-refresh fa-spin"></i></span></header>
+<div role="content" style="display: block;">
+			<div class="widget-body no-padding">
+				<div class="table-responsive">
+        <table class="table table-hover">
+				   
+			   <thead>
+			    <tr>
+			        <th style="font-size: 18px;"><div class="text-center">Obra</div></th>
+			        <th style="font-size: 18px;"><div class="text-center">Presupuesto de gasto de campo</div></th>
+			        <th style="font-size: 18px;"><div class="text-center">Precio de Venta</div></th>
+			        <th style="font-size: 18px;"><div class="text-center">Ingresos</div></th>
+			        <th style="font-size: 18px;">%</th>
+			        <th style="font-size: 18px;"><div class="text-center">Gastos de campo</div></th>
+			        <th style="font-size: 18px;"><div class="text-center">Acciones</div></th>
+
+			    </tr>
+			   </thead>
+				<tbody>
+				<tr ng-repeat="obra in GI.obras">
+				    <th style="font-size: 15px;"><div class="text-center"><a href="/obra/{{obra._id}}">{{obra.nombre}}</a></div></th>
+				    <td style="font-size: 15px;"><div class="text-center">{{obra.gastosPCampo}}</div></td>
+				    <td style="font-size: 15px;"><div class="text-center">{{obra.precio}}</div></td>
+				    <td style="font-size: 15px;"><div class="text-center">{{GI.cobroTotalFinal(obra._id) | currency}}</div></td>
+				    <td style="font-size: 15px;">{{GI.cobroTotalFinal(obra._id) / GI.ingresosTotalesMes(GI.obras) * 100 | number : 2}}% </td>
+				    <td style="font-size: 15px;"><div class="text-center">{{GI.cobroTotalFinalPeriodo(obra._id) | currency}}</div></td>
+				    <td style="font-size: 15px;"><div class="text-center"><a ng-click="GI.editarObra(obra._id)">Agregar presupuesto de campo</a></div></td>					    
+				    <tr ng-show="" ><th ng-repeat="cobro in GI.cobros"><div class="text-center">{{cobro.cIva + cobro.cSinIva | currency}}</div></th></tr>
+				    <tr ng-show=""><th ng-repeat="periodo in GI.periodos"><div class="text-center">{{periodo.comprasIva + periodo.comprasSinIva + periodo.contadoIva + periodo.contadoSinIva  | currency}}</div></th>
+				    </tr>
+				    </tr>
+				     <tr>
+						<th style="font-size: 18px;" colspan="8">GASTOS DE OFICINA DE ESTE MES:&nbsp; {{GI.TotalFinalGO()  | currency}}</th>
+				    </tr>
+				    <tr>
+						<th style="font-size: 18px;" colspan="8">GASTOS DE OFICINA:&nbsp; {{GI.todosGastosOficinas()  | currency}}</th>
+				    </tr>
+				    <tr>
+					    <th style="font-size: 18px;" colspan="8">TOTAL INGRESOS :&nbsp; {{GI.ingresosTotales(GI.obras) | currency}}</th>
+				    </tr>
+				     <tr>
+						<th style="font-size: 18px;" colspan="8">TOTAL GASTOS DE CAMPO:&nbsp; {{GI.cobrosTotales(GI.obras) | currency}}</th>
+				    </tr>
+			</tbody>  
+
+		</table>
+   </div>
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+
+<div class="row" ng-if="mes.mesGasto_id != ''">
+
+<div class="col-sm-4">
+		<div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-2" data-widget-editbutton="false" role="widget">						
+		<header role="heading"><div class="jarviswidget-ctrls" role="menu"><a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> </div>
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			<!-- <h2>Tabla</h2> -->
+		<span class="jarviswidget-loader" style="display: none;"><i class="fa fa-refresh fa-spin"></i></span></header>
+<div role="content" style="display: block;">
+			<div class="widget-body no-padding">
+				<div class="table-responsive">
+        <table class="table table-hover"> 
+			   <thead>
+			    <tr>
+			        <th style="font-size: 18px;"><div class="text-center">GASTOS INDIRECTOS POR MES</div></th>
+			        <!--<th><div class="text-center">INDIRECTOS EMPRESA  ANUAL</div></th>-->
+			    </tr>
+			   </thead>
+				<tbody>
+				    <tr>
+				    <th style="font-size: 18px;"><div class="text-center">TOTAL:{{((GI.camposTotales()) + (GI.TotalFinalGO())) / (GI.ingresosTotales3())*100  | number:2}}
+				     </div></th>
+					    <th ng-show="" ng-repeat="gasto in GI.gastosOficinas"><div class="text-center">{{gasto.importeVar + gasto.importeFijo | currency}}</div></th>
+				    </tr>	   
+			    </tbody> 
+		</table>
+   </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="row" ng-show="">
+<div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-2" data-widget-editbutton="false" role="widget">						
+		<header role="heading"><div class="jarviswidget-ctrls" role="menu"><a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> </div>
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			<!--<h2>Resumen</h2>-->
+		<span class="jarviswidget-loader" style="display: none;"><i class="fa fa-refresh fa-spin"></i></span></header>
+		<div role="content" style="display: block;">
+			<div class="widget-body no-padding">
+				<div class="table-responsive">			
+						
+					<table class="table table-hover">
+				   
+						   <thead>
+						    <tr>
+							    <th width="20%" style="font-size: 18px;"><div class="text-center">Gasto Variables</div></th>
+							    <th width="20%" style="font-size: 18px;"><div class="text-center">Gasto FIjos</div></th>
+							    <th width="20%" style="font-size: 18px;"><div class="text-center">Acciones</div></th>
+							  
+						    </tr>
+						   </thead>
+
+
+							<tbody>
+							<tr ng-repeat="gasto in GI.gastosOficinas">
+						        <th style="font-size: 15px;"><div class="text-center">{{gasto.importeVar | currency}}</div></th>
+						        <th style="font-size: 15px;"><div class="text-center">{{gasto.importeFijo | currency}}</div></th>
+						        <th ng-show="">{{gasto.importeVar + gasto.importeFijo | currency}}</th>
+							    <td>
+								    <div class="text-center">
+											   <a  ng-click="GI.editar(gasto._id)" style="font-size: 13px;" class="label label-warning"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
+											  <a  ng-click="GI.cambiarEstatus(gasto._id)" style="font-size: 13px;" class="label label-primary">Cambiar Estatus</a>
+								    </div>				    
+							    </td>							
+							</tr>
+
+						    <tr ng-repeat="obra in GI.obras">
+							    <th ng-show="" colspan="8">TOTAL DE GASTOS: {{GI.TotalFinalGO() | currency}}</th>
+							    <th ng-show="" colspan="8">{{GI.cobroTotalFinal(obra._id) / GI.ingresosTotales(GI.obras) * 100 | number : 2}}% </th>
+							    <th style="font-size: 18px;"  colspan="8">{{(GI.TotalFinalGO()) * (GI.cobroTotalFinal(obra._id) / GI.ingresosTotales(GI.obras)) | currency}}</th>
+							    <th style="font-size: 18px;" colspan="8">{{GI.TotalFinalCalculo(obra._id)}}</th>
+						    </tr>
+						   <!-- <tr>
+							    <th colspan="6">CANTIDAD A PAGAR POR TODAS LAS OBRAS: {{add.TotalAnual() | currency}}</th>
+						    </tr>-->		
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div>
+	 <div class="col-sm-8">
+		<div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-2" data-widget-editbutton="false" role="widget">						
+		<header role="heading"><div class="jarviswidget-ctrls" role="menu"><a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> </div>
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			<!-- <h2>Tabla</h2> -->
+		<span class="jarviswidget-loader" style="display: none;"><i class="fa fa-refresh fa-spin"></i></span></header>
+	<div role="content" style="display: block;">
+				<div class="widget-body no-padding">
+					<div class="table-responsive">
+				        <table class="table table-hover"> 
+							   <thead>
+							    <tr>
+							        <th style="font-size: 18px;"><div class="text-center">Obras</div></th>
+							        <th style="font-size: 18px;"><div class="text-center">% Indirectos</div></th>
+							        <th ng-show="" ><div class="text-center">TOTAL INGRESOS</div></th>
+							        <th ng-show="" ><div class="text-center">Oficinas</div></th>
+							        <th ng-show=""><div class="text-center">porcentaje</div></th>
+							        <th ng-show=""><div class="text-center">pago</div></th>
+							         <th ng-show=""><div class="text-center">suma</div></th>
+							         <th ng-show=""><div class="text-center">Ingresos Obra</div></th>
+							         <!-- <th ><div class="text-center">Campo Gastos</div></th> -->
+
+							    </tr><!-- ((obra.pagoEmpresa + obra.gastoDeCampo) / obra.ingresoTotal) * 100  -->
+							   </thead>
+								<tbody>
+								    <tr ng-repeat="obra in GI.indirectoMes">
+									    <th style="font-size: 15px;"> <div class="text-center">{{obra.obra}}</div></th>
+									    <th style="font-size: 15px;"><div class="text-center">{{obra.indirecto| number:2}}%</div></th>
+									    <th ng-show="" ><div class="text-center">{{obra.ingresosTotales | currency}}</div></th>
+									    <th ng-show="" ><div class="text-center">{{GI.indirectoMes[0].oficinas | currency}}</div></th>
+									    <th  ng-show=""><div class="text-center">{{obra.ingresoPorObra | currency}}</div></th>
+									    <th  ng-show=""><div class="text-center">{{GI.indirectoMes2.pagoPorObra | currency}}</div></th>
+									      <th ng-show=""><div class="text-center">{{obra.sumaDeGastos | currency}}</div></th>
+									      <th ng-show=""><div class="text-center">{{obra.ingresisa | currency}}</div></th>
+									      <!-- <th ><div class="text-center">{{GI.camposTotales()  | currency}}</div></th> -->
+
+								    </tr>
+							    </tbody> 
+							  <thead>
+							         <th colspan="8" style="font-size: 18px;"><div class="text-center">Indirectos empresa anual</div></th>
+							    	
+							    </thead>
+							    <tbody>							    	 
+								    <tr colspan="8">
+								    	<td colspan="8" style="font-size: 18px;" ><div class="text-center"><strong>
+								    	{{((GI.todosGastosOficinas()) + (GI.camposTotales2())) / (GI.ingresosTotales2())*100  | number:2}}%</strong></div></td>
+								    </tr>
+				
+							    </tbody> 
+						</table>
+	  				 </div>
+	   			</div>
+	  </div>
+	 </div>
+	</div>
+ </div>
+
+
+</div>
+</div>
+

@@ -1,0 +1,83 @@
+<!-- <h1  style="color:#646464"> <i class="fa fa-reorder"></i> {{cos.obras[0].nombre}}</h1><br/>
+ --><h2 style="font-size: 18px;">Conceptos</h2>
+<div class="row">
+	<div class="col-sm-12">
+		<a class="btn btn-{{cos.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+			href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="nuevopartida" ng-click="cos.nuevoPartida()">
+		 {{cos.nuevo == true ? 'Nuevo' : 'Cancelar'}}
+		</a>
+		<div class="collapse" id="collapseExample">
+			<form class="form-horizontal" role="form" data-parsley-validate>
+		  	<div class="well">	    
+			    <div class="row">
+	          <div class="col-sm-4">
+					    <label style="font-size: 18px;">Nombre</label>
+				    	<input type="text" class="form-control" placeholder="Nombre" ng-model="cos.costo.nombre" required>
+				    </div>
+	    	  </div>
+					<div class="row">
+						<br>
+						<div class="col-sm-12">
+							<input type="submit" ng-click="cos.guardar(cos.costo)" value="Guardar" class="btn btn-primary" ng-show="cos.action">
+							<input type="submit" ng-click="cos.actualizar(cos.costo)" value="Actualizar" class="btn btn-primary" ng-show="!cos.action">	
+						</div>
+					</div>
+		  	</div>
+	  	</form>
+		</div>
+	</div>
+</div>
+<br/>
+<!-- List -->
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th style="font-size: 18px;" width="20%"><div class="text-center">Nombre</div></th>
+					<th style="font-size: 18px;" width="5%">
+						<div class="text-center">
+							Estatus
+						</div>
+					</th>
+					<th style="font-size: 18px;" width="5%">
+						<div class="text-center">
+							Acciones
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="costo in cos.costos">
+			    <td style="font-size: 15px;">{{costo.nombre}}</td>
+		
+			    <td>
+				    <div class="text-center">
+				    	<span ng-if="costo.estatus" class="label label-success" style="font-size: 15px;">
+							  Activo
+							</span>
+							<span ng-if="!costo.estatus" class="label label-danger" style="font-size: 15px;">
+							  Inactivo
+							</span>
+				    </div>
+			    </td>
+			    <td>
+				    <div class="text-center">
+					    <div class="btn-group">
+							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="caret"></span>
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <ul class="dropdown-menu text-left">
+							    <li><a href="#" ng-click="cos.editar(costo._id)"><i class="fa fa-pencil" style="font-size: 15px;"></i> Editar</a></li>
+							  <li><a href="#" ng-click="cos.cambiarEstatus(costo._id)" style="font-size: 15px;"><i class="fa fa-trash"></i> Desactivar</a></li>
+							  
+							  </ul>
+							</div>
+				    </div>				    
+			    </td>
+		    </tr>
+			</tbody>
+		</table>
+	</div>
+</div>

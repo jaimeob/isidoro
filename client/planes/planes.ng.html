@@ -1,0 +1,770 @@
+<h2>Planes</h2>{{pl.cargos}}
+<div class="row"><!-- {pl.totalIngresos[0].total | currency}}-> ag10 -->
+	<div class="col-sm-12">
+		<a class="btn btn-{{pl.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+			href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="nuevoplan" ng-click="pl.nuevoPlan()">
+		 {{pl.nuevo == true ? 'Nuevo' : 'Cancelar'}}
+		</a>
+		<div class="collapse" id="collapseExample">
+			<form class="form-horizontal" role="form">
+<!-- ///////////////////////////////////////////////  PRIMER ROW //////////////////////////////// -->
+		  	 <div class="well">
+		  	 	
+			    <div class="row bs-callout bs-callout-danger" style="background-color:#e1e1e8; " >
+			    
+			    <h1>Seccion para calcular precio</h1>
+			    <br/>
+			       <div class="col-sm-3">
+					    <label style="font-size: 18px;">Costos mas cargos</label><!-- totalPrecioUnitario -->
+				    	<!-- <div class="form-control" style="font-size: 15px;" >{{(pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].cargoAdicional)/ 100) +
+				    	((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)+ ((pl.totalFinalCostosDirectos * pl.cosas[0].costoFinanciamento)/ 100) | currency}}</div> -->
+				    	 <div class="form-control" style="font-size: 15px;" >{{((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100  | currency}}</div>
+				    </div>
+
+				    <div class="col-sm-2">
+				     <div class="form-group" style="font-size: 18px;">
+				     	TREMA
+					    <a class="pull-left" data-toggle="popover" data-placement="top" data-content="Tasa de rendimiento minima aceptable" style="font-size: 15px;"> <i class="fa fa-info-circle" aria-hidden="true"></i></a><br/>
+					    <div class="input-group">
+					      <div class="input-group-addon" style="font-size: 15px;border-color: yellow">%</div>
+					      	<input type="number" style="border-color: yellow" class="form-control" placeholder="TREMA" ng-change="pl.factorRecuperacionCalc()" ng-model="pl.plan.trema2" >
+					     <!--  <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount"> -->
+					    </div>
+					 </div>
+					</div>
+					<div class="col-sm-2">
+					    <label for="domicilio" style="font-size: 18px;">ISR</label>
+				    	<input type="number" class="form-control" placeholder=""  ng-model="pl.plan.isr"  style="font-size: 15px;border-color: yellow">
+			    	</div> 
+			    	<div class="col-sm-3">
+					    <label for="domicilio" style="font-size: 18px;">Factor de Recuperación</label>
+				    	<div class="form-control" style="font-size: 15px;">{{1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))| number : 4}}</div>
+			    	</div>
+			    	
+			    	<div class="col-sm-2"><!--  * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))) -->
+					    <label style="font-size: 18px;">Precio de Venta</label>
+				    	<div class="form-control" style="font-size: 15px;">
+				    	{{(((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))) | currency }}</div>
+				    </div>
+				    <!-- <div class="col-sm-2">
+					    <label>Precio de Venta</label>
+				    	<div class="form-control">{{(((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100| number : 2}}</div>
+				    </div> -->
+		        </div><br/>
+		
+
+
+      <!--   //////////////////////////////SEGUNDO ROW//////////////////////////////// -->				    
+            
+                 <div class="row" style="background-color:#e1e1e8;"> 
+	                 <h1>Seccion para calcular egresos</h1>
+	                 <br/>
+	                 <div class="col-sm-3">
+					    <label style="font-size: 18px;">Ingresos</label>
+				    	<div class="form-control" style="font-size: 15px;">{{(((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))) | currency}}</div>
+			    	</div>
+				    <div class="col-sm-2">
+				     <div class="form-group">
+				     	<label style="font-size: 18px;"> TREMA </label>
+					    <a class="pull-left" data-toggle="popover" data-placement="top" data-content="Tasa de rendimiento minima aceptable" style="font-size: 15px;"> <i class="fa fa-info-circle" aria-hidden="true"></i></a><br/>
+					    <div class="input-group">
+					      <div class="input-group-addon" style="font-size: 15px; border-color: yellow">%</div>
+					      	<input type="number" class="form-control" placeholder="TREMA" ng-change="pl.factorRecuperacionCalc()" ng-model="pl.plan.trema" style="font-size: 15px;border-color: yellow" >
+					     <!--  <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount"> -->
+					    </div>
+					 </div>
+					</div>
+					<div class="col-sm-2">
+					    <label for="domicilio" style="font-size: 18px;">ISR</label>
+				    	<input type="number"  style="font-size: 15px; border-color: yellow"  class="form-control" placeholder=""  ng-model="pl.plan.isr" >
+			    	</div> 
+			    	<div class="col-sm-3">
+					    <label for="domicilio" style="font-size: 18px;">Factor de Recuperación</label>
+				    	<div class="form-control" style="font-size: 15px;">{{1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))| number : 2}}</div>
+			    	</div>
+				    <div class="col-sm-2">
+					    <label style="font-size: 18px;">Total de Egresos</label>
+				    	<div class="form-control" style="font-size: 15px;">{{(((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100| number : 2}}</div>
+				    </div>
+				    </div>
+				    <div class="row" style="background-color:#e1e1e8;">
+				     <div class="col-sm-12" >
+				     <div class="col-sm-3" >
+						     <div class="form-group">
+							    <label style="font-size: 18px;">Relacion % Cd/Ingresos</label>
+							    <div class="input-group">
+							      <div class="input-group-addon" style="font-size: 15px;">%</div>
+							      <div class="form-control" id="exampleInputAmount" style="font-size: 15px;">{{(pl.totalFinalCostosDirectos) / ((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) * 100 | number : 2}}</div>
+							     <!--  <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount"> -->
+							    </div>
+							 </div>
+							</div>
+
+					    	<div class="col-sm-2">				    	
+							    <label style="font-size: 18px;">Costo Directo</label>
+
+									<div style="width: 150px; font-size: 15px;" class="form-control">
+									{{pl.totalFinalCostosDirectos | currency}}</div>
+			
+						    </div>
+					    	<div class="col-sm-3">				    	
+							    <label style="font-size: 18px;">Gastos Indirectos</label>
+						    	<div class="form-control" style="font-size: 15px;">{{( (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)  | number : 2}}</div>
+						    </div>
+					   
+					  </div>
+					    </div>
+				   
+			    <br/><br/>
+
+	
+<!-- ////////////////////////////////////////////////////TABLA////////////////////////////////////////////////////////
+ -->			     <div class="row">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+								<th width="20%" style="font-size: 18px;"><div class="text-center">Ingresos</div></th>
+								<td width="20%" style="font-size: 15px;">{{(((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))) | currency}} </td>
+								<tr>
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">Costos</div></th>
+							     <td width="20%" style="font-size: 15px;">{{pl.totalFinalCostosDirectos | currency}}</td>
+							    
+							    </tr> 
+							    <tr>
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">Gastos</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)  | currency}}</td>
+							    
+							    </tr>
+							    <tr>
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">Utilidad Fiscal</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) - (pl.totalFinalCostosDirectos) - (((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) | currency }} </td> 
+							    
+							    </tr>
+							    <tr>
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">ISR</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{(((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) - (pl.totalFinalCostosDirectos) - (((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))) * 0.3 | number : 2 }}</td>
+							    
+							    </tr>
+							    <tr>
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">PTU</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{(((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) - (pl.totalFinalCostosDirectos) - (((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))) * 0.1 | currency}}</td>
+							    
+							    </tr>
+							    <tr>
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">Utilidad Neta</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) - (pl.totalFinalCostosDirectos) - (((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))) - 
+							    ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) - (pl.totalFinalCostosDirectos) - (((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))) * 0.3)-
+							     ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) - (pl.totalFinalCostosDirectos) - (((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))) * 0.1 ))  | currency}}</td>
+							    
+							    </tr>
+							    <tr>
+							    <th  width="20%" style="font-size: 18px;"> <div class="text-center">Rentabilidad</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{(((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) - (pl.totalFinalCostosDirectos) - (((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))) - 
+							    ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) - (pl.totalFinalCostosDirectos) - (((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))) * 0.3)-
+							     ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) - (pl.totalFinalCostosDirectos) - (((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))) * 0.1 ))) / ((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))*100 | number:2}}%</td>
+							    
+							    </tr>
+								</tr>
+							</thead>
+						</table>
+					
+				</div>
+		  	</div>
+<!-- Distribucion de Gastos -->
+		  	
+<!-- Costos Directos -->
+<div class="well">
+		<h2 style="text-align: center">Plan de reduccion de costos directos</h2><br/>
+	
+					<br/>
+			
+							<table style="width:80%">
+							<thead>
+														
+									<tr style="height: 50px;" ng-repeat="costo in pl.costosTotales">
+										<td>{{costo.costo}}</td><br/>
+										<td>
+											<div class="col-sm-12">
+											<label style="font-size: 18px;">Porcentaje</label>
+												<div style="width: 80px; font-size: 15px;" class="form-control">{{(costo.total) / (pl.totalFinalCostosDirectos)*100 | number : 2}}%</div>
+						    				</div>
+						    			</td>
+										<td >
+										 	<div class="col-sm-12">
+										 	<label style="font-size: 18px;">Presupuesto Base</label>
+					    						<div style="width: 150px; font-size: 15px;" class="form-control">{{costo.total | currency}}</div>
+						    				</div>
+						    			</td>
+						    			<!-- <td>
+											<div class="col-sm-4">
+						    						<input type="number" style="width: 150px;" class="form-control"   ng-model="cos.factor"  >%
+							  			    </div>
+									    </td> -->
+						  			    <td>
+						  			    	<div class="col-sm-12">
+						  			    	<label style="font-size: 18px;">Presupuesto Ajustado</label>
+												<div style="width: 150px; font-size: 15px;" class="form-control">{{costo.presupuestoTotal | currency}}</div>
+						    				</div><!-- costo.presupuestoTotal -->
+						    			</td>	    			
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+									<th></th>
+										<th>
+										 <div class="col-sm-12" >
+										   
+										     <label style="font-size: 18px; ">Total</label>
+											       <div style="width: 80px; font-size: 15px;" class="form-control">{{pl.costoTotalTotal.totalDePorcentaje}}%</div>
+											 
+							            </div>
+
+											<!-- <div class="col-sm-12">
+												<label>Total</label>
+												<div style="width: 100px;" class="form-control">{{pl.costoTotalTotal.totalDePorcentaje}}</div>
+						    				</div> -->	
+										</th>
+										<th>
+										<div class="col-sm-12">
+										<label style="font-size: 18px;">Total</label>
+												<div style="width: 150px; font-size: 15px;" class="form-control">{{pl.totalFinalCostosDirectos | currency}}</div>
+												</div>
+						    												    
+										</th>
+
+										<th>
+										<div class="col-sm-12">
+										<label style="font-size: 18px;">Total</label>
+												<div style="width: 150px; font-size: 15px;" class="form-control">{{pl.costoTotalPres | currency }}</div>					    				
+						    				</div>									    
+										</th>
+									</tr>
+									</tbody>	
+							</table><br/>
+
+
+
+                    <div class="row">
+							<div class="col-sm-12"><!-- (Poner %) -->
+							
+				<div ng-repeat="(key, costo) in pl.costos" style="margin-top: 2px; font-size: 15px;" class="col-sm-4 ">
+				<div class="form-group">
+						<label for="{{key}}">{{costo.nombre}}</label>
+						 <div class="input-group">
+						 <div class="input-group-addon">%</div>
+							
+							<input type="number" id="{{key}}" style="border-color: yellow" class="form-control" ng-model="costo.factor">
+							 </div>
+						</div>
+					</div>
+					</div>
+					</div>
+				
+					<div class="row" ng-repeat="plan in pl.planes">
+						<br>
+						<div class="col-sm-12">
+						<input type="submit" ng-click="pl.editarCambios(plan._id)" value="Editar" class="btn btn-primary" ng-show="pl.editCam"   >
+							<input type="submit" ng-click="pl.actualizarCambios(pl.plan,pl.costos,plan._id)" value="Actualizar Cambios" class="btn btn-primary" >
+						</div>
+					</div>
+						</div>
+
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+						<div class="well">
+					<h2 style="text-align: center; font-size: 18px;">Gastos Indirectos</h2>
+			    <div class="row"><!-- (((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -->
+				    <div class="col-sm-12">
+							<div class="row">
+						    <div class="col-sm-3">
+									<label style="font-size: 18px;">Gastos de Oficina</label>
+						    </div>
+						    <div class="col-sm-2">
+					    		<div class="form-control">{{(((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento)) | currency }}</div>
+						    </div>
+
+						    <div class="col-sm-2">
+							     <div class="form-group">
+								    <div class="input-group">
+								      <div class="input-group-addon" style="border-color: yellow" >%</div>
+								       <input type="number" class="form-control" placeholder="" ng-change="pl.factorRecuperacionCalc()" style="border-color: yellow" ng-model="pl.plan.gastosFijosOficina1" >
+								    </div>
+								 </div>
+							</div>
+
+						   <!--  <div class="col-sm-1">
+					    		<input type="number" class="form-control" placeholder="" ng-change="pl.factorRecuperacionCalc()" ng-model="pl.plan.gastosFijosOficina1" >%
+						    </div> -->
+						    <div class="col-sm-2">
+									<div class="form-control">{{((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100)  | currency}}</div>
+						    </div>
+							</div>
+				    </div>
+			    </div>
+			    <br/>
+			    <div class="row">
+				    <div class="col-sm-12">
+							<div class="row">
+						    <div class="col-sm-3">
+									<label style="font-size: 18px;">Gastos Indirectos de Campo</label>
+						    </div>
+						    <div class="col-sm-2" >
+								<div class="form-control">{{(((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento)) | currency }}</div>
+						    </div>
+
+
+						     <div class="col-sm-2">
+							     <div class="form-group">
+								    <div class="input-group">
+								      <div class="input-group-addon" style="border-color: yellow">%</div>
+								       <input type="number" class="form-control" placeholder="" ng-change="pl.factorRecuperacionCalc()" style="border-color: yellow" ng-model="pl.plan.gastosIndirectosCampo1" >
+								    </div>
+								 </div>
+							</div>
+
+
+				
+
+
+						    <div class="col-sm-2">
+									<div class="form-control">{{((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)    | currency}}</div>
+						    </div>
+							</div>
+				    </div>
+			    </div>
+			    <br/>
+			    <div class="row">
+				    <div class="col-sm-12">
+							<div class="row">
+						    <div class="col-sm-3">
+									<label style="font-size: 18px;">Total</label>
+						    </div>
+						    <div class="col-sm-2">
+									<div class="form-control">{{((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)  | number : 2}}</div>
+						    </div>
+						    <div class="col-sm-2">
+									<div class="form-control">{{hola}}</div>
+						    </div>
+						    <div class="col-sm-2">
+									<div class="form-control">{{(((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)) | currency }}</div>
+						    </div>
+						   <!--  <div class="col-sm-2">
+									<div class="form-control">{{((((pl.indirectosEmpresas[1].cantidades) - (pl.indirectosEmpresas[1].cantidades * pl.plan.gastosFijosOficina1 )/ 100) + ((pl.indirectosEmpresas[1].GasIndiCampo) - (pl.indirectosEmpresas[1].GasIndiCampo * pl.plan.gastosIndirectosCampo1)/100)) / ((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))) * 100| currency}}</div>
+						    </div> -->
+							</div>
+				    </div>
+			    </div>
+		  	</div>
+		  	<!-- ///////////////////////////ESTADISTICA DE GASTOS INDIRECTOS PARA LA OBRA ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+		  	<div class="well">
+			    <div class="row">
+								<!--  <div class="col-sm-4">
+									<div class="form-control">{{((pl.todosGastosOficinas()) + (pl.camposTotales2())) / (pl.ingresosTotales2())*100  | number:2}}%</div>
+									
+								</div> -->
+				    <div class="col-sm-12">
+							<div class="row">
+						    <div class="col-sm-6">
+									<label style="font-size: 18px;">ESTADISTICA DE GASTOS INDIRECTOS PARA LA OBRA</label>
+						    </div>
+						
+							</div>
+				    </div>
+			    </div>
+			    <br/>
+			    <div class="row">
+
+				    <div class="col-sm-12">
+							<div class="row">
+						    <div class="col-sm-4">
+									<label style="font-size: 18px;">Presupuesto de indirecto total</label>
+						    </div>
+						    <div class="col-sm-4">
+							    <div class="form-control">
+							    {{((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)  | currency}} 
+							    </div>
+
+						   </div>
+								
+							</div>
+				    </div>
+			    </div>
+			    <br/>
+			    <div class="row">
+				    <div class="col-sm-12">
+							<div class="row">
+						    <div class="col-sm-4">
+									<label style="font-size: 18px;">Gastos fijos de oficina mensual  sin IVA	</label>
+						    </div>
+						  <div class="col-sm-4">
+					    		<input type="number" class="form-control"  ng-model="pl.plan.gastosOficinaSinIva" >
+						    </div>
+							</div>
+				    </div>
+			    </div>
+			    <br/>
+			    <div class="row">
+				    <div class="col-sm-12">
+							<div class="row">
+						    <div class="col-sm-4">
+									<label style="font-size: 16px;">Presupuesto Gastos de oficina  estadistico para la obra	
+	</label>
+						    </div>
+						    <div class="col-sm-4">
+									<div class="form-control">{{(((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) * (((pl.todosGastosOficinas()) + (pl.camposTotales2())) / (pl.ingresosTotales2())*100)) / 100 | currency}}</div>
+						    </div>
+							</div>
+				    </div>
+			    </div>
+		  	</div>
+
+<!-- Ultima Tabla -->
+		  	<div class="well">
+			    <div class="row">
+			  <!--    <div class="col-sm-4">
+									<div class="form-control">{{(((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))) * pl.indirectosEmpresas[0].indirecto/100 | currency}}</div>
+								</div>
+
+								 <div class="col-sm-4">
+									<div class="form-control">{{((pl.todosGastosOficinas()) + (pl.camposTotales2())) / (pl.ingresosTotales2())*100  | number:2}}%</div>
+									{{pl.todosGastosOficinas() | number:2}} {{pl.camposTotales2()| currency}} {{(pl.ingresosTotales2()) | currency}}
+								</div> -->
+				    <div class="col-sm-12">
+							<div class="row">
+						    <div class="col-sm-4">
+									<label style="font-size: 18px;">Si la obra se ejecuto en</label>
+						    </div>
+						    <div class="col-sm-1">
+						    <label style="font-size: 18px;">Meses</label>
+					    		<input type="number" class="form-control" style="border-color: yellow"   ng-model="pl.plan.meses" >
+						    </div>
+						
+							</div>
+				    </div>
+			    </div>
+			    <br/>
+			    <div class="row">
+
+				    <div class="col-sm-12">
+							<div class="row">
+						    <div class="col-sm-4">
+									<label style="font-size: 18px;">Nuevo presupuesto de Gastos Indirectos Mensual</label>
+						    </div>
+						    <div class="col-sm-4">
+									<div class="form-control">{{(((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses | currency }}</div>
+								</div>
+							</div>
+				    </div>
+			    </div>
+			    <br/>
+			    <div class="row">
+				    <div class="col-sm-12">
+							<div class="row">
+						    <div class="col-sm-4">
+									<label style="font-size: 18px;">Ajuste presupuestal de Indirectos</label>
+						    </div>
+						    <div class="col-sm-4">
+									<div class="form-control" >{{
+									(pl.plan.gastosOficinaSinIva) - ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses) | number:2}}</div>
+						    </div>
+							</div>
+				    </div>
+			    </div>
+			    <br/>
+			    <div class="row">
+				    <div class="col-sm-12">
+							<div class="row">
+						    <div class="col-sm-4">
+									<label style="font-size: 18px;">Anticipo de Obra</label>
+						    </div>
+						    <div class="col-sm-4">
+					    		<input type="number" class="form-control" style="border-color: yellow"  ng-model="pl.plan.anticipoObras" >
+						    </div>
+						    <div class="col-sm-4">
+									<div class="form-control">{{(((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))) * pl.plan.anticipoObras / 100 | currency}}</div>
+						    </div>
+							</div>
+				    </div>
+			    </div>
+		  	</div>
+<!-- Estado de Resultado -->
+<!-- ///////////////////////////////////////TABLA////////////////////////////////////-->	
+            <div class="well">			 
+                <div class="row">
+					<div class="col-sm-12">
+					<h3>Estado de resultados</h3>
+						<table class="table table-bordered">
+							<thead>
+							<tr>
+							<th style="font-size: 18px;"><div class="text-center">Estados de resultados</div></th>
+							<th style="font-size: 18px;"><div class="text-center">Proyectado</div></th>
+							<th> <div class="text-center" style="font-size: 18px;">Productivo</div></th>
+							<th> <div class="text-center" style="font-size: 18px;">Actual</div></th>
+							</tr>
+								<tr>
+								<th width="20%" style="font-size: 18px;"><div class="text-center">Valor Economico</div></th>
+								<td width="20%" style="font-size: 15px;">{{(((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))) | currency}} </td>
+								<td width="20%" style="font-size: 15px;"> {{pl.jaime[0].ingresosObraCargo | currency}}</td>
+								<td width="20%" style="font-size: 15px;"> {{pl.jaime[0].ingresosObra | currency}}</td>
+								<tr>
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">Costos</div></th>
+							     <td width="20%" style="font-size: 15px;">{{pl.costoTotalPres | currency}} </td>
+							     <td width="20%" style="font-size: 15px;">{{pl.camposTotales3() | currency}} </td> 
+							      <td width="20%" style="font-size: 15px;">{{pl.camposTotales3() | currency}} </td> 
+							    </tr> 
+							    <tr>
+
+
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">Gastos</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{(((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)) | currency }}
+
+							    </td>
+							     <td  width="20%" style="font-size: 15px;">{{pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo() | currency}} </td> 
+							      <td  width="20%" style="font-size: 15px;">{{pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo() | currency}} </td> 
+							    </tr>
+							    <tr>
+							  
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">Utilidad Fiscal + Exedente de Indirectos</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{
+							    ((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))      -  (pl.costoTotalPres)    -  ((((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses)  | currency}} </td> 
+
+
+
+
+
+							    
+							   <td  width="20%" style="font-size: 15px;">{{(pl.jaime[0].ingresosObraCargo)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()) | currency }} </td>
+
+							    <td  width="20%" style="font-size: 15px;">{{(pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())  | currency }} </td> 
+
+							    </tr>
+							    <tr>
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">ISR</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{(((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))      -  (pl.costoTotalPres)    -  ((((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses) ) * (pl.plan.isr /100) | currency}} </td>
+
+					    		 <td  width="20%" style="font-size: 15px;">
+					    		 {{((pl.jaime[0].ingresosObraCargo)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (pl.plan.isr)/100 | currency}}
+					    		 </td>
+
+					    		  <td  width="20%" style="font-size: 15px;">
+					    		 {{((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  * (pl.plan.isr)/100 | currency}}
+					    		 </td>
+
+
+
+							    </tr>
+							    <tr>
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">PTU</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{(((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))      -  (pl.costoTotalPres)    -  ((((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses) ) * 10/100 | currency }}</td>
+
+							     <td  width="20%" style="font-size: 15px;">{{((pl.jaime[0].ingresosObraCargo)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100) | currency}}  
+							     </td>
+
+							       <td  width="20%" style="font-size: 15px;">{{((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100) | currency}}  
+							     </td>
+
+							    </tr>
+
+
+
+
+
+
+							    <tr>
+							    <th  width="20%" style="font-size: 18px;"><div class="text-center">Utilidad Neta</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{(((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))      -  (pl.costoTotalPres)    -  ((((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses))    -  ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))      -  (pl.costoTotalPres)    -  ((((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses) ) * (pl.plan.isr /100))   -  ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))      -  (pl.costoTotalPres)    -  ((((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses)) * 10/100)   | currency}}
+							      </td>
+
+							    <td  width="20%" style="font-size: 15px;">{{((pl.jaime[0].ingresosObraCargo)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  -   (((pl.jaime[0].ingresosObraCargo)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  * (pl.plan.isr)/100)    -   (((pl.jaime[0].ingresosObraCargo)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100)) | currency}} </td> 
+
+
+							     <td  width="20%" style="font-size: 15px;">{{((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  -   (((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  * (pl.plan.isr)/100)    -   (((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100)) | currency}} </td>
+
+							    </tr>
+
+
+
+
+
+
+							    <tr>
+							    <th  width="20%" style="font-size: 18px;"> <div class="text-center">Rentabilidad</div></th>
+							    <td  width="20%" style="font-size: 15px;">{{((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))      -  (pl.costoTotalPres)    -  ((((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses))    -  ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))      -  (pl.costoTotalPres)    -  ((((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses) ) * (pl.plan.isr /100))   -  ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))      -  (pl.costoTotalPres)    -  ((((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses)) * 10/100))/((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))) *100 | number:2}}%</td>
+
+							    <td  width="20%" style="font-size: 15px;"> {{(((pl.jaime[0].ingresosObraCargo)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  -   (((pl.jaime[0].ingresosObraCargo)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  * (pl.plan.isr)/100)    -   (((pl.jaime[0].ingresosObraCargo)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100))) / (pl.jaime[0].ingresosObraCargo) * 100  | number:2}}% </td>
+
+
+							    <td  width="20%" style="font-size: 15px;"> {{(((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  -   (((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  * (pl.plan.isr)/100)    -   (((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100))) / (pl.jaime[0].ingresosObra) * 100  | number:2}}% </td>
+							    
+							    </tr>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+
+				<!-- ///////////////////////////////////////////// SEGUNDA TABLA ///////////////////////////////////////// -->
+
+				<div class="row">
+					<div class="col-sm-6">
+						<table class="table table-bordered">
+							<thead>
+							<tr>
+								<th style="font-size: 18px;"><div class="text-center">Saldo Disponible</div></th>
+								<td style="font-size: 15px;"><div class="text-center" style="font-size: 15px;"></div>{{((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))) * pl.plan.anticipoObras / 100)- pl.gastosMasCostos() + pl.cobrosTotales()  | currency}}</td>
+
+							<!-- 	{{(plan.ingresos * plan.anticipoObras / 100)- mes.gastosMasCostos() + mes.cobrosTotales()  | currency}} -->
+								
+							</tr>
+								<tr>
+									<th style="font-size: 18px;"><div class="text-center">Cuentas por pagar</div></th>
+									<td style="font-size: 15px;"><div class="text-center" style="font-size: 15px;"></div>{{pl.gastosMasCostosTotales() - pl.pagosProveedoresTotales() | currency}}</td>
+							    </tr>
+							   <!--  <tr>
+									<th><div class="text-center"></div>IVA por pagar</th>
+									<th><div class="text-center"></div>{{}}</th>
+							    </tr> -->
+							    <tr>
+									<th style="font-size: 18px;"><div class="text-center">Estimaciones por cobrar</div></th>
+									<td style="font-size: 15px;"><div class="text-center" style="font-size: 15px;"></div>
+									{{pl.cargosObra() -pl.abonos() | currency}}</td>
+							    </tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+
+			 <br/>
+					<div class="row">
+						<br>
+						<div class="col-sm-12">
+							<input type="submit" ng-click="pl.guardar(pl.costos)" value="Guardar" class="btn btn-primary" ng-show="pl.action">
+							<input type="submit" ng-click="pl.actualizar(pl.plan,pl.costos)" value="Actualizar" class="btn btn-primary" ng-show="!pl.action">
+						</div>
+					</div>
+		    	</div>
+		  </form>
+		</div>
+	</div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+				<th width="20%" style="font-size: 18px;"><div class="text-center">Obra</div></th>
+
+			    <th width="20%" style="font-size: 18px;"><div class="text-center">Ingresos</div></th>
+			    <th width="20%" style="font-size: 18px;"><div class="text-center">Anticipo de Obra</div></th>
+					<th width="10%" style="font-size: 18px;">
+						<div class="text-center">
+							Estatus
+						</div>
+					</th>
+					<th width="30%" style="font-size: 18px;">
+						<div class="text-center">
+							Acciones
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="plan in pl.planes">
+			    <td style="font-size: 15px;">{{pl.obra.nombre}} </td>
+			    <td style="font-size: 15px;">{{(((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))) | currency}}</td>
+			    <td style="font-size: 15px;">{{plan.anticipoObras | number:2}}% </td> 
+			    <td>
+				    <div class="text-center">
+				    	<span ng-if="plan.estatus" class="label label-success" style="font-size: 15px;">
+							  Activo
+							</span>
+							<span ng-if="!plan.estatus" class="label label-danger" style="font-size: 15px;">
+							  Inactivo
+							</span>
+				    </div>
+			    </td>
+			    <td>
+				    <div class="text-center">
+				    <a class="btn btn-default" href="#" ng-click="pl.editar(plan._id)"><i class="fa fa-eye" style="font-size: 15px;"> Ver Plan</i></a>
+					    <div class="btn-group">
+					    
+							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="caret"></span>
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <ul class="dropdown-menu text-left">
+							    <li style="font-size: 15px;"><a href="#" ng-click="pl.editar(plan._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+							   <li style="font-size: 15px;"><a href="#" ng-click="pl.cambiarEstatus(plan._id)"><i class="fa fa-trash"></i> Desactivar</a></li>
+							 
+							    
+							  </ul>
+							</div>
+				    </div>				    
+			    </td>
+		    </tr>
+			</tbody>
+		</table>
+
+
+	</div>
+</div>
+
+
+
+
+<!-- (((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))))    -     (pl.costoTotalPres)      -    ((((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100)-(pl.totalFinalCostosDirectos))*((((pl.cosas[0].costoFinanciamento)  + (pl.cosas[0].cargoAdicional)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) *  (pl.plan.gastosFijosOficina1)/100))  +  (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
+					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100))))   - ((pl.plan.gastosOficinaSinIva) - ((((((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100))))/ (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) / 100 * 100) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) -->

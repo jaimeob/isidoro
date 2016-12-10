@@ -1,0 +1,128 @@
+		<h1  style="color:#646464"> <i class="fa fa-reorder"></i> {{cd.obras[0].nombre}}</h1><br/>
+		<div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-2" data-widget-editbutton="false" role="widget" >						
+		<header role="heading"><div class="jarviswidget-ctrls" role="menu"><a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> </div>
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			<h2>Tabla</h2>
+		<span class="jarviswidget-loader" style="display: none;"><i class="fa fa-refresh fa-spin"></i></span></header>
+	<div role="content" style="display: inline-block;">
+				<div class="widget-body no-padding">
+					<div class="table-responsive" >
+				        <table class="table table-hover table-bordered  inlineTable" style="display: inline-block;"  >
+				           <thead>
+								    <tr>
+									    <th style="font-size: 18px;"><div class="text-center">Partida</div></th>
+									    <th style="font-size: 18px;"><div class="text-center">Precio</div></th>
+									    <th style="font-size: 18px;" class="text-center" colspan="4" ng-repeat="costo in cd.costos">{{costo.nombre}}</th>
+									    <th></th>
+									    <th></th>
+									    <th></th>
+									    <th></th>
+									    <th></th>
+									    <th></th>
+
+								    </tr>
+								    <tr>
+								    	<th></th>
+								    	<th></th>
+									    <th style="font-size: 15px;" ng-repeat-start="costo in cd.costos" class="text-center">{{costo.presupuestoString}}</th>
+									    <th style="font-size: 15px;"  class="text-center">{{costo.ajusteString}}</th>
+									    <th style="font-size: 15px;"  class="text-center">{{costo.realString}}</th>
+									    <th style="font-size: 15px;" ng-repeat-end class="text-center">{{costo.diferenciaString}}</th>
+									    <th style="font-size: 15px;" class="text-center">Directo Real</th>
+									    <th style="font-size: 15px;" class="text-center">Indirecto Real</th>
+									    <th style="font-size: 15px;" class="text-center">Costo Unitario</th>
+									    <th style="font-size: 15px;" class="text-center">Base Gravable</th>
+									    <th style="font-size: 15px;" class="text-center">Utilidad Neta</th>
+									    <th style="font-size: 15px;" class="text-center">Rentabilidad</th>
+								    </tr>
+								   
+							   </thead><!-- ng-class="{{costo.diferencia}} > 0 ? 'primary' : 'danger'" -->
+								<tbody >
+								    <tr ng-repeat="partida in cd.costosTotales">
+									    <th style="font-size: 15px;"><div class="text-center">{{partida.partida}}</div></th>
+									    <td style="font-size: 15px;">{{(partida.totalPrecioUnitarioFin) + (partida.totalPrecioUnitarioFin * cd.planes[0].trema/100)| currency}}</td>
+									    <td style="font-size: 15px;" ng-repeat-start="costo in partida.costos">{{costo.presupuesto | currency}}</td>
+							            <td style="font-size: 15px;" >{{costo.ajuste | currency}}</td>
+							            <td style="font-size: 15px;">{{costo.realPeriodo | currency}}</td>
+							            <td style="font-size: 15px;" ng-repeat-end 
+							            ><div ng-class="{{costo.diferencia}} > 0 ? 'primary' : 'danger'">{{costo.diferencia | currency}}</div></td>
+							            
+									    <td style="font-size: 15px;"><div class="text-center">{{partida.directoReal1 | currency}}</div></td>
+									   <td style="font-size: 15px;"><div class="text-center">{{partida.indirectoReal  | currency}}</div></td>
+									    <td style="font-size: 15px;"><div class="text-center">{{partida.costoUnitario | currency}}</div></td>
+									     <td style="font-size: 15px;"><div class="text-center">{{partida.baseGravable | currency}}</div></td>
+									      <td style="font-size: 15px;"><div class="text-center">{{partida.utilidadNeta | currency}}</div></td>
+									      <td style="font-size: 15px;"><div class="text-center">{{partida.rentabilidad | number:2}}%</div></td>
+									  
+								    </tr>
+									      <tr>
+									         <td></td>
+									         <th >{{cd.totalPrecioUnitario | currency}}</th>
+									          <th  ng-repeat-start="partida in cd.costosTotales2">{{partida.presupuestos | number:2}}</th>
+									         <th>{{partida.ajuste | number:2}}</th>
+									         <th>{{partida.real | number:2}}</th>
+									          <th ng-repeat-end>{{partida.diferencia | number:2}}</th> 
+									    </tr>  
+							    </tbody>
+						</table>
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+			<div ng-show=""   class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-2" data-widget-editbutton="false" role="widget" >						
+		<header role="heading"><div class="jarviswidget-ctrls" role="menu"><a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> </div>
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			<h2>TABLA INVISIBLE</h2>
+		<span class="jarviswidget-loader" style="display: none;"><i class="fa fa-refresh fa-spin"></i></span></header>
+		<div role="content" style="display: block;">
+			<div class="widget-body no-padding">
+				<div class="table-responsive">			
+						
+						<table class="table table-hover">
+					<thead>
+							<tr>
+								<th style="font-size: 18px;">CONCEPTO</th>
+								<th style="font-size: 18px;" ng-repeat="costo in cd.costos">{{costo.nombre}}</th>
+								<th style="font-size: 18px;">Cantidad</th>
+								<th  style="font-size: 18px;">Costo directo</th>
+								<th style="font-size: 18px;" >Costo Indirecto</th>
+								<th style="font-size: 18px;" >Cargo por financiamineto</th>
+							<!-- 	<th  style="font-size: 18px;">Cargo Utilidad</th> -->
+								<th  style="font-size: 18px;">Cargo adicional</th>
+								<th  style="font-size: 18px;">Costo Unitario</th>
+								<th  style="font-size: 18px;">Precio Unitario</th>
+							
+							</tr>
+						</thead>
+						<tbody>
+							<tr  style="font-size: 15px;" ng-repeat="presupuesto in cd.presupuestos">{{cd.cosas}}
+								<td style="font-size: 15px;">{{cd.getConcepto(presupuesto.concepto_id)}}</td>
+								<td style="font-size: 15px;" ng-repeat="costo in presupuesto.costos">{{costo.direct | currency}}</td>
+								<td style="font-size: 15px;">{{presupuesto.cantidad | currency}}</td>
+								<td style="font-size: 15px;">{{presupuesto.totalOtro | currency}}</td>
+								<td style="font-size: 15px;">{{presupuesto.costoIndi | currency}} </td>
+								<td style="font-size: 15px;">{{presupuesto.financiamiento | currency}} </td>
+						
+								<!-- <td style="font-size: 15px;">{{presupuesto.utilidad | currency}}</td> -->
+								<td style="font-size: 15px;">{{presupuesto.adicional | currency}}</td>
+								<td style="font-size: 15px;">{{presupuesto.precioUnitario | currency}}</td>
+								<td style="font-size: 15px;">{{(presupuesto.precioUnitario) + (presupuesto.precioUnitario * cd.planes[0].trema/100) | currency}}</td>
+
+							    
+							</tr>
+						</tbody>
+						</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	  				 </div>
+	   			</div>
+	  </div>
+	 </div>
+
+
+	 	
+
+	
