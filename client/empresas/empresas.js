@@ -3,11 +3,6 @@ angular.module('formulas')
 function EmpresasCtrl($scope, $meteor, $reactive, $state, toastr) {
 $reactive(this).attach($scope);
 
-
-this.subscribe('users',()=>{
-	return Meteor.users.findOne[{ _id: Meteor.userId() }];
-    });
-
     this.subscribe("empresas",()=>{
 		return [{estatus:true,empresa_id : this.getReactively("empresa_id")}]
 	});

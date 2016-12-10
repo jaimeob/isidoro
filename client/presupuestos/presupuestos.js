@@ -18,6 +18,8 @@ $reactive(this).attach($scope);
 		}]
 	});
 
+    
+
 	this.subscribe('conceptos',()=>{
 	return [{estatus:true}] 
     });
