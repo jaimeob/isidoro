@@ -1,4 +1,4 @@
-angular.module('inoxica').controller('LoginCtrl', ['$injector', function ($injector) {
+angular.module('formulas').controller('LoginCtrl', ['$injector', function ($injector) {
   var $meteor = $injector.get('$meteor');
   var $state 	= $injector.get('$state');
   var toastr 	= $injector.get('toastr');

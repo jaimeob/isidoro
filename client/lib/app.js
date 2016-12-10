@@ -1,4 +1,4 @@
-angular.module('inoxica',
+angular.module('formulas',
   [
     'angular-meteor',    
     'ngAnimate',

@@ -1,4 +1,4 @@
-angular.module("inoxica")
+angular.module("formulas")
 .controller("UsuariosCtrl", UsuariosCtrl);
 function UsuariosCtrl($scope, $meteor, $reactive,  $state, $stateParams, toastr) {
 let rc =$reactive(this).attach($scope);
