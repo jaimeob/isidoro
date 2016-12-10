@@ -12,9 +12,9 @@ angular.module('formulas').controller('LoginCtrl', ['$injector', function ($inje
 	      toastr.success("Bienvenido al Sistema");
         if(Meteor.user().roles[0] == "admin" )
         {
-          $state.go('root.materiales'); 
+          $state.go('root.empresas'); 
         }else{
-          $state.go('root.materiales'); 
+          $state.go('root.obras'); 
         }
                
       },

@@ -1,12 +1,12 @@
 angular
 .module("formulas")
-.controller("UsuariosCtrl", UsuariosCtrl);
-function UsuariosCtrl($scope, $meteor, $reactive,  $state, $stateParams, toastr) {
+.controller("DirectoresCtrl", DirectoresCtrl);
+function DirectoresCtrl($scope, $meteor, $reactive,  $state, $stateParams, toastr) {
 let rc =$reactive(this).attach($scope);
 window.rc = rc;
 
-this.usuario = {};
-    this.subscribe('usuarios',()=>{
+this.director = {};
+    this.subscribe('directores',()=>{
 	return [{"profile.estatus":true}] 
     });
 
