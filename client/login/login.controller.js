@@ -1,4 +1,4 @@
-angular.module('inoxica').controller('LoginCtrl', ['$injector', function ($injector) {
+angular.module('formulas').controller('LoginCtrl', ['$injector', function ($injector) {
   var $meteor = $injector.get('$meteor');
   var $state 	= $injector.get('$state');
   var toastr 	= $injector.get('toastr');
@@ -12,9 +12,9 @@ angular.module('inoxica').controller('LoginCtrl', ['$injector', function ($injec
 	      toastr.success("Bienvenido al Sistema");
         if(Meteor.user().roles[0] == "admin" )
         {
-          $state.go('root.materiales'); 
+          $state.go('root.empresas'); 
         }else{
-          $state.go('root.materiales'); 
+          $state.go('root.obras'); 
         }
                
       },
