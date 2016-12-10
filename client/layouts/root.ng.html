@@ -25,7 +25,7 @@
 </header>
 <aside id="left-panel">
   <div class="login-info">
-		<span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+		<span ng-show="{{isLoggedIn()}}"> <!-- User image size is adjusted inside CSS, it should stay as it --> 
 			<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
 				<!-- <img ng-src="{{currentUser.profile.fotografia}}" alt="me" class="online"> --> 
 				<span>
@@ -38,7 +38,6 @@
   <div ng-include=" 'client/layouts/left-nav.ng.html' "></div>
 </aside>
 <div id="main" role="main">
-  <div id="ribbon"><br/></div>
+  <div id="ribbon"></div>
   <div id="content" ui-view></div>
 </div>
-<!-- <h2 class="row-seperator-header" style="color:#BBB"> <i class="fa fa-reorder"></i> {{rt.obra.nombre}}</h2> -->
