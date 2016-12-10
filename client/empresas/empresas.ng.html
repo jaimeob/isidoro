@@ -1,0 +1,181 @@
+<h2>Empresas</h2>
+<div class="row">
+	<div class="col-sm-12">
+		<a class="btn btn-{{empr.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+			href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="nuevoempresa" ng-click="empr.nuevoEmpresa()">
+		 {{empr.nuevo == true ? 'Nuevo' : 'Cancelar'}}
+		</a>
+		<div class="collapse" id="collapseExample">
+			<form class="form-horizontal" role="form">
+		  	<div class="well">	    
+			    <div class="row">
+			    <div class="col-sm-4">					    
+				    	<label>Usuario</label>
+				    	<input type="text" class="form-control" placeholder="Usuario" ng-model="empr.empresa.username" required>
+			    	</div>
+			    	<div class="col-sm-4">					    
+				    	<label>Contraseña</label>
+				    	<input type="password" class="form-control" placeholder="Contraseña" ng-model="empr.empresa.password" required>
+			    	</div>
+			    </div>
+			     <div class="row">
+			    	<div class="col-sm-4">					    
+				    	<label>Nombre del Director</label>
+				    	<input type="text" class="form-control" placeholder="Nombre" ng-model="empr.empresa.nombreDirector" required>
+			    	</div>
+			    	<div class="col-sm-4">					    
+				    	<label>Apellido Paterno</label>
+				    	<input type="text" class="form-control" placeholder="Apellido" ng-model="empr.empresa.apPaternoDirector" required>
+			    	</div>
+			    	<div class="col-sm-4">					    
+				    	<label>Apellido Materno</label>
+				    	<input type="text" class="form-control" placeholder="Apellido" ng-model="empr.empresa.apMaternoDirector" required>
+			    	</div>
+			   </div>
+			 </div>
+			    <div class="well">
+			    <div class="row">	
+				    <div class="col-sm-3">
+					    <label>Clave</label>
+				    	<input type="text" class="form-control" placeholder="Clave" ng-model="empr.empresa.clave" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>Nombre de la Empresa</label>
+				    	<input type="text" class="form-control" placeholder="Nombre" ng-model="empr.empresa.nombre" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>Razón Social</label>
+				    	<input type="text" class="form-control" placeholder="Razón Social" ng-model="empr.empresa.razonSocial" required>
+				    </div>
+			    	<div class="col-sm-3">
+					    <label for="domicilio">Domicilio</label>
+					    <input type="text" class="form-control" placeholder="Domicilio" ng-model="empr.empresa.domicilio" required>
+			    	</div>
+				    <div class="col-sm-3">
+					    <label>Referencia Domicilio</label>
+				    	<input type="text" class="form-control" placeholder="Referencia Domicilio" ng-model="empr.empresa.refDomicilio" required>
+				    </div>
+			    	<div class="col-sm-3">				    	
+					    <label>No.Exterior</label>
+				    	<input type="text" class="form-control" placeholder="No.Exterior" ng-model="empr.empresa.nEx" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>No.Interior</label>
+				    	<input type="text" class="form-control" placeholder="No.Interior" ng-model="empr.empresa.nInt" required>
+				    </div>
+				     <div class="col-sm-3">
+					    <label>CP</label>
+				    	<input type="text" class="form-control" placeholder="CP" ng-model="empr.empresa.CP" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>Colonia</label>
+				    	<input type="text" class="form-control" placeholder="Colonia" ng-model="empr.empresa.colonia" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>Municipio</label>
+				    	<input type="text" class="form-control" placeholder="Municipio" ng-model="empr.empresa.municipio" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>Ciudad</label>
+				    	<input type="text" class="form-control" placeholder="Ciudad" ng-model="empr.empresa.ciudad" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>Estado</label>
+				    	<input type="text" class="form-control" placeholder="Estado" ng-model="empr.empresa.estado" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>País</label>
+				    	<input type="text" class="form-control" placeholder="País" ng-model="empr.empresa.pais" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>Teléfonos</label>
+				    	<input type="text" class="form-control" placeholder="Teléfonos" ng-model="empr.empresa.telefonos" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>Fax</label>
+				    	<input type="text" class="form-control" placeholder="Fax" ng-model="empr.empresa.fax" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>RFC</label>
+				    	<input type="text" class="form-control" placeholder="RFC" ng-model="empr.empresa.rfc" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>E-mail</label>
+				    	<input type="email" class="form-control" placeholder="E-mail" ng-model="empr.empresa.email" required>
+				    </div>
+				    <div class="col-sm-3">
+					    <label>Titular</label>
+				    	<input tape="text" class="form-control" placeholder="Titular" ng-model="empr.empresa.titular" required>
+				    </div>
+		    	</div>  
+					<div class="row">
+						<br>
+						<div class="col-sm-12">
+							<input type="submit" ng-click="empr.guardar(empr.empresa)" value="Guardar" class="btn btn-primary" ng-show="empr.action">
+							<input type="submit" ng-click="empr.actualizar(empr.empresa)" value="Actualizar" class="btn btn-primary" ng-show="!empr.action">
+						</div>
+					</div>	  
+		  	</div>
+		  </form>
+		</div>
+	</div>
+</div>
+<br/>
+<!-- List -->
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+			    <th width="30%"><div class="text-center">Nombre</div></th>
+			    <th width="20%"><div class="text-center">Teléfonos</div></th>
+			    <th width="20%"><div class="text-center">Correo</div></th>
+			    <th width="20%"><div class="text-center">Titular</div></th>
+					<th width="10%">
+						<div class="text-center">
+							Estatus
+						</div>
+					</th>
+					<th width="10%">
+						<div class="text-center">
+							Acciones
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="empresa in empr.empresas">
+			    <td>{{empresa.nombre}} </td> 
+			    <td>{{empresa.telefonos}} </td>
+			    <td>{{empresa.email}} </td>
+			    <td>{{empresa.titular}} </td>
+			    <td>
+				    <div class="text-center">
+				    	<span ng-if="empresa.estatus" class="label label-success">
+							  Activo
+							</span>
+							<span ng-if="!empresa.estatus" class="label label-danger">
+							  Inactivo
+							</span>
+				    </div>
+			    </td>
+			    <td>
+				    <div class="text-center">
+					    <div class="btn-group">
+							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="caret"></span>
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <ul class="dropdown-menu text-left">
+							    <li><a href="#" ng-click="empr.editar(empresa._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+							   <li><a href="#" ng-click="empr.cambiarEstatus(empresa._id)"><i class="fa fa-trash"></i> Desactivar</a></li>
+							    <!--<li><a href="/empresas" ng-click="remove(empresas)"><span class="fa fa-trash"> Eliminar</span></a></li>-->
+							  </ul>
+							</div>
+				    </div>				    
+			    </td>
+		    </tr>
+			</tbody>
+		</table>
+	</div>
+</div>
