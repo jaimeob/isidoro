@@ -216,7 +216,7 @@ angular.module('inoxica').config(['$injector', function ($injector) {
       templateUrl: 'client/usuarios/usuarios.ng.html',
       controller: 'UsuariosCtrl as usu',
     })
-<<<<<<< HEAD
+
        .state('root.partidas', {
       url: '/partidas/:id',
       templateUrl: 'client/partidas/partidas.ng.html',
@@ -291,19 +291,5 @@ angular.module('inoxica').config(['$injector', function ($injector) {
       url: '/costosDirectos/:id',
       templateUrl: 'client/costosDirectos/costosDirectos.ng.html',
       controller: 'CostosDirectosCrtl as cd',
-=======
-     //<--///////////////// PROEEDORES ////////////////////-->//
-      .state('root.proveedores', {
-      url: '/proveedores',
-      templateUrl: 'client/proveedores/proveedores.ng.html',
-      controller: 'ProveedoresCtrl as prove',
-    })
-       //<--///////////////// UNIDADES ////////////////////-->//
-         .state('root.unidades', {
-      url: '/unidades/',
-      templateUrl: 'client/unidades/unidades.ng.html',
-      controller: 'UnidadesCtrl as uni',
-
->>>>>>> e6b4c4848f78b921faa32ed4e81d80c95a2abb98
     });
 }]);     
