@@ -793,16 +793,18 @@ console.log(costosTotalesArreglos)
 	   		console.log("costosarreglos", costosTotalesArreglos)
 
 	   		///////////////////////////////////////////////////////////////////////////////////////////
-
+console.log("zamaArray", zamaArray);
+console.log("periodos", rc.periodosCostos);
 var periodosCostos = {};
 		 	_.each(zamaArray, function(costoTotal){
 		 		_.each(costoTotal.costos, function(costo){
-
+		 		var totalPeriodo = 0.00;
 		 			_.each(rc.getReactively("periodosCostos"), function(periodo){
 		 				//console.log(costo, periodo);
 		 				if(costo.partida_id == periodo.partida_id && costo.costo_id == periodo.costo_id){
-		 					console.log("prueba")
-		 					costo.realPeriodo += costo.realPeriodo
+		 					console.log("prueba", periodo)
+		 					totalPeriodo += periodo.comprasSinIva + periodo.comprasIva + periodo.contadoSinIva + periodo.contadoIva
+		 					console.log("realperiodo",costo.realPeriodo);
 		 				}
 		   			// //_.each(rc.getReactively("conceptos"), function(concepto){
 		   			// 	_.each(rc.getReactively("periodosCostos"), function(costoPeriodo){
@@ -821,6 +823,7 @@ var periodosCostos = {};
 		   			// 		}
 		   			// 	});
 		   		     });
+		   		     costo.realPeriodo = totalPeriodo;
 		        });
 		       });
 
