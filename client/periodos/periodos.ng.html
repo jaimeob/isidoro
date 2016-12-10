@@ -1,0 +1,45 @@
+
+<div class="row">				
+	<div class="col-sm-12">
+	
+		<h3 class="dark-grey">Periodos</h3>
+	<div class="row">
+ 
+
+	   </div>
+	   </div>	
+	     	  
+	<div class="col-sm-12" >
+	<br/>
+		<div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-2" data-widget-editbutton="false" role="widget">						
+		<header role="heading"><div class="jarviswidget-ctrls" role="menu"><a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> </div>
+			<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+			<h2>Tabla</h2>
+		<span class="jarviswidget-loader" style="display: none;"><i class="fa fa-refresh fa-spin"></i></span></header>
+		<div role="content" style="display: block;">
+			<div class="widget-body no-padding">
+				<div class="table-responsive">			
+						
+					<table class="table table-hover">
+					<thead>
+							<tr>
+								<th>Obras</th>
+								<th ng-repeat="mes in per.meses">{{mes.fecha | date:"MMMM-yyyy"}}</th>
+								<th>EJEMPLO</th><th>COMPRAS DE CREDITO S/IVA</th><th>COMPRAS DE CREDITO C/ IVA</th><th>CONTADO S/IVA</th><td>CONTADO C/IVA</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="presupuesto in mes.presupuestos">
+								<td>{{mes.getConcepto(presupuesto.concepto_id)}}</td>
+								<td ng-repeat="costo in presupuesto.costos">{{costo.value | currency}}</td>
+								<!--<td ng-repeat="presupuesto in mes.presupuestos"><input type="text"  class="form-control" placeholder="Correo" ng-model="mes.presupuesto.total" ></td>-->
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+   </div> 
+</div>

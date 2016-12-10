@@ -1,0 +1,80 @@
+<h2>Pagos</h2>
+<div class="row">
+	<div class="col-sm-12">
+		<a class="btn btn-{{pag.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
+			href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="nuevopago" ng-click="pag.nuevoPago()">
+		 {{pag.nuevo == true ? 'Nuevo' : 'Cancelar'}}
+		</a>
+		<div class="collapse" id="collapseExample">
+			<form class="form-horizontal" role="form" data-parsley-validate>
+		  	<div class="well">	    
+			    <div class="row">
+	          <div class="col-sm-4">
+					    <label>Nombre</label>
+				    	<input type="text" class="form-control" placeholder="Nombre" ng-model="pag.pago.nombre" required>
+				    </div>
+	    	  </div>
+					<div class="row">
+						<br>
+						<div class="col-sm-12">
+							<input type="submit" ng-click="pag.guardar(pag.pago)" value="Guardar" class="btn btn-primary" ng-show="pag.action">
+							<input type="submit" ng-click="pag.actualizar(pag.pago)" value="Actualizar" class="btn btn-primary" ng-show="!pag.action">	
+						</div>
+					</div>
+		  	</div>
+	  	</form>
+		</div>
+	</div>
+</div>
+<br/>
+<!-- List -->
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th width="20%"><div class="text-center">Nombre</div></th>
+					<th width="10%">
+						<div class="text-center">
+							Estatus
+						</div>
+					</th>
+					<th width="10%">
+						<div class="text-center">
+							Acciones
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="pago in pag.pagos">
+			    <td>{{pago.nombre}}</td>
+			    <td>
+				    <div class="text-center">
+				    	<span ng-if="pago.estatus" class="label label-success">
+							  Activo
+							</span>
+							<span ng-if="!pago.estatus" class="label label-danger">
+							  Inactivo
+							</span>
+				    </div>
+			    </td>
+			    <td>
+				    <div class="text-center">
+					    <div class="btn-group">
+							  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="caret"></span>
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <ul class="dropdown-menu text-left">
+							    <li><a href="#" ng-click="pag.editar(pago._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+							  <li><a href="#" ng-click="pag.cambiarEstatus(pago._id)"><i class="fa fa-trash"></i> Desactivar</a></li>
+							  </ul>
+							</div>
+				    </div>				    
+			    </td>
+		    </tr>
+			</tbody>
+		</table>
+	</div>
+</div>
