@@ -32,9 +32,9 @@ this.subscribe('users',()=>{
 	return [{empresa_id : Meteor.user() != undefined ? Meteor.user().profile.empresa_id : undefined,estatus:true}] 
     });
 
-    this.subscribe('meses',()=>{
-	return [{estatus:true}] 
-    });
+    	this.subscribe('meses',()=>{
+		return [{estatus:true,usuarioMes: Meteor.userId()}]
+	});
 
     this.subscribe('pagosProveedores',()=>{
 	return [{estatus:true}] 

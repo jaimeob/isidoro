@@ -47,7 +47,7 @@ let rc =$reactive(this).attach($scope);
     });
 
 	this.subscribe('meses',()=>{
-		return [{estatus:true}]
+		return [{estatus:true, usuarioMes: Meteor.userId()}]
 	});
 
 	this.subscribe('partidas',()=>{

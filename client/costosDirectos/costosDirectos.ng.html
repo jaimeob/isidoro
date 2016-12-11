@@ -45,7 +45,7 @@
 							            <td style="font-size: 15px;" ng-class="costo.ajuste < 0 ? 'rojo' : ''" >{{costo.ajuste | currency}}</td>
 							            <td style="font-size: 15px;" ng-class="costo.realPeriodo < 0 ? 'rojo' : ''">{{costo.realPeriodo | currency}}</td>
 							            <td style="font-size: 15px;" ng-repeat-end 
-							            ><div ng-class="{{costo.diferencia}} > 0 ? 'primary' : 'danger'">{{costo.diferencia | currency}}</div></td>
+							            ><div ng-class="costo.diferencia < 0 ? 'rojo' : ''">{{costo.diferencia | currency}}</div></td>
 							            
 									    <td style="font-size: 15px;"><div class="text-center">{{partida.directoReal1 | currency}}</div></td>
 									   <td style="font-size: 15px;"><div class="text-center">{{partida.indirectoReal  | currency}}</div></td>

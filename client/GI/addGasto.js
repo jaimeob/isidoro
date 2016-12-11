@@ -13,9 +13,9 @@ this.subscribe('users',()=>{
 	return Meteor.users.findOne[{ _id: Meteor.userId() }];
     });
 
-    this.subscribe('meses',()=>{
-	return [{estatus:true}] 
-    });
+    	this.subscribe('meses',()=>{
+		return [{estatus:true,usuarioMes: Meteor.userId()}]
+	});
 
 
      this.subscribe('gastosOficina',()=>{

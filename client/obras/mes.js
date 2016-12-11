@@ -8,7 +8,7 @@ $reactive(this).attach($scope);
 	this.tipoPeriodo = 'costo';
 
 	this.subscribe('meses',()=>{
-		return [{estatus:true}]
+		return [{estatus:true,usuarioMes: Meteor.userId()}]
 	});
 
 	this.subscribe('obras',()=>{
@@ -55,6 +55,7 @@ $reactive(this).attach($scope);
   this.guardar = function(mes)
 	{
 		moment.locale("es"); 
+		this.mes.usuarioMes = Meteor.userId()
 		this.mes.estatus = true;
 		this.mes.mes = moment(mes.fecha).format('MMMM-YYYY')
 		console.log(this.mes);
