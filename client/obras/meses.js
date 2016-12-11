@@ -564,7 +564,7 @@ let rc =$reactive(this).attach($scope);
    		 this.Resumen = true;
 
    		 	 this.period = false;
-   		 	 this.combo = false
+   		 	 this.combo = true
    
 		this.accionPeriodo = false;
 		this.accionPresupuesto = true;
@@ -787,8 +787,11 @@ let rc =$reactive(this).attach($scope);
    			 this.period = false;
    		 this.tablaPeriodos = false;
    		 this.PeriodoIva = true;
+
+   		// this.combo = true;
    		 
    		 this.period = false;
+   		 this.periodCampo = false;
    		console.log(this.mes_id);
   
 	    console.log(this.gastoCosto);
@@ -841,6 +844,7 @@ let rc =$reactive(this).attach($scope);
 		this.periodo.comprasSinIva = 0.00;  
 		this.periodo.contadoIva = 0.00;
 		this.periodo.contadoSinIva = 0.00;
+		this.period = true
 
 	}
 
