@@ -391,6 +391,27 @@ let rc =$reactive(this).attach($scope);
 
 		periodo.estatus = true;
 		this.gastoCosto = true;
+		this.combo = true
+		periodo.obra_id = this.obra_id;
+		periodo.mes_id = this.mes_id;
+		periodo.partida_id = this.partida_id;
+		if(periodo.costo_id != undefined)
+			periodo.tipo = 'costo';
+		if(periodo.gasto != undefined)
+			periodo.tipo = 'gasto';
+		console.log(periodo);
+		Periodos.insert(periodo);
+		toastr.success('Periodo Agregado.');
+		this.periodo = {}; 
+
+		
+	};
+
+	this.guardarPeriodoCampo = function(periodo)
+	{
+		this.periodCampo = true
+		periodo.estatus = true;
+		this.gastoCosto = false;
 		periodo.obra_id = this.obra_id;
 		periodo.mes_id = this.mes_id;
 		periodo.partida_id = this.partida_id;
@@ -542,7 +563,8 @@ let rc =$reactive(this).attach($scope);
    		 this.PeriodoIva = false;
    		 this.Resumen = true;
 
-   		 	 this.period = true;
+   		 	 this.period = false;
+   		 	 this.combo = false
    
 		this.accionPeriodo = false;
 		this.accionPresupuesto = true;
@@ -775,7 +797,7 @@ let rc =$reactive(this).attach($scope);
 
 	this.gastoCampos = function(mes_id,obra_id)
    	{
-   		
+   		this.combo = false
 		this.tipoPeriodo = 'gasto'; 
 		this.periodo.comprasIva = 0.00;
 		this.periodo.comprasSinIva = 0.00;  
@@ -787,7 +809,8 @@ let rc =$reactive(this).attach($scope);
    		this.gastoCosto = false;
    		this.PeriodoIva = false;
    		 this.true = false;
-   		 this.period = true;
+   		 this.period = false;
+   		 this.periodCampo = true;
    		 this.tablaPeriodos = true;
    		this.accionPartidas = true;
    		console.log(this.mes_id);
@@ -812,6 +835,7 @@ let rc =$reactive(this).attach($scope);
 
 	this.reiniciar = function()
 	{
+
 		this.periodo = {};
 		this.periodo.comprasIva = 0.00;
 		this.periodo.comprasSinIva = 0.00;  
@@ -878,6 +902,8 @@ this.actPeriod = true;
     this.periodo = Periodos.findOne({_id:id});
     this.actPeriod = false;
     this.period = false;
+    this.periodCampo = false;
+    this.combo=true
 	};
 
 
@@ -895,7 +921,13 @@ this.actPeriod = true;
 		this.periodo.comprasSinIva = 0.00;  
 		this.periodo.contadoIva = 0.00;
 		this.periodo.contadoSinIva = 0.00;
+		this.period = true;
+		this.actPeriod = true
+		this.combo = true;
+		;
 	};
+
+
 
 	this.cambiarEstatusPeriodo= function(id)
 	{

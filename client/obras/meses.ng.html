@@ -440,8 +440,8 @@
 					</div>
 				</div><br/>
 
-		<div style="margin-top: 18px" class="row"><br/>
-			<div class="col-sm-4"  ng-show="mes.gastoCosto" >
+		<div style="margin-top: 18px" ng-show="mes.combo" class="row"><br/>
+			<div class="col-sm-4" >
 			<br/>
 		<label>COSTOS DIRECTOS </label>
 		<select ng-click="mes.reiniciar()" id="costo" class="form-control" style="margin-top: 18px"  placeholder="Seleccione" ng-model="mes.periodo.costo_id">
@@ -480,6 +480,7 @@
           <div class="col-sm-2"  >
           <br/>
 	         <input type="submit"  ng-click="mes.guardarPeriodo(mes.periodo); mes.input();" value="Guardar" class="btn btn-primary" ng-show="mes.period">
+	         <input type="submit"  ng-click="mes.guardarPeriodoCampo(mes.periodo); mes.input();" value="Guardar" class="btn btn-primary" ng-show="mes.periodCampo">
 	         <input type="submit" ng-click="mes.actualizarPeriodo(mes.periodo);mes.input();" ng-show="!mes.actPeriod" value="Actualizar" class="btn btn-primary"><br/>
 	     </div>
 	    </div>
