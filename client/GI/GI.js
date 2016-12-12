@@ -21,15 +21,15 @@ this.subscribe('users',()=>{
      });
 
     this.subscribe('planes',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
     });
 
      this.subscribe('presupuestosCampo',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
     });
 
     this.subscribe('obras',()=>{
-	return [{empresa_id : Meteor.user() != undefined ? Meteor.user().profile.empresa_id : undefined,estatus:true}] 
+	return [{empresa_id : Meteor.user() != undefined ? Meteor.user().profile.empresa_id : undefined,estatus:true,usuario_id:Meteor.userId()}] 
     });
 
     	this.subscribe('meses',()=>{
@@ -37,10 +37,10 @@ this.subscribe('users',()=>{
 	});
 
     this.subscribe('pagosProveedores',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
   });
     this.subscribe('cobros',()=>{
-	return [{estatus:true,modo:true}] 
+	return [{estatus:true,modo:true,usuario_id:Meteor.userId()}] 
   });
 	this.subscribe('periodos',()=>{
 	return [{tipo: this.getReactively('tipoPeriodo'),estatus:true,usuario_id:Meteor.userId()}] 
