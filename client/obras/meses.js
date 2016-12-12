@@ -388,7 +388,7 @@ let rc =$reactive(this).attach($scope);
 	};
 	this.guardarPeriodo = function(periodo)
 	{
-
+        this.periodo.usuario_id = Meteor.userId()
 		periodo.estatus = true;
 		this.gastoCosto = true;
 		this.combo = true
@@ -409,6 +409,7 @@ let rc =$reactive(this).attach($scope);
 
 	this.guardarPeriodoCampo = function(periodo)
 	{
+		this.periodo.usuario_id = Meteor.userId()
 		this.periodCampo = true
 		periodo.estatus = true;
 		this.gastoCosto = false;
@@ -429,6 +430,7 @@ let rc =$reactive(this).attach($scope);
 
 	this.guardarPago = function(pagoProveedor)
 	{
+		pagoProveedor.usuario_id = Meteor.userId()
 		pagoProveedor.estatus = true;
 		pagoProveedor.obra_id = this.obra_id;
 		pagoProveedor.mes_id = this.mes_id;
@@ -443,6 +445,7 @@ let rc =$reactive(this).attach($scope);
 
 	this.guardarCobro = function(cobro)
 	{
+		cobro.usuario_id = Meteor.userId()
 		this.guardarc = false
 		this.cargos = false
 		this.abonos = false;
@@ -1087,11 +1090,10 @@ this.actPeriod = true;
 	
      this.guardarCosa = function(cosa)
      { 
+     	cosa.usuario_id = Meteor.userId()
      	this.cosa.estatus = true;
      	this.cosa.obra_id = this.obra_id;
-     	cosa.cargoAdicional = 0.00;
-     	cosa.costoFinanciamento = 0.00;
-     	cosa.costoIndirecto = 0.00;
+
 
 
      	PresupuestosCosas.insert(this.cosa);
@@ -1099,7 +1101,10 @@ this.actPeriod = true;
      	console.log(this.cosa);
   
      	this.editarCosita = true ;
-     	this.thing = false;
+     	this.thing = false;     	
+     	cosa.cargoAdicional = 0.00;
+     	cosa.costoFinanciamento = 0.00;
+     	cosa.costoIndirecto = 0.00;
 
      };
      this.editarCosa = function(id)

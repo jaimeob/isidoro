@@ -19,7 +19,7 @@ this.subscribe('users',()=>{
 
 
      this.subscribe('gastosOficina',()=>{
-	 return [{mes_id: this.getReactively('mes_id'), estatus:true}] 
+	 return [{mes_id: this.getReactively('mes_id'), estatus:true,usuario_id:Meteor.userId()}] 
      });
 
       this.subscribe('cobros',()=>{
@@ -49,6 +49,7 @@ this.subscribe('users',()=>{
   this.guardar = function(mes)
 	{
 		moment.locale("es"); 
+		this.periodo.usuario_id = Meteor.userId()
 		this.mes.estatus = true;
 		this.mes.mes = moment(mes.fecha).format('MMMM-YYYY')
 		//this.mes.mes_id = this.mes_id;
@@ -108,6 +109,7 @@ this.subscribe('users',()=>{
 	{
 	
 		this.gasto.estatus = true;
+		this.gasto.usuario_id = Meteor.userId()
 		this.gasto.mes_id = this.mes_id;
 		console.log(this.gasto);
 		GastosOficina.insert(this.gasto);

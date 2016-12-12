@@ -17,7 +17,7 @@ this.subscribe('users',()=>{
     });
 
      this.subscribe('gastosOficina',()=>{
-	 return [{estatus:true}] 
+	 return [{estatus:true,usuario_id:Meteor.userId()}] 
      });
 
     this.subscribe('planes',()=>{
@@ -43,7 +43,7 @@ this.subscribe('users',()=>{
 	return [{estatus:true,modo:true}] 
   });
 	this.subscribe('periodos',()=>{
-	return [{tipo: this.getReactively('tipoPeriodo'),estatus:true}] 
+	return [{tipo: this.getReactively('tipoPeriodo'),estatus:true,usuario_id:Meteor.userId()}] 
   });
 
   this.action = true;
@@ -588,11 +588,11 @@ this.subscribe('users',()=>{
 		return total
 	}
 
-	this.TotalFinalGO = function(){
-		total = 0;
-		_.each(rc.gastosOficinas,function(gasto){total += gasto.importeFijo + gasto.importeVar});
-		return total
-	}
+	// this.TotalFinalGO = function(){
+	// 	total = 0;
+	// 	_.each(rc.gastosOficinas,function(gasto){total += gasto.importeFijo + gasto.importeVar});
+	// 	return total
+	// }
 
 	this.todosGastosOficinas = function(){
 		total = 0;
