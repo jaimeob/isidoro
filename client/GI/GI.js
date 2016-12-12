@@ -86,7 +86,7 @@ this.subscribe('users',()=>{
 	  },
 
 	   TodosCobros : () => {
-		  return Cobros.find();
+		  return Cobros.find({usuario_id: Meteor.userId()});
 	  },
 
 	  periodos : () => {
