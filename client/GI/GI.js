@@ -164,7 +164,7 @@ this.subscribe('users',()=>{
  				var porcentaje = ingresosMes / totalIngresos * 100;
  				var pago =  totalGastoOficinaPorMes * porcentaje/100
 
- 				console.log(mes.mes,ingresosMes,totalIngresos)
+ 				//console.log(mes.mes,ingresosMes,totalIngresos)
  				
 
 
@@ -183,10 +183,10 @@ this.subscribe('users',()=>{
             totalPago = {};
 			_.each(arreglin, function(arreglo){
 				
-				console.log("arreglo", arreglo);
+				//console.log("arreglo", arreglo);
 				
 				if("undefined" == typeof totalPago[arreglo.obra_id]){
-					console.log("if");
+					//console.log("if");
 					totalPago[arreglo.obra_id] = {};
 
 					if (arreglo.pago > 0) {
@@ -199,19 +199,19 @@ this.subscribe('users',()=>{
 					
 				}else{
 					if (arreglo.pago > 0) {
-						console.log("else")
+						//console.log("else")
 						totalPago[arreglo.obra_id].pago += arreglo.pago;
 					}
 				}
-				console.log(totalPago);
+				//console.log(totalPago);
 				// if (arreglo.pago !=undefined) {
 
  			// 		}else{
  			// 			arreglo.pago = 0;
  			// 		}
 			});
-			console.log("tatal pago", totalPago);
-			console.log("arreglo total", arreglin);
+			//console.log("tatal pago", totalPago);
+			//console.log("arreglo total", arreglin);
 			_.each(arreglin, function(arreglo){
 					if (isNaN(arreglo.porcentaje)) {
 							arreglo.porcentaje = 0;
@@ -221,7 +221,7 @@ this.subscribe('users',()=>{
 
 			});
 
-			console.log(totalPago);
+			//console.log(totalPago);
  			_.each(totalPago, function(pago){
  				_.each(arreglin, function(arreglo){
 
@@ -740,12 +740,13 @@ this.subscribe('users',()=>{
 		var totalIngresos=0;
 		_.each(obras, function(obra){
 			var cobros = Cobros.find().fetch();
-			_.each(rc.TodosCobros,function(cobro){
+			_.each(rc.getReactively("TodosCobros"),function(cobro){
 				var obra_id=obra._id;
 				if(obra_id == cobro.obra_id)
 					totalIngresos += cobro.cIva/1.16 + cobro.cSinIva
 			})
 		});
+		console.log(totalIngresos)
 		return totalIngresos
  	};
 
