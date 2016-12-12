@@ -12,11 +12,11 @@ $reactive(this).attach($scope);
 	});
 
 	this.subscribe('obras',()=>{
-		return [{estatus:true}]
+		return [{estatus:true,usuario_id:Meteor.userId()}]
 	});
 
 	this.subscribe('periodos',()=>{
-		return [{estatus:true}]
+		return [{estatus:true,usuario_id:Meteor.userId()}]
 	});
 
 	this.helpers({	

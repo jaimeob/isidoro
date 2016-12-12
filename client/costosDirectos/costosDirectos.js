@@ -19,7 +19,7 @@ window.rc = rc;
 	return [{obra_id : $stateParams.id,estatus:true}] 
     });
      this.subscribe('periodos',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
     });
      this.subscribe('presupuestos',()=>{
 	return [{obra_id : $stateParams.id,estatus:true}] 
@@ -35,22 +35,20 @@ window.rc = rc;
      estatus : true}]});
 
     this.subscribe('presupuestosCosas',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
     });
          this.subscribe('gastosOficina',()=>{
-	 return [{estatus:true}] 
+	 return [{estatus:true,usuario_id:Meteor.userId()}] 
      });
     this.subscribe('pagosProveedores',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
      });
     this.subscribe('cobros',()=>{
-	return [{estatus:true,modo:true}] 
+	return [{estatus:true,modo:true,usuario_id:Meteor.userId()}] 
     });
-     this.subscribe('gastosOficina',()=>{
-	 return [{estatus:true}] 
-     });
+    
     this.subscribe('meses',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
     });
     this.subscribe('users',()=>{
 	return Meteor.users.findOne[{ _id: Meteor.userId() }];

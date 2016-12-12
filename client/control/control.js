@@ -42,7 +42,7 @@ let rc = $reactive(this).attach($scope);
     });
 
     this.subscribe('costos',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
     });
     this.subscribe('presupuestos',()=>{
 	return [{obra_id : $stateParams.id,estatus:true}] 

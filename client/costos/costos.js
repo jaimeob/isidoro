@@ -42,6 +42,7 @@ this.subscribe('users',()=>{
   
   this.guardar = function(costo)
 	{
+		costo.usuario_id = Meteor.userId()
 		this.costo.estatus = true;
 		costo.obra_id = $stateParams.id;
 		console.log(this.costo);

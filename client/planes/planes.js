@@ -23,7 +23,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 
 
   this.subscribe('planes',()=>{
-		return [{obra_id : $stateParams.id,estatus:true}] 
+		return [{obra_id : $stateParams.id,estatus:true,usuario_id:Meteor.userId()}] 
   });
   this.subscribe('obra', () => {
   	return [{ _id : $stateParams.id, estatus : true}]
@@ -32,16 +32,16 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 		return [{obra_id : $stateParams.id,estatus:true}] 
   });
     this.subscribe('gastosOficina',()=>{
-	 return [{estatus:true}] 
+	 return [{estatus:true,usuario_id:Meteor.userId()}] 
      });
    this.subscribe('costos',()=>{
 	return [{obra_id : $stateParams.id,estatus:true}] 
     });
     this.subscribe('cobros',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
     });
     this.subscribe('meses',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
     });
     this.subscribe('conceptos',()=>{
 	return [{obra_id : $stateParams.id,partida_id: this.getReactively('partida_id'),estatus:true}] 
@@ -61,7 +61,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
   });
 
     this.subscribe('periodos',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
   });
 
 
@@ -978,6 +978,7 @@ totalPresupuestoTotal = 0.00;
 	{
 
 		console.log(costos);
+		this.plan.usuario_id = Meteor.userId()
 		this.plan.totalFinalCostosDirectos = rc.totalFinalCostosDirectos;
 		   rc.plan.estatus = true;
 		   rc.plan.obra_id = $stateParams.id;

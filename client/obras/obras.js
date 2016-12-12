@@ -50,6 +50,7 @@ this.subscribe('users',()=>{
   
   this.guardar = function(obra)
 	{
+		this.obra.usuario_id = Meteor.userId()
 		this.obra.estatus = true;
 		console.log(this.obra);
 		Obras.insert(this.obra);

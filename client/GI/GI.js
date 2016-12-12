@@ -17,19 +17,19 @@ this.subscribe('users',()=>{
     });
 
      this.subscribe('gastosOficina',()=>{
-	 return [{estatus:true}] 
+	 return [{estatus:true,usuario_id:Meteor.userId()}] 
      });
 
     this.subscribe('planes',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
     });
 
      this.subscribe('presupuestosCampo',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
     });
 
     this.subscribe('obras',()=>{
-	return [{empresa_id : Meteor.user() != undefined ? Meteor.user().profile.empresa_id : undefined,estatus:true}] 
+	return [{empresa_id : Meteor.user() != undefined ? Meteor.user().profile.empresa_id : undefined,estatus:true,usuario_id:Meteor.userId()}] 
     });
 
     	this.subscribe('meses',()=>{
@@ -37,13 +37,13 @@ this.subscribe('users',()=>{
 	});
 
     this.subscribe('pagosProveedores',()=>{
-	return [{estatus:true}] 
+	return [{estatus:true,usuario_id:Meteor.userId()}] 
   });
     this.subscribe('cobros',()=>{
-	return [{estatus:true,modo:true}] 
+	return [{estatus:true,modo:true,usuario_id:Meteor.userId()}] 
   });
 	this.subscribe('periodos',()=>{
-	return [{tipo: this.getReactively('tipoPeriodo'),estatus:true}] 
+	return [{tipo: this.getReactively('tipoPeriodo'),estatus:true,usuario_id:Meteor.userId()}] 
   });
 
   this.action = true;
@@ -86,7 +86,7 @@ this.subscribe('users',()=>{
 	  },
 
 	   TodosCobros : () => {
-		  return Cobros.find();
+		  return Cobros.find({usuario_id: Meteor.userId()});
 	  },
 
 	  periodos : () => {
@@ -164,7 +164,7 @@ this.subscribe('users',()=>{
  				var porcentaje = ingresosMes / totalIngresos * 100;
  				var pago =  totalGastoOficinaPorMes * porcentaje/100
 
- 				console.log(mes.mes,ingresosMes,totalIngresos)
+ 				//console.log(mes.mes,ingresosMes,totalIngresos)
  				
 
 
@@ -183,10 +183,10 @@ this.subscribe('users',()=>{
             totalPago = {};
 			_.each(arreglin, function(arreglo){
 				
-				console.log("arreglo", arreglo);
+				//console.log("arreglo", arreglo);
 				
 				if("undefined" == typeof totalPago[arreglo.obra_id]){
-					console.log("if");
+					//console.log("if");
 					totalPago[arreglo.obra_id] = {};
 
 					if (arreglo.pago > 0) {
@@ -199,19 +199,19 @@ this.subscribe('users',()=>{
 					
 				}else{
 					if (arreglo.pago > 0) {
-						console.log("else")
+						//console.log("else")
 						totalPago[arreglo.obra_id].pago += arreglo.pago;
 					}
 				}
-				console.log(totalPago);
+				//console.log(totalPago);
 				// if (arreglo.pago !=undefined) {
 
  			// 		}else{
  			// 			arreglo.pago = 0;
  			// 		}
 			});
-			console.log("tatal pago", totalPago);
-			console.log("arreglo total", arreglin);
+			//console.log("tatal pago", totalPago);
+			//console.log("arreglo total", arreglin);
 			_.each(arreglin, function(arreglo){
 					if (isNaN(arreglo.porcentaje)) {
 							arreglo.porcentaje = 0;
@@ -221,7 +221,7 @@ this.subscribe('users',()=>{
 
 			});
 
-			console.log(totalPago);
+			//console.log(totalPago);
  			_.each(totalPago, function(pago){
  				_.each(arreglin, function(arreglo){
 
@@ -588,11 +588,11 @@ this.subscribe('users',()=>{
 		return total
 	}
 
-	this.TotalFinalGO = function(){
-		total = 0;
-		_.each(rc.gastosOficinas,function(gasto){total += gasto.importeFijo + gasto.importeVar});
-		return total
-	}
+	// this.TotalFinalGO = function(){
+	// 	total = 0;
+	// 	_.each(rc.gastosOficinas,function(gasto){total += gasto.importeFijo + gasto.importeVar});
+	// 	return total
+	// }
 
 	this.todosGastosOficinas = function(){
 		total = 0;
@@ -740,12 +740,13 @@ this.subscribe('users',()=>{
 		var totalIngresos=0;
 		_.each(obras, function(obra){
 			var cobros = Cobros.find().fetch();
-			_.each(rc.TodosCobros,function(cobro){
+			_.each(rc.getReactively("TodosCobros"),function(cobro){
 				var obra_id=obra._id;
 				if(obra_id == cobro.obra_id)
 					totalIngresos += cobro.cIva/1.16 + cobro.cSinIva
 			})
 		});
+		console.log(totalIngresos)
 		return totalIngresos
  	};
 
