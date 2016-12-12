@@ -839,7 +839,7 @@ let rc =$reactive(this).attach($scope);
 	this.reiniciar = function()
 	{
 
-		this.periodo = {};
+		//this.periodo.costo_id = "";
 		this.periodo.comprasIva = 0.00;
 		this.periodo.comprasSinIva = 0.00;  
 		this.periodo.contadoIva = 0.00;
