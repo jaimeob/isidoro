@@ -389,7 +389,7 @@ window.rc = rc;
 
    							}else{
    								arregliZama[indi.obra].ingresosMesTotales += indi.ingresosMes;
-   								arregliZama[indi.obra].gastoDeCampo += indi.gastoDeCampo;
+   								arregliZama[indi.obra].gastoDeCampo = indi.gastoDeCampo;
    								if(indi.pagoEmpresa > 0){
    									arregliZama[indi.obra].pagoEmpresa = indi.pagoEmpresa;
    								}
@@ -537,7 +537,7 @@ var costosTotalesArreglos = _.toArray(costosTotales);
 	   					factor : costoTotal.factor,
 	   					realPeriodo : costosDirectosTotales[costoTotal.partida].realPeriodo,
 	   					ajuste : costosDirectosTotales[costoTotal.partida].ajuste,
-	   					diferencia : costoTotal.total - costosDirectosTotales[costoTotal.partida].realPeriodo,
+	   					//diferencia : costoTotal.total - costosDirectosTotales[costoTotal.partida].realPeriodo,
 	   					value :  costosDirectosTotales[costoTotal.partida].value = costoTotal.direct,
 	   					cantidad : costosDirectosTotales[costoTotal.partida].cantidad = costoTotal.cantidad,
 	   				});
@@ -560,7 +560,7 @@ var costosTotalesArreglos = _.toArray(costosTotales);
 	   					factor : costoTotal.factor,
 	   					realPeriodo : costosDirectosTotales[costoTotal.partida].realPeriodo,
 	   					ajuste : costosDirectosTotales[costoTotal.partida].ajuste,
-	   					diferencia : costoTotal.total - costosDirectosTotales[costoTotal.partida].realPeriodo,
+	   					//diferencia : costoTotal.total - costosDirectosTotales[costoTotal.partida].realPeriodo,
 	   					value :  costosDirectosTotales[costoTotal.partida].value = costoTotal.direct,
 	   					cantidad : costosDirectosTotales[costoTotal.partida].cantidad = costoTotal.cantidad,
 
@@ -741,8 +741,8 @@ console.log(costosTotalesArreglos)
 	   			_.each(rc.indirectoMes, function(indi){
 	   				//indirectoObra = indi.indirecto
 	   			_.each(costosDirectosTotales, function(arreglo){
-	   				arreglo.indirectoReal= arreglo.directoReal1 * indi.indirecto/100;
-	   				arreglo.costoUnitario = arreglo.indirectoReal + arreglo.directoReal1
+	   				arreglo.indirectoReal= arreglo.realPeriodo * indi.indirecto/100;
+	   				arreglo.costoUnitario = arreglo.indirectoReal + arreglo.realPeriodo
 	   				arreglo.baseGravable= ((arreglo.totalPrecioUnitarioFin) + (arreglo.totalPrecioUnitarioFin * plan.trema/100)) - (arreglo.costoUnitario);
 	   				arreglo.utilidadNeta = arreglo.baseGravable -(plan.isr/100*arreglo.baseGravable)-(arreglo.baseGravable*0.1)
 	   				arreglo.rentabilidad = ((arreglo.utilidadNeta) / ((arreglo.totalPrecioUnitarioFin) + (arreglo.totalPrecioUnitarioFin * plan.trema/100)))*100
@@ -797,12 +797,15 @@ var periodosCostos = {};
 		 	_.each(zamaArray, function(costoTotal){
 		 		_.each(costoTotal.costos, function(costo){
 		 		var totalPeriodo = 0.00;
+		 		var totalDiferencia = 0.00;
 		 			_.each(rc.getReactively("periodosCostos"), function(periodo){
 		 				//console.log(costo, periodo);
 		 				if(costo.partida_id == periodo.partida_id && costo.costo_id == periodo.costo_id){
 		 					console.log("prueba", periodo)
 		 					totalPeriodo += periodo.comprasSinIva + periodo.comprasIva + periodo.contadoSinIva + periodo.contadoIva
-		 					console.log("realperiodo",costo.realPeriodo);
+		 					//console.log("realperiodo",costo.realPeriodo);
+		 					totalDiferencia = costo.presupuesto - totalPeriodo;
+
 		 				}
 		   			// //_.each(rc.getReactively("conceptos"), function(concepto){
 		   			// 	_.each(rc.getReactively("periodosCostos"), function(costoPeriodo){
@@ -822,6 +825,7 @@ var periodosCostos = {};
 		   			// 	});
 		   		     });
 		   		     costo.realPeriodo = totalPeriodo;
+		   		     costo.diferencia = totalDiferencia;
 		        });
 		       });
 

@@ -1,0 +1,6 @@
+{
+  "public": {
+    "staleSessionInactivityTimeout": 30000
+
+  }
+}
