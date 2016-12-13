@@ -444,11 +444,12 @@
 			<div class="col-sm-4" >
 			<br/>
 		<label>COSTOS DIRECTOS </label>
-		<select ng-click="mes.reiniciar()" id="costo" class="form-control" style="margin-top: 18px"  placeholder="Seleccione" ng-model="mes.periodo.costo_id">
-						  <option ng-repeat="costo in mes.costos" value="{{costo._id}}">
-						  	{{costo.nombre}}
-						  </option>
-						  </select>
+		<select ng-change="mes.reiniciar()" id="costo" class="form-control" style="margin-top: 18px"  placeholder="Seleccione" ng-model="mes.periodo.costo_id">
+			
+				  <option ng-repeat="costo in mes.costos" value="{{costo._id}}">
+				  	{{costo.nombre}}
+				  </option>
+				  </select>
 		   </div>
 		   </div>
 		   <br/>
