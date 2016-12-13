@@ -1026,14 +1026,14 @@ _.each(partidas, function(partida){
 						costosDirectosTotalesSuma[costos.costo] = {};
 						costosDirectosTotalesSuma[costos.costo].presupuestos = costos.presupuesto;
 						costosDirectosTotalesSuma[costos.costo].ajuste = costos.ajuste;
-						costosDirectosTotalesSuma[costos.costo].real = costos.realPeriodo;
+						costosDirectosTotalesSuma[costos.costo].real = partidas.realPeriodo;
 						costosDirectosTotalesSuma[costos.costo].diferencia =  costos.diferencia;
 						costosDirectosTotalesSuma[costos.costo].partida_id =  partidas.partida_id;
 						costosDirectosTotalesSuma[costos.costo].costo_id =  costos.costo_id;
 					}else{
 						costosDirectosTotalesSuma[costos.costo].presupuestos += costos.presupuesto;
 						costosDirectosTotalesSuma[costos.costo].ajuste += costos.ajuste;
-						costosDirectosTotalesSuma[costos.costo].real += costos.realPeriodo;
+						costosDirectosTotalesSuma[costos.costo].real += partidas.realPeriodo;
 						costosDirectosTotalesSuma[costos.costo].diferencia += costos.diferencia;
 						costosDirectosTotalesSuma[costos.costo].partida_id =  partidas.partida_id;
 						costosDirectosTotalesSuma[costos.costo].costo_id =  costos.costo_id;
@@ -1099,7 +1099,7 @@ _.each(partidas, function(partida){
 
 
 
-           // console.log("suma de costosTotales2", _.toArray(costosDirectosTotalesSuma));
+            console.log("suma de costosTotales2", _.toArray(costosDirectosTotalesSuma));
 	   		return costosDirectosTotalesSuma;
 		},
 

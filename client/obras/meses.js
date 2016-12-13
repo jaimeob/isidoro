@@ -395,10 +395,10 @@ let rc =$reactive(this).attach($scope);
 		periodo.obra_id = this.obra_id;
 		periodo.mes_id = this.mes_id;
 		periodo.partida_id = this.partida_id;
-		if(periodo.costo_id != undefined)
+		//if(periodo.costo_id != undefined)
 			periodo.tipo = 'costo';
-		if(periodo.gasto != undefined)
-			periodo.tipo = 'gasto';
+		// if(periodo.gasto != undefined)
+		// 	periodo.tipo = 'gasto';
 		console.log(periodo);
 		Periodos.insert(periodo);
 		toastr.success('Periodo Agregado.');
@@ -416,9 +416,9 @@ let rc =$reactive(this).attach($scope);
 		periodo.obra_id = this.obra_id;
 		periodo.mes_id = this.mes_id;
 		periodo.partida_id = this.partida_id;
-		if(periodo.costo_id != undefined)
-			periodo.tipo = 'costo';
-		if(periodo.gasto != undefined)
+		// if(periodo.costo_id != undefined)
+		// 	periodo.tipo = 'costo';
+		// if(periodo.gasto != undefined)
 			periodo.tipo = 'gasto';
 		console.log(periodo);
 		Periodos.insert(periodo);
