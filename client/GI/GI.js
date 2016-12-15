@@ -746,7 +746,8 @@ this.subscribe('users',()=>{
 					totalIngresos += cobro.cIva/1.16 + cobro.cSinIva
 			})
 		});
-		console.log(totalIngresos)
+		
+		//console.log(totalIngresos)
 		return totalIngresos
  	};
 

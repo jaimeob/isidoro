@@ -41,7 +41,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 	return [{estatus:true,usuario_id:Meteor.userId()}] 
     });
     this.subscribe('meses',()=>{
-	return [{estatus:true,usuario_id:Meteor.userId()}] 
+	return [{estatus:true,usuarioMes:Meteor.userId()}] 
     });
     this.subscribe('conceptos',()=>{
 	return [{obra_id : $stateParams.id,partida_id: this.getReactively('partida_id'),estatus:true}] 
@@ -249,16 +249,17 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 
 
 
-	    indirectoMes2 : () => {
+	       indirectoMes2 : () => {
 	  	var arreglin = [];
  		  var pago = 0;
  		   var ingresosMesTotales = 0
  		   // var totalIngresos=0;
  		   // var ingresosMes = 0
 
-
  		  _.each(rc.getReactively("obras"), function(obra){ 
+ 		  	console.log("entro");
  			 _.each(rc.getReactively("meses"), function(mes){ 
+ 			 	  	console.log("entro a los meses");
  			 	
 				var totalGastoOficinaPorMes = 0;
 				var totalPorObra = 0;
@@ -288,14 +289,14 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  				});
  	
  				var gastosCampoObra = 0;
- 				var periodisa = Periodos.find({obra_id : obra._id}).fetch();
+ 				var periodisa = Periodos.find({obra_id : obra._id,tipo:"gasto"}).fetch();
  				_.each(periodisa, function(gc){
  					if (obra._id == gc.obra_id)
  					gastosCampoObra += gc.comprasSinIva + (gc.comprasIva / 1.16)
  				  + gc.contadoSinIva + (gc.contadoIva / 1.16)
  				});
  				var totalGastosCampo = 0;
- 				var period = Periodos.find({mes_id : mes._id}).fetch();
+ 				var period = Periodos.find({mes_id : mes._id,tipo:"gasto"}).fetch();
  				_.each(period, function(campo){
  					totalGastosCampo += campo.comprasSinIva + (campo.comprasIva / 1.16)
  				  + campo.contadoSinIva + (campo.contadoIva / 1.16)
@@ -313,7 +314,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  				var porcentaje = ingresosMes / totalIngresos * 100;
  				var pago =  totalGastoOficinaPorMes * porcentaje/100
 
- 				console.log(mes.mes,ingresosMes,totalIngresos)
+ 				//console.log(mes.mes,ingresosMes,totalIngresos)
  				
 
 
@@ -329,13 +330,13 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 
 
 
-            totalPago = {};
+       totalPago = {};
 			_.each(arreglin, function(arreglo){
 				
 				//console.log("arreglo", arreglo);
 				
 				if("undefined" == typeof totalPago[arreglo.obra_id]){
-					//console.log("if");
+				//	console.log("if");
 					totalPago[arreglo.obra_id] = {};
 
 					if (arreglo.pago > 0) {
@@ -353,20 +354,31 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 					}
 				}
 				//console.log(totalPago);
+				// if (arreglo.pago !=undefined) {
+
+ 			// 		}else{
+ 			// 			arreglo.pago = 0;
+ 			// 		}
 			});
 			//console.log("tatal pago", totalPago);
-			//console.log("arreglo total", arreglin);
+		//	console.log("arreglo total", arreglin);
+
 			_.each(arreglin, function(arreglo){
 					if (isNaN(arreglo.porcentaje)) {
 							arreglo.porcentaje = 0;
-	 					}		
+	 					}	
 
 			});
 
-			console.log(totalPago);
+			_.each(arreglin, function(arreglo){
+				if (isNaN(arreglo.pago)) {
+						arreglo.pago = 0;
+ 					}
+
+			});
+			//console.log("totalPago", totalPago);
  			_.each(totalPago, function(pago){
  				_.each(arreglin, function(arreglo){
-
  					if (pago.obra_id == arreglo.obra_id) {
  						//if(arreglo.pagoEmpresa != undefined)
  							arreglo.pagoEmpresa = pago.pago
@@ -395,7 +407,6 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  					}
 
 			});
-            
  				console.log("calculo",arreglin);
  				return arreglin;
 	  },
@@ -405,7 +416,13 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 
 	  //////////////////////////////////////////////////////////////////////////////////////////
 
-	  	  indirectoMes : () => {
+	  //////////////////////////////////////////////////////////////////////////////////////////
+
+	  //////////////////////////////////////////////////////////////////////////////////////////
+
+	  //////////////////////////////////////////////////////////////////////////////////////////
+
+	  	 indirectoMes : () => {
 	  	var arreglin = [];
 
 	  		var meses = Meses.find().fetch();
@@ -415,7 +432,6 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  					var totalGastosCampo = 0;
  					var gastosCampoObra = 0; 
 
- 	
  				_.each(rc.getReactively("cobros"), function(ingresos){
  					
  					totalPorObra += ingresos.cSinIva + ingresos.cIva/1.16; 
@@ -472,13 +488,12 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  						 _.each(arreglin, function(arreglo){
  						 	//console.log("indi", indi)
  				 		if (arreglo.obra_id == indi.obra_id) {
- 				 			arreglo.ingresoTotal += indi.ingresoTotal;
+ 				 			arreglo.ingresosMesTotales += indi.ingresosMesTotales;
  				 			arreglo.pago = indi.pago;
  				 			arreglo.pagoEmpresa = indi.pagoEmpresa
  				 			arreglo.gastoDeCampo = indi.gastoDeCampo;
- 				 			arreglo.indirecto = (((arreglo.pagoEmpresa + arreglo.gastoDeCampo) / arreglo.ingresoTotal) * 100).toFixed(2)
- 				 			
- 				 			
+ 				 			arreglo.indirecto = (((arreglo.pagoEmpresa + arreglo.gastoDeCampo) / arreglo.ingresosMesTotales) * 100).toFixed(2)
+
 
  				 		}
  				 		
@@ -493,19 +508,19 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  				_.each(rc.indirectoMes2, function(indi){
 	   			//_.each(rc.getReactively("conceptos"), function(concepto){
 	   				//_.each(arreglin, function(arreglo){
-	   					var ingresoTotal = 0.00;
+	   					var ingresosMesTotales = 0.00;
 	   					//if(indi.obra_id == arreglo.obra_id ){
 
    							if("undefined" == typeof arregliZama[indi.obra]){
    								arregliZama[indi.obra] = {};	   								
-   								arregliZama[indi.obra].ingresoTotal = indi.ingresosMes;
+   								arregliZama[indi.obra].ingresosMesTotales = indi.ingresosMes;
    								arregliZama[indi.obra].pagoEmpresa = indi.pagoEmpresa;
    								arregliZama[indi.obra].gastoDeCampo = indi.gastoDeCampo;
    								arregliZama[indi.obra].obra = indi.obra;
 
    							}else{
-   								arregliZama[indi.obra].ingresoTotal += indi.ingresosMes;
-   								arregliZama[indi.obra].gastoDeCampo += indi.gastoDeCampo;
+   								arregliZama[indi.obra].ingresosMesTotales += indi.ingresosMes;
+   								arregliZama[indi.obra].gastoDeCampo = indi.gastoDeCampo;
    								if(indi.pagoEmpresa > 0){
    									arregliZama[indi.obra].pagoEmpresa = indi.pagoEmpresa;
    								}
@@ -517,15 +532,8 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 	   			});
 
 	   			_.each(arregliZama, function(arreglo){
-	   				 arreglo.indirecto = (((arreglo.pagoEmpresa + arreglo.gastoDeCampo) / arreglo.ingresoTotal) * 100).toFixed(2)
-	   			})
-
-
-		 	// if(obj.gastos != undefined){
-				// 	//operación
-				// }else{
-				// 	obj.gastos = 0;
-				// }
+	   				 arreglo.indirecto = (((arreglo.pagoEmpresa + arreglo.gastoDeCampo) / arreglo.ingresosMesTotales) * 100).toFixed(2)
+	   			});
  		
             
  				console.log("el arreglin zama",arregliZama);
