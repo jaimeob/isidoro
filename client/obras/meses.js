@@ -42,10 +42,6 @@ let rc =$reactive(this).attach($scope);
 		return [{ _id : $stateParams.id, estatus : true,empresa_id : Meteor.user() != undefined ? Meteor.user().profile.empresa_id : undefined}]});
 
 
-	this.subscribe('users',()=>{
-	return [{_id : Meteor.user().profile.empresa_id,estatus:true}] 
-    });
-
 	this.subscribe('meses',()=>{
 		return [{estatus:true, usuarioMes: Meteor.userId()}]
 	});
@@ -124,7 +120,10 @@ let rc =$reactive(this).attach($scope);
 			return PagosProveedores.find();
 		},
 		cobros : () => {
-			return Cobros.find({mes_id: this.getReactively('mes_id')});
+			return Cobros.find({mes_id: this.getReactively('mes_id'),tipo:undefined});
+		},
+		cobrosValor : () => {
+			return Cobros.find({mes_id: this.getReactively('mes_id'),tipo:"valor"});
 		},
 		cobrosPorCobrar : () => {
 			return Cobros.find({modo:true});
@@ -462,6 +461,23 @@ let rc =$reactive(this).attach($scope);
 		this.cobro.cSinIva =0.00;
 		
 	};
+	this.guardarCobroValor = function(cobro)
+	{
+	
+		cobro.tipo = "valor"
+		cobro.usuario_id = Meteor.userId()
+		this.cobro.estatus = true;
+		this.cobro.obra_id = this.obra_id;
+		this.cobro.mes_id = this.mes_id;
+		console.log(cobro);
+		Cobros.insert(cobro);
+		toastr.success('cobro Agregado.');
+		this.cobro = {}; 
+		this.cobro.cIva =0.00;
+		this.cobro.cSinIva =0.00;
+		 
+		
+	};
 
 	this.cargos = false
 		this.abonos = false;
@@ -476,12 +492,14 @@ let rc =$reactive(this).attach($scope);
 		this.cargoAbono=false;
 		this.cobro.cargo = "cobroCargo"
 		this.cobro.modo = false
+		this.cob =true
 		console.log(this.cobro.modo)
 	}
 
 	this.mostrarAbono = function()
 	{
 		this.guardarc = true
+		this.cob =true
 		this.cargos = true
 		this.abonos = true;
 		this.cargoBoton=false;
@@ -530,6 +548,7 @@ let rc =$reactive(this).attach($scope);
     this.accionCobro = true;
     this.accionResumen = true;
     this.gastoPer = true;
+    this.accionValor = true
     this.mostrarListas= function(mes_id,obra_id)
 	{
 		
@@ -545,6 +564,8 @@ let rc =$reactive(this).attach($scope);
 		this.accionResumen = false;
 		this.accionGI = false;
         this.Resumen = true;
+        this.valor = true
+        this.accionValor = false
 
       //  console.log(mes_id);
         
@@ -654,10 +675,11 @@ let rc =$reactive(this).attach($scope);
 	this.Cobro = true;
 	this.mostrarCobro = function(obra_id,mes_id)
 	{
-		this.cargo = false
-		this.abono = false
+		this.botonValor = false
+		this.cob = false
+		this.cargos = false
+		this.abonos = false
 		this.cargoBoton=true
-
 		this.cobro.cIva =0.00;
 		this.cobro.cSinIva =0.00;
 		this.obra_id = obra_id;
@@ -668,6 +690,37 @@ let rc =$reactive(this).attach($scope);
 		this.Resumen = true;
 		this.gastoCosto = false;
 		this.Cobro = false;
+		this.valor = false;
+		this.tablaCobros = true
+		this.tablaValor = false
+
+	
+	};
+
+		this.valor = false;
+	this.mostrarValorContruccion = function(obra_id,mes_id)
+	{
+
+		this.cob = false
+
+		this.cargo = true
+		this.abono = true
+		this.cargoBoton=false
+		this.guardarc = true
+		this.cobro.cIva =0.00;
+		this.cobro.cSinIva =0.00;
+		this.obra_id = obra_id;
+		this.mes_id = mes_id;
+		this.accionPresupuesto = true;
+		this.accionPeriodo = true;
+		this.Pagos = true;
+		this.Resumen = true;
+		this.gastoCosto = false;
+		this.valor = true;
+		this.Cobro = false;
+		this.tablaValor = true
+		this.tablaCobros = false
+		this.botonValor = true
 	
 	};
 
@@ -739,6 +792,11 @@ let rc =$reactive(this).attach($scope);
 	this.cobroTotalFinal = function(){
 		total = 0;
 		_.each(this.cobros,function(cobro){total += cobro.cIva/1.16 + cobro.cSinIva});
+		return total
+	}
+	this.cobroTotalFinalValor = function(){
+		total = 0;
+		_.each(this.cobrosValor,function(cobro){total += cobro.importeCobro});
 		return total
 	}
 
@@ -1001,6 +1059,7 @@ this.actPeriod = true;
 	{
     this.cobro = Cobros.findOne({_id:id});
     this.cob = false;
+    this.actCob = true
     this.guardarc = true
 		this.cargos = true
 		this.abonos = true;
@@ -1026,7 +1085,8 @@ this.actPeriod = true;
 		this.cobro = {};
 		this.cobro.cIva = 0.00;
 		this.cobro.cSinIva = 0.00;
-		this.cob = true;  
+		this.cob = true;
+		this.actCob = false  
 	};
 
 	this.cambiarEstatusCobros= function(id)

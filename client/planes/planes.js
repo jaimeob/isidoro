@@ -79,9 +79,14 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 	  },
 	  cobros : () => {
 		  return Cobros.find({obra_id : $stateParams.id});
+
+
 	  },
 	   todosCobros : () => {
 		  return Cobros.find();
+	  },
+	    todosCobrosValor : () => {
+		  return Cobros.find({tipo:"valor"}).fetch();
 	  },
 	  cobrosAbono : () => {
 			return Cobros.find({cargo:"cargoAbono",modo:true});
@@ -1139,6 +1144,12 @@ this.cobrosTotales = function()
 		
 		return total
 	};
+
+	this.cobroTotalFinalValor = function(){
+		total = 0;
+		_.each(rc.todosCobrosValor,function(cobro){total += cobro.importeCobro});
+		return total
+	}
 
 	
 	this.cobrosPorCobrarTotales = function()
