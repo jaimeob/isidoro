@@ -80,6 +80,9 @@ this.subscribe('users',()=>{
 	  cobros : () => {
 		  return Cobros.find({mes_id: this.getReactively('mes_id'),modo:true});
 	  },
+	   cobrosValor : () => {
+		  return Cobros.find({mes_id: this.getReactively('mes_id'),tipo:"valor"});
+	  },
 
 	   cobrosObra : () => {
 		  return Cobros.find({obra_id: this.getReactively('obra_id')});
@@ -119,23 +122,23 @@ this.subscribe('users',()=>{
  				});
 
  				var ingresosMes = 0
-				var obr = Cobros.find({mes_id: mes._id,obra_id : obra._id,modo:true}).fetch();
+				var obr = Cobros.find({mes_id: mes._id,obra_id : obra._id,tipo:"valor"}).fetch();
  				_.each(obr,function(cobro){
 				if(obra._id == cobro.obra_id && cobro.mes_id == mes._id)
-				ingresosMes += cobro.cIva/1.16 + cobro.cSinIva
+				ingresosMes += cobro.importeCobro
 				})
 
                 var ingresosMesTotales = 0
- 				var cobros = Cobros.find({mes_id: mes._id,obra_id : obra._id,modo:true}).fetch();
+ 				var cobros = Cobros.find({mes_id: mes._id,obra_id : obra._id,tipo:"valor"}).fetch();
  				_.each(cobros, function(ingresos){
  					
- 					ingresosMesTotales += ingresos.cSinIva + ingresos.cIva/1.16; 
+ 					ingresosMesTotales += ingresos.importeCobro 
  				}); 
 
- 				var cobrosM = Cobros.find({mes_id: mes._id}).fetch();
+ 				var cobrosM = Cobros.find({mes_id: mes._id,tipo:"valor"}).fetch();
  				_.each(cobrosM, function(ingresos){
 
- 					totalPorObra += ingresos.cSinIva + ingresos.cIva/1.16; 
+ 					totalPorObra += ingresos.importeCobro 
  				});
  	
  				var gastosCampoObra = 0;
@@ -153,12 +156,12 @@ this.subscribe('users',()=>{
  				});
 
  				var totalIngresos=0;
-					var cobros = Cobros.find({}).fetch();
+					var cobros = Cobros.find({tipo:"valor"}).fetch();
 					_.each(cobros,function(cobro){
 						var obra_id=obra._id;
 						//console.log( mes.mes, obra.nombre, cobro)
 						if( mes._id == cobro.mes_id)
-							totalIngresos += cobro.cIva/1.16 + cobro.cSinIva
+							totalIngresos += cobro.importeCobro
 					});
 
  				var porcentaje = ingresosMes / totalIngresos * 100;
@@ -274,9 +277,9 @@ this.subscribe('users',()=>{
  					var gastosCampoObra = 0; 
 
  	
- 				_.each(rc.getReactively("cobros"), function(ingresos){
+ 				_.each(rc.getReactively("cobrosValor"), function(ingresos){
  					
- 					totalPorObra += ingresos.cSinIva + ingresos.cIva/1.16; 
+ 					totalPorObra += ingresos.importeCobro
  				});
 
  				//var per = Periodos.find({mes_id : mes._id,obra_id : obra_id, tipo : "gasto"}).fetch();
@@ -296,19 +299,19 @@ this.subscribe('users',()=>{
  					totalGastoOficinaPorMes += gasto.importeFijo + gasto.importeVar;
  				});
 
-				var obr = Cobros.find({mes_id: rc.getReactively('mes_id'),obra_id : obra._id,modo:true}).fetch();
+				var obr = Cobros.find({mes_id: rc.getReactively('mes_id'),obra_id : obra._id,tipo:"valor"}).fetch();
  				var ingresosMes = 0;
  				_.each(obr,function(cobro){
 				if(obra._id == cobro.obra_id)
-				ingresosMes += cobro.cIva/1.16 + cobro.cSinIva
+				ingresosMes += cobro.importeCobro
 				});
 				var totalIngresos=0;
-					var cobros = Cobros.find().fetch();
+					var cobros = Cobros.find({tipo:"valor"}).fetch();
 					_.each(cobros,function(cobro){
 						var obra_id=obra._id;
 						
 						if(obra_id == cobro.obra_id)
-							totalIngresos += cobro.cIva/1.16 + cobro.cSinIva
+							totalIngresos += cobro.importeCobro
 					});
                 var ingresoObras = 0;
 				ingresoObras = parseFloat(ingresosMes.toFixed(2)) / parseFloat(totalPorObra.toFixed(2)) * 100 ;
