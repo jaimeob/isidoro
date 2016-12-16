@@ -86,7 +86,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 		  return Cobros.find();
 	  },
 	    todosCobrosValor : () => {
-		  return Cobros.find({tipo:"valor"}).fetch();
+		  return Cobros.find({tipo:"valor",obra_id : $stateParams.id}).fetch();
 	  },
 	  cobrosAbono : () => {
 			return Cobros.find({cargo:"cargoAbono",modo:true});
