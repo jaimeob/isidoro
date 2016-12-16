@@ -517,7 +517,7 @@
 								<tr>
 								<th width="20%" style="font-size: 18px;"><div class="text-center">Valor Economico</div></th>
 								<td width="20%" style="font-size: 15px;">{{pl.plan.ingresos| currency}} </td>
-								<td width="20%" style="font-size: 15px;"> {{pl.jaime[0].ingresosObraCargo + pl.cobroTotalFinalValor() | currency}}</td>
+								<td width="20%" style="font-size: 15px;"> {{pl.cobroTotalFinalValor() | currency}}</td>
 								<td width="20%" style="font-size: 15px;"> {{pl.jaime[0].ingresosObra  | currency}}</td>
 								<tr>
 							    <th  width="20%" style="font-size: 18px;"><div class="text-center">Costos</div></th>
@@ -554,7 +554,7 @@
 
 
 							    
-							   <td  width="20%" style="font-size: 15px;">{{(pl.jaime[0].ingresosObraCargo + pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()) | currency }} </td>
+							   <td  width="20%" style="font-size: 15px;">{{(pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()) | currency }} </td>
 
 							    <td  width="20%" style="font-size: 15px;">{{(pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())  | currency }} </td> 
 
@@ -568,7 +568,7 @@
 					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses) ) * (pl.plan.isr /100) | currency}} </td>
 
 					    		 <td  width="20%" style="font-size: 15px;">
-					    		 {{((pl.jaime[0].ingresosObraCargo + pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (pl.plan.isr)/100 | currency}}
+					    		 {{((pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (pl.plan.isr)/100 | currency}}
 					    		 </td>
 
 					    		  <td  width="20%" style="font-size: 15px;">
@@ -586,7 +586,7 @@
 					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
 					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses) ) * 10/100 | currency }}</td>
 
-							     <td  width="20%" style="font-size: 15px;">{{((pl.jaime[0].ingresosObraCargo + pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100) | currency}}  
+							     <td  width="20%" style="font-size: 15px;">{{((pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100) | currency}}  
 							     </td>
 
 							       <td  width="20%" style="font-size: 15px;">{{((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100) | currency}}  
@@ -616,7 +616,7 @@
 					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses)) * 10/100)   | currency}}
 							      </td>
 
-							    <td  width="20%" style="font-size: 15px;">{{((pl.jaime[0].ingresosObraCargo + pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  -   (((pl.jaime[0].ingresosObraCargo + pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  * (pl.plan.isr)/100)    -   (((pl.jaime[0].ingresosObraCargo + pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100)) | currency}} </td> 
+							    <td  width="20%" style="font-size: 15px;">{{((pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  -   (((pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  * (pl.plan.isr)/100)    -   (((pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100)) | currency}} </td> 
 
 
 							     <td  width="20%" style="font-size: 15px;">{{((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  -   (((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  * (pl.plan.isr)/100)    -   (((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100)) | currency}} </td>
@@ -644,7 +644,7 @@
 					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) - (((((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos)) *((((pl.cosas[0].costoIndirecto)))/
 					    		(pl.cosas[0].cargoAdicional + pl.cosas[0].costoIndirecto + pl.cosas[0].costoFinanciamento))) * (pl.plan.gastosIndirectosCampo1)/100)))     -    (((pl.plan.gastosOficinaSinIva) - ((((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos)) / pl.plan.meses)) * pl.plan.meses)) * 10/100))/(pl.plan.ingresos)*100 | number:2}}%</td>
 
-							    <td  width="20%" style="font-size: 15px;"> {{(((pl.jaime[0].ingresosObraCargo + pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  -   (((pl.jaime[0].ingresosObraCargo + pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  * (pl.plan.isr)/100)    -   (((pl.jaime[0].ingresosObraCargo + pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100))) / (pl.jaime[0].ingresosObraCargo + pl.cobroTotalFinalValor()) * 100  | number:2}}% </td>
+							    <td  width="20%" style="font-size: 15px;"> {{(((pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  -   (((pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  * (pl.plan.isr)/100)    -   (((pl.cobroTotalFinalValor())-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100))) / (pl.cobroTotalFinalValor()) * 100  | number:2}}% </td>
 
 
 							    <td  width="20%" style="font-size: 15px;"> {{(((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  -   (((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo()))  * (pl.plan.isr)/100)    -   (((pl.jaime[0].ingresosObra)-(pl.camposTotales3())  -  (pl.indirectoMes2[0].pagoEmpresa  + pl.indirectoMes[0].pagoEmpresa + pl.gastosCampo())) * (10 / 100))) / (pl.jaime[0].ingresosObra) * 100  | number:2}}% </td>
