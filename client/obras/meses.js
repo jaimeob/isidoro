@@ -146,7 +146,41 @@ let rc =$reactive(this).attach($scope);
 			return Conceptos.find();
 		},
 		presupuestos : () => {
-			return Presupuestos.find();
+
+			presus = Presupuestos.find();
+
+			_.each(rc.costos, function(costo){
+				console.log("costo")
+				_.each(presus, function(presupuesto){
+					console.log("costo")
+					_.each(presupuesto.costos, function(arreglo){
+						
+						if (costo._id == arreglo._id) {
+							 arreglo.estatus = true
+
+						}else{
+							arreglo.estatus = false
+
+						}
+
+				});
+			});
+		});
+
+		// 	_.each(rc.costos, function(costo){
+		// _.each(costos, function(presu){
+		// 	if (costo_id == presu.costo_id) 
+		// 	{
+				
+		// 	}
+		// 	delete costo.$$hashKey;
+		// });
+
+
+
+
+
+			return presus;
 		},
 		// presupuestosPartida : () => {
 		// 	return Prespuestos.find({partida_id : this.getReactively("partida_id")})
@@ -283,6 +317,24 @@ let rc =$reactive(this).attach($scope);
 				
 				
 			});
+
+
+
+
+			_.each(rc.costos, function(costo){
+				console.log("costo")
+				_.each(rc.presupuestos, function(presupuesto){
+					console.log("costo")
+					_.each(presupuesto.costos, function(arreglo){
+						
+						if (costo._id != arreglo._id) {
+							delete arreglo
+
+						}
+
+				});
+			});
+		});
              
 
 
@@ -374,6 +426,14 @@ let rc =$reactive(this).attach($scope);
 		_.each(costos, function(costo){
 			delete costo.$$hashKey;
 		});
+		// _.each(rc.costos, function(costo){
+		// _.each(costos, function(presu){
+		// 	if (costo_id == presu.costo_id) 
+		// 	{
+
+		// 	}
+		// 	delete costo.$$hashKey;
+		// });
 		this.presupuesto.costos = costos;
 		console.log(this.presupuesto);
 		Presupuestos.insert(this.presupuesto);

@@ -27,7 +27,7 @@
 									    <th style="font-size: 15px;" ng-repeat-start="costo in cd.costos" class="text-center">{{costo.presupuestoString}}</th>
 									    <th style="font-size: 15px;"  class="text-center">{{costo.ajusteString}}</th>
 									    <th style="font-size: 15px;"  class="text-center">{{costo.realString}}</th>
-									    <th style="font-size: 15px;" ng-repeat-end class="text-center">{{costo.diferenciaString}}</th>
+									    <th width="30%" style="font-size: 15px;" ng-repeat-end class="text-center">{{costo.diferenciaString}}</th>
 									    <th style="font-size: 15px;" class="text-center">Directo Real</th>
 									    <th style="font-size: 15px;" class="text-center">Indirecto Real</th>
 									    <th style="font-size: 15px;" class="text-center">Costo Unitario</th>
@@ -42,10 +42,10 @@
 									    <th style="font-size: 15px;"><div class="text-center">{{partida.partida}}</div></th>
 									    <td style="font-size: 15px;">{{(partida.totalPrecioUnitarioFin) + (partida.totalPrecioUnitarioFin * cd.planes[0].trema/100)| currency}}</td>
 									    <td style="font-size: 15px;" ng-repeat-start="costo in partida.costos">{{costo.presupuesto | currency}}</td>
-							            <td style="font-size: 15px;" ng-class="costo.ajuste < 0 ? 'rojo' : ''" >{{costo.ajuste | currency}}</td>
-							            <td style="font-size: 15px;" ng-class="costo.realPeriodo < 0 ? 'rojo' : ''">{{costo.realPeriodo | currency}}</td>
-							            <td style="font-size: 15px;" ng-repeat-end 
-							            ><div ng-class="costo.diferencia < 0 ? 'rojo' : ''">{{costo.diferencia | currency}}</div></td>
+							            <td style="font-size: 15px;" >{{costo.ajuste | currency}}</td>
+							            <td style="font-size: 15px;">{{costo.realPeriodo | currency}}</td>
+							            <td  ng-repeat-end >
+							            <div width="30%" style="font-size: 15px" ng-class="costo.diferencia < 0 ? 'rojo' : ''">{{costo.diferencia | currency}}</div></td>
 							            
 									    <td style="font-size: 15px;"><div class="text-center">{{partida.realPeriodo | currency}}</div></td>
 									   <td style="font-size: 15px;"><div class="text-center">{{partida.indirectoReal  | currency}}</div></td>

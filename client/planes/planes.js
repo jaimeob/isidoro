@@ -174,7 +174,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 	  	return Periodos.find({tipo : "gasto"});
 	  },
 	  periodosGasto : () => {
-	  	return Periodos.find({tipo : "costo",obra_id : $stateParams.id});
+	  	return Periodos.find({tipo : "costo",obra_id : $stateParams.id,partida_id:!undefined});
 	  },
 	
 

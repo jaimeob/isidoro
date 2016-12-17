@@ -842,7 +842,7 @@
 
 						        <td style="font-size: 15px;">{{mes.gastosMasCostos() | currency}}</td>
 						        <td style="font-size: 15px;">{{mes.cobrosTotales() | currency}}</td>
-						        <td style="font-size: 15px;">{{(mes.gastosMasCostos()) + (mes.cobrosTotales()) | currency}}</td>
+						        <td style="font-size: 15px;">{{(mes.gastosMasCostos()) - (mes.cobrosTotales()) | currency}}</td>
 							</tr>
 							<tr>
 								 <td style="font-size: 15px;">Proveedores</td>
