@@ -1,4 +1,4 @@
-<h2>Planes</h2>{{pl.cargos}}
+<h2>Plan de negocio</h2>{{pl.cargos}}
 <div class="row"><!-- {pl.totalIngresos[0].total | currency}}-> ag10 -->
 	<div class="col-sm-12">
 		<a class="btn btn-{{pl.nuevo == true ? 'primary' : 'danger'}}" role="button" data-toggle="collapse" 
@@ -21,9 +21,9 @@
 				    	 <div class="form-control" style="font-size: 15px;" >{{((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))    +     (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) + (((pl.totalFinalCostosDirectos)+((pl.totalFinalCostosDirectos * pl.cosas[0].costoIndirecto)/ 100)) * (pl.cosas[0].cargoAdicional/100))) * (pl.cosas[0].cargoAdicional)/ 100  | currency}}</div>
 				    </div>
 
-				    <div class="col-sm-2">
+				    <div class="col-sm-2" >
 				     <div class="form-group" style="font-size: 18px;">
-				     	TREMA
+				     	% de Utilidad
 					    <a class="pull-left" data-toggle="popover" data-placement="top" data-content="Tasa de rendimiento minima aceptable" style="font-size: 15px;"> <i class="fa fa-info-circle" aria-hidden="true"></i></a><br/>
 					    <div class="input-group">
 					      <div class="input-group-addon" style="font-size: 15px;border-color: yellow">%</div>
@@ -36,7 +36,7 @@
 					    <label for="domicilio" style="font-size: 18px;">ISR</label>
 				    	<input type="number" class="form-control" placeholder=""  ng-model="pl.plan.isr"  style="font-size: 15px;border-color: yellow">
 			    	</div> 
-			    	<div class="col-sm-3">
+			    	<div class="col-sm-3" ng-show="">
 					    <label for="domicilio" style="font-size: 18px;">Factor de Recuperación</label>
 				    	<div class="form-control" style="font-size: 15px;">{{1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema2/100)))| number : 4}}</div>
 			    	</div>
@@ -68,7 +68,7 @@
 			    	</div> 
 				    <div class="col-sm-2">
 				     <div class="form-group">
-				     	<label style="font-size: 18px;"> TREMA </label>
+				     	<label style="font-size: 18px;"> % de Utilidad </label>
 					    <a class="pull-left" data-toggle="popover" data-placement="top" data-content="Tasa de rendimiento minima aceptable" style="font-size: 15px;"> <i class="fa fa-info-circle" aria-hidden="true"></i></a><br/>
 					    <div class="input-group">
 					      <div class="input-group-addon" style="font-size: 15px; border-color: yellow">%</div>
@@ -81,13 +81,13 @@
 					    <label for="domicilio" style="font-size: 18px;">ISR</label>
 				    	<input type="number"  style="font-size: 15px; border-color: yellow"  class="form-control" placeholder=""  ng-model="pl.plan.isr" >
 			    	</div> 
-			    	<div class="col-sm-3">
+			    	<div class="col-sm-3" ng-show="">
 					    <label for="domicilio" style="font-size: 18px;">Factor de Recuperación</label>
 				    	<div class="form-control" style="font-size: 15px;">{{1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))| number : 2}}</div>
 			    	</div>
 				    <div class="col-sm-2">
 					    <label style="font-size: 18px;">Total de Egresos</label>
-				    	<div class="form-control" style="font-size: 15px;">{{(pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))| number : 2}}</div>
+				    	<div class="form-control" style="font-size: 15px;">{{(pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100)))) | currency}}</div>
 				    </div>
 				    </div>
 				    <div class="row" style="background-color:#e1e1e8;">
@@ -112,7 +112,7 @@
 						    </div>
 					    	<div class="col-sm-3">				    	
 							    <label style="font-size: 18px;">Gastos Indirectos</label>
-						    	<div class="form-control" style="font-size: 15px;">{{((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos)  | number : 2}}</div>
+						    	<div class="form-control" style="font-size: 15px;">{{((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos)  |  currency}}</div>
 						    </div>
 					   
 					  </div>
@@ -126,7 +126,7 @@
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-								<th width="20%" style="font-size: 18px;"><div class="text-center">Ingresos</div></th>
+								<th width="20%" style="font-size: 18px;"><div class="text-center">Precio de Venta</div></th>
 								<td width="20%" style="font-size: 15px;">{{pl.plan.ingresos| currency}} </td>
 								<tr>
 							    <th  width="20%" style="font-size: 18px;"><div class="text-center">Costos</div></th>
@@ -349,7 +349,7 @@
 									<label style="font-size: 18px;">Total</label>
 						    </div>
 						    <div class="col-sm-2">
-									<div class="form-control">{{((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos)  | number : 2}}</div>
+									<div class="form-control">{{((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos) | currency}}</div>
 						    </div>
 						    <div class="col-sm-2">
 									<div class="form-control">{{hola}}</div>
@@ -484,34 +484,24 @@
 				    </div>
 			    </div>
 			    <br/>
-			    <!-- <div class="row">
-				    <div class="col-sm-12">
-							<div class="row">
-						    <div class="col-sm-4">
-									<label style="font-size: 18px;">Anticipo de Obra</label>
-						    </div>
-						    <div class="col-sm-4">
-					    		<input type="number" class="form-control" style="border-color: yellow"  ng-model="pl.plan.anticipoObras" >
-						    </div>
-						    <div class="col-sm-4">
-									<div class="form-control">{{pl.plan.ingresos* pl.plan.anticipoObras / 100 | currency}}</div>
-						    </div>
-							</div>
-				    </div>
-			    </div> -->
 		  	</div>
 <!-- Estado de Resultado -->
 <!-- ///////////////////////////////////////TABLA////////////////////////////////////-->	
             <div class="well">			 
                 <div class="row">
 					<div class="col-sm-12">
-					<h3>Estado de resultados</h3>
+					<div  class="text-center"><h2>Situación Actual</h2></div>
+				<!-- 	 <div class="col-sm-6">
+									<label style="font-size: 18px;">Situación Actual</label>
+						    </div> -->
+					
+					<h3>{{pl.obra.nombre}}</h3>
 						<table class="table table-bordered">
 							<thead>
 							<tr>
 							<th style="font-size: 18px;"><div class="text-center">Estados de resultados</div></th>
 							<th style="font-size: 18px;"><div class="text-center">Proyectado</div></th>
-							<th> <div class="text-center" style="font-size: 18px;">Productivo</div></th>
+							<th> <div class="text-center" style="font-size: 18px;">Obra ejecutada</div></th>
 							<th> <div class="text-center" style="font-size: 18px;">Economico Actual</div></th>
 							</tr>
 								<tr>
@@ -685,7 +675,12 @@
 							    <tr>
 									<th style="font-size: 18px;"><div class="text-center">Obra ejecutada sin estimar</div></th>
 									<td style="font-size: 15px;"><div class="text-center" style="font-size: 15px;"></div>
-									{{pl.cargosObra() -pl.abonos() | currency}}</td>
+									{{pl.cobroTotalFinalValor() - pl.jaime[0].ingresosObra | currency}}</td>
+							    </tr>
+							    <tr>
+									<th style="font-size: 18px;"><div class="text-center">Saldo Disponible</div></th>
+									<td style="font-size: 15px;"><div class="text-center" style="font-size: 15px;"></div>
+									{{(pl.cobrosTotales())-(pl.gastosMasCostos()) | currency}}</td>
 							    </tr>
 							</thead>
 						</table>
@@ -713,8 +708,8 @@
 				<tr>
 				<th width="20%" style="font-size: 18px;"><div class="text-center">Obra</div></th>
 
-			    <th width="20%" style="font-size: 18px;"><div class="text-center">Ingresos</div></th>
-			    <th width="20%" style="font-size: 18px;"><div class="text-center">Anticipo de Obra</div></th>
+			    <th width="20%" style="font-size: 18px;"><div class="text-center">Precio de Venta</div></th>
+			    <!-- <th width="20%" style="font-size: 18px;"><div class="text-center">Anticipo de Obra</div></th> -->
 					<th width="10%" style="font-size: 18px;">
 						<div class="text-center">
 							Estatus
@@ -730,8 +725,8 @@
 			<tbody>
 		    <tr ng-repeat="plan in pl.planes">
 			    <td style="font-size: 15px;">{{pl.obra.nombre}} </td>
-			    <td style="font-size: 15px;">{{pl.plan.ingresos| currency}}</td>
-			    <td style="font-size: 15px;">{{plan.anticipoObras | number:2}}% </td> 
+			    <td style="font-size: 15px;">{{plan.ingresos| currency}}</td>
+			    <!-- <td style="font-size: 15px;">{{plan.anticipoObras | number:2}}% </td> --> 
 			    <td>
 				    <div class="text-center">
 				    	<span ng-if="plan.estatus" class="label label-success" style="font-size: 15px;">

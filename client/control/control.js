@@ -42,7 +42,7 @@ let rc = $reactive(this).attach($scope);
     });
 
     this.subscribe('costos',()=>{
-	return [{estatus:true,usuario_id:Meteor.userId()}] 
+	return [{obra_id : $stateParams.id,estatus:true,usuario_id:Meteor.userId()}] 
     });
     this.subscribe('presupuestos',()=>{
 	return [{obra_id : $stateParams.id,estatus:true}] 
@@ -144,6 +144,10 @@ let rc = $reactive(this).attach($scope);
 		  return Periodos.find({tipo:"costo"});
 	  },
 	  costosTotales : () => {
+
+	  	_.each(rc.getReactively("presupuestos"), function(presupuesto){
+
+	  	});
 	  	 	var costosPeriodos = Periodos.find({tipo:"costo"}).fetch();
 			var costosTotales = {};
 
@@ -153,12 +157,20 @@ let rc = $reactive(this).attach($scope);
 		   					var totalFinal = 0.00;
 		   					if(presupuesto.partida_id == partida._id && presupuesto.concepto_id == concepto._id){
 		   						_.each(presupuesto.costos, function(costoPresupuesto){
+
+		   							var costoNombre = "";
+	   							_.each(rc.costos, function(c){
+	   								if(c._id == costoPresupuesto._id){
+	   									costoNombre = c.nombre;
+	   								}
+	   							})
+
 		   							if("undefined" == typeof costosTotales[costoPresupuesto.nombre]){
 		   								costosTotales[costoPresupuesto.nombre] = {};
 		   								costosTotales[costoPresupuesto.nombre].partida = partida.nombre;
 		   								costosTotales[costoPresupuesto.nombre].partida_id = partida._id;
 		   								costosTotales[costoPresupuesto.nombre].costo_id =  costoPresupuesto._id;
-		   								costosTotales[costoPresupuesto.nombre].costo =  costoPresupuesto.nombre;
+		   								costosTotales[costoPresupuesto.nombre].costo =  costoNombre;
 		   								costosTotales[costoPresupuesto.nombre].total = costoPresupuesto.value * presupuesto.cantidad;
 		   								
 		   							}else{
@@ -294,39 +306,11 @@ _.each(rc.getReactively("planes"), function(plan){
 	   		});
 	   			});
 
-
-      //        _.each(rc.getReactively("controlesResponsables"), function(control){
-	   		// _.each(costosTotalesArreglos, function(costoTotal){
-	     //         if(costoTotal.costo_id == control.costo_id )
-	   		// 			{
-	   		// 				costoTotal.responsables = control.descripcionResponsables;
-	   		// 			}
-	   				
-	   		// });
-
-	   		// });
+	   		
 
 
-      //       _.each(rc.getReactively("controlesPlan"), function(control){
-	   		// _.each(costosTotalesArreglos, function(costoTotal){
-	     //         if(costoTotal.costo_id == control.costo_id )
-	   		// 			{
-	   		// 				costoTotal.plan = control.descripcionTrabajo;
-	   		// 			}
-	   				
-	   		// });
 
-	   		// });
-	   		// _.each(rc.getReactively("controlesForma"), function(control){
-	   		// _.each(costosTotalesArreglos, function(costoTotal){
-	     //         if(costoTotal.costo_id == control.costo_id )
-	   		// 			{
-	   		// 				costoTotal.forma = control.descripcionForma;
-	   		// 			}
-	   				
-	   		// });
 
-	   		// });
 	   		costosTotalesArreglos.push({final : totalCosto});
 
 	   		console.log("arreglo",costosTotalesArreglos);

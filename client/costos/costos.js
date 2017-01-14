@@ -63,14 +63,32 @@ this.subscribe('users',()=>{
 	
 	this.actualizar = function(costo)
 	{
+		console.log(costo)
 		var idTemp = costo._id;
 		delete costo._id;		
 		Costos.update({_id:idTemp},{$set:costo});
 		$('.collapse').collapse('hide');
 		this.nuevo = true;
 		this.action = true;
-		this.costo = {};		
+				
 	};
+
+	// this.editar = function(id)
+	// {
+ //    this.obra = Meses.findOne({_id:id});
+ //    this.action = false;
+ //    $('.collapse').collapse('show');
+ //    this.nuevo = false;
+	// };
+	
+	// this.actualizar = function(obra)
+	// {
+	// 	var idTemp = obra._id;
+	// 	delete obra._id;		
+	// 	Meses.update({_id:idTemp},{$set:obra});
+	// 	$('.collapse').collapse('hide');
+	// 	this.nuevo = true;
+	// };
 
 	this.cambiarEstatus = function(id)
 	{

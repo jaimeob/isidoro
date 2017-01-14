@@ -89,11 +89,11 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 		  return Cobros.find({tipo:"valor",obra_id : $stateParams.id}).fetch();
 	  },
 	  cobrosAbono : () => {
-			return Cobros.find({cargo:"cargoAbono",modo:true});
+			return Cobros.find({cargo:"cargoAbono",modo:true,obra_id : $stateParams.id});
 		},
 
 		cobrosParaCobrar : () => {
-			return Cobros.find({modo:false,cargo:"cobroCargo"});
+			return Cobros.find({modo:false,cargo:"cobroCargo",obra_id : $stateParams.id});
 		},
 	  cobrosPorCobrar : () => {
 			return Cobros.find({obra_id : $stateParams.id,modo:true});
@@ -171,10 +171,10 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 	  },
 
 	  periodosCampo : () => {
-	  	return Periodos.find({tipo : "gasto"});
+	  	return Periodos.find({tipo : "gasto",obra_id : $stateParams.id});
 	  },
 	  periodosGasto : () => {
-	  	return Periodos.find({tipo : "costo",obra_id : $stateParams.id,partida_id:!undefined});
+	  	return Periodos.find({tipo : "costo",obra_id : $stateParams.id});
 	  },
 	
 
@@ -580,7 +580,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 						var obra_id=obra._id;
 						
 						if(obra_id == cobro.obra_id)
-							totalIngresos += cobro.cIva + cobro.cSinIva
+							totalIngresos += cobro.cIva/1.16 + cobro.cSinIva
 					});
 
 					var totalIngresos2=0;
@@ -589,7 +589,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 						var obra_id=obra._id;
 						
 						if(obra_id == cobro.obra_id)
-							totalIngresos2 += cobro.cIva + cobro.cSinIva
+							totalIngresos2 += cobro.cIva/1.16 + cobro.cSinIva
 					});
 
 
@@ -636,6 +636,13 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 	   					var totalFinal = 0.00;
 	   					if(presupuesto.partida_id == partida._id ){
 	   						_.each(presupuesto.costos, function(costoPresupuesto){
+	   							var costoNombre = "";
+	   							_.each(rc.costos, function(c){
+	   								if(c._id == costoPresupuesto._id){
+	   									costoNombre = c.nombre;
+	   								}
+	   							})
+
 	   							if("undefined" == typeof costosTotales[partida.nombre + " - " + costoPresupuesto.nombre]){
 	   								costosTotales[partida.nombre + " - " + costoPresupuesto.nombre] = {};
 	   								//costosTotales[partida.nombre + " - " + costoPresupuesto.nombre].value = costoPresupuesto.value;
@@ -826,15 +833,21 @@ var totalP = 0.00;
 		   					var totalFinal = 0.00;
 		   					if(presupuesto.partida_id == partida._id && presupuesto.concepto_id == concepto._id){
 		   						_.each(presupuesto.costos, function(costoPresupuesto){
-		   							if("undefined" == typeof costosTotales[costoPresupuesto.nombre]){
-		   								costosTotales[costoPresupuesto.nombre] = {};
-		   								costosTotales[costoPresupuesto.nombre].partida = partida.nombre;
-		   								costosTotales[costoPresupuesto.nombre].costo_id =  costoPresupuesto._id;
-		   								costosTotales[costoPresupuesto.nombre].costo =  costoPresupuesto.nombre;
-		   								costosTotales[costoPresupuesto.nombre].total = costoPresupuesto.value * presupuesto.cantidad;
+		   								var costoNombre = "";
+	   							_.each(rc.costos, function(c){
+	   								if(c._id == costoPresupuesto._id){
+	   									costoNombre = c.nombre;
+	   								}
+	   							})
+		   							if("undefined" == typeof costosTotales[costoNombre]){
+		   								costosTotales[costoNombre] = {};
+		   								costosTotales[costoNombre].partida = partida.nombre;
+		   								costosTotales[costoNombre].costo_id =  costoPresupuesto._id;
+		   								costosTotales[costoNombre].costo = costoNombre;
+		   								costosTotales[costoNombre].total = costoPresupuesto.value * presupuesto.cantidad;
 		   								
 		   							}else{
-		   								costosTotales[costoPresupuesto.nombre].total += costoPresupuesto.value * presupuesto.cantidad;
+		   								costosTotales[costoNombre].total += costoPresupuesto.value * presupuesto.cantidad;
 		   								
 		   							};
 		   							

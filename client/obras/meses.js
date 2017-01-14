@@ -67,7 +67,7 @@ let rc =$reactive(this).attach($scope);
   });
 
   this.subscribe('presupuestos',()=>{
-	return [{obra_id : $stateParams.id, partida_id: this.getReactively('partida_id'),mes_id: this.getReactively('mes_id'),estatus:true}] 
+	return [{obra_id : $stateParams.id, partida_id: this.getReactively('partida_id'),estatus:true}] 
   });
 
    this.subscribe('presupuestosCosas',()=>{
@@ -149,23 +149,23 @@ let rc =$reactive(this).attach($scope);
 
 			presus = Presupuestos.find();
 
-			_.each(rc.costos, function(costo){
-				console.log("costo")
-				_.each(presus, function(presupuesto){
-					console.log("costo")
-					_.each(presupuesto.costos, function(arreglo){
+		// 	_.each(rc.costos, function(costo){
+		// 		console.log("costo")
+		// 		_.each(presus, function(presupuesto){
+		// 			console.log("costo")
+		// 			_.each(presupuesto.costos, function(arreglo){
 						
-						if (costo._id == arreglo._id) {
-							 arreglo.estatus = true
+		// 				if (costo._id == arreglo._id) {
+		// 					 arreglo.estatus = true
 
-						}else{
-							arreglo.estatus = false
+		// 				}else{
+		// 					arreglo.estatus = false
 
-						}
+		// 				}
 
-				});
-			});
-		});
+		// 		});
+		// 	});
+		// });
 
 		// 	_.each(rc.costos, function(costo){
 		// _.each(costos, function(presu){
@@ -205,23 +205,18 @@ let rc =$reactive(this).attach($scope);
 
 	   					if(presupuesto.partida_id == partida._id && presupuesto.concepto_id == concepto._id){
 	   						_.each(presupuesto.costos, function(costoPresupuesto){
-	   			// 				_.each(rc.getReactively("costos"), function(costo){
-	   			// 					if (costo.nombre == presupuesto.nombre) {
-							// 		existio=true;
-							// 	}
 
-	   			// 				});
-	   			// 				if (existio == false) {
-							// 	costoPresupuesto.value = 0
-							// }
-	   							
-	   							
-
+	   							var costoNombre = "";
+	   							_.each(rc.costos, function(c){
+	   								if(c._id == costoPresupuesto._id){
+	   									costoNombre = c.nombre;
+	   								}
+	   							})
 	   							if("undefined" == typeof costosTotales[costoPresupuesto.nombre]){
 
 	   								costosTotales[costoPresupuesto.nombre] = {};
 	   								costosTotales[costoPresupuesto.nombre].partida = partida.nombre;
-	   								costosTotales[costoPresupuesto.nombre].costo =  costoPresupuesto.nombre;
+	   								costosTotales[costoPresupuesto.nombre].costo =  costoNombre;
 	   								costosTotales[costoPresupuesto.nombre].total = costoPresupuesto.value * presupuesto.cantidad;
 	   								costosTotales[costoPresupuesto.nombre].costo_id =  costoPresupuesto._id;
 	   						
@@ -277,31 +272,6 @@ let rc =$reactive(this).attach($scope);
 	   		});
 
 	   		
-	
-				
-				//var value = 0;
-		
-			
-			
-			// _.each(presupuestos, function(presupuesto){
-			// 	var existio = false;
-			// 	var indice = 0;
-			// 	_.each(presupuesto.costos, function(costoPresupuesto){
-			// 		_.each(rc.getReactively("costos"), function(costo, $index){
-					
-			// 			//console.log("los costos",costo)
-			// 			if (costo._id == costoPresupuesto.costo_id) {
-			// 				existio=true;
-			// 			}
-			// 		});
-					
-			// 	});
-			// 	if (existio == false) {
-			// 		presupuesto.costos.push({value : 0, costo : costo.nombre, costo_id : costo._id});
-			// 		console.log("no existio")
-			// 	}	
-				
-			// });
 			_.each(rc.presupuestos, function(presupuesto){
 				var p_ids = _.pluck(presupuesto.costos, "_id");
 				var c_ids = _.pluck(rc.costos, "_id");
@@ -523,7 +493,7 @@ let rc =$reactive(this).attach($scope);
 	};
 	this.guardarCobroValor = function(cobro)
 	{
-	
+	    cobro.modo = true
 		cobro.tipo = "valor"
 		cobro.usuario_id = Meteor.userId()
 		this.cobro.estatus = true;
@@ -678,13 +648,14 @@ let rc =$reactive(this).attach($scope);
 
 	};
 
-	this.mostrarArchivos= function(mes_id,obra_id)
+	this.mostrarArchivos= function(obra_id,mes_id)
 	{
 		this.presupuesto = {}; 
 
 		//this.presupuesto.costo = 0.00;
-		this.mes_id = mes_id;
+		
 		this.obra_id = $stateParams.id;
+		this.mes_id = mes_id;
 		this.accionPresupuesto = false;
 		this.accionPeriodo = true;
 		this.mostrarFormPre = true;
@@ -867,7 +838,7 @@ let rc =$reactive(this).attach($scope);
 	}
 	this.cobroTotalFinalPeriodoCampo = function(){
 		total = 0;
-		_.each(rc.periodosCampo,function(periodo){total += (periodo.comprasIva / 1.16) + periodo.comprasSinIva + (periodo.contadoIva / 1.16) + periodo.contadoSinIva});
+		_.each(rc.periodosCampo,function(periodo){total += (periodo.comprasIva/1.16 ) + periodo.comprasSinIva + (periodo.contadoIva/1.16 ) + periodo.contadoSinIva});
 		return total
 	}
 
@@ -881,6 +852,16 @@ let rc =$reactive(this).attach($scope);
 			cobro.modo = true;
 		
 		Cobros.update({_id: id},{$set :  {modo : cobro.modo}});
+    };
+    this.cambiarEstatusCosa = function(id)
+	{
+		var cosa = PresupuestosCosas.findOne({_id:id});
+		if(cosa.estatus == true)
+			cosa.estatus = false;
+		else
+			cosa.estatus = true;
+		
+		PresupuestosCosas.update({_id: id},{$set :  {estatus : cosa.estatus}});
     };
 
      
@@ -1292,6 +1273,12 @@ this.actPeriod = true;
 		  {total += pago.pIva + pago.pSinIva});
 		return total
 	};
+
+ this.cargar = function(id)
+{ 
+  $state.go('root.costosDirectos', {'id': id});
+  window.location.reload();
+}, 1000;
 
 
 };

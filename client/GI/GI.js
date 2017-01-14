@@ -135,7 +135,7 @@ this.subscribe('users',()=>{
  					ingresosMesTotales += ingresos.importeCobro 
  				}); 
 
- 				var cobrosM = Cobros.find({mes_id: mes._id,tipo:"valor"}).fetch();
+ 				var cobrosM = Cobros.find({obra_id: obra._id,tipo:"valor"}).fetch();
  				_.each(cobrosM, function(ingresos){
 
  					totalPorObra += ingresos.importeCobro 

@@ -3,7 +3,7 @@
 <div class="well" >
 
 <div class="row">
-<label style="font-size: 20px;"><strong>Control y Evaluación de Acuerdos</strong></label>					  
+<label style="font-size: 20px;"><strong>Acuerdos y compromisos</strong></label>					  
 	<div class="col-sm-12">
    </div> 
 </div>
@@ -26,7 +26,7 @@
 						    <tr>
 							    <th style="font-size: 18px;"><div class="text-center">Conceptos</div></th>
 							    <th style="font-size: 18px;"><div class="text-center">Presupuestos</div></th>
-							    <th style="font-size: 18px;"><div class="text-center">Ahorros</div></th>
+							    <th style="font-size: 18px;"><div class="text-center">Ahorros Proyectados</div></th>
 							    <th style="font-size: 18px;"><div class="text-center">Nuevo Presupuesto</div></th>
 							    <th style="font-size: 18px;"><div class="text-center">Egresos</div></th>
 							    <!-- <th style="font-size: 18px;"><div class="text-center">Resultados logrados</div></th> -->
@@ -39,8 +39,8 @@
 							<!--{{ct.plan}}-->
 							<div class="row" ng-show="ct.panel">
 								<div class="col-sm-12">
-									<a ng-click="ct.mostrarMedidas()" class="btn btn-link" style="font-size: 18px;">Medidas Potenciales (Que se va hacer)</a>
-									<a ng-click="ct.mostrarPlanTrabajo()"  class="btn btn-link" style="font-size: 18px;">Plan de Trabajo(Como se va a desarrollar)</a>
+									<a ng-click="ct.mostrarMedidas()" class="btn btn-link" style="font-size: 18px;">Medidas Potenciales </a>
+									<a ng-click="ct.mostrarPlanTrabajo()"  class="btn btn-link" style="font-size: 18px;">Plan de Trabajo</a>
 									<a ng-click="ct.mostrarForma()"  class="btn btn-link" style="font-size: 18px;">Forma de Medición</a>
 									<a ng-click="ct.mostrarResponsables()"  class="btn btn-link" style="font-size: 18px;">Responsables</a>
 								</div>
@@ -103,28 +103,7 @@
 								
 							  </div>
 
-<!--  <div class="row">
-	<div class="col-sm-12">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th width="20%"><div class="text-center">Medidas Potenciales</div></th>
-					<th width="20%"><div class="text-center">Plan de Trabajo</div></th>
-					<th width="20%"><div class="text-center">Forma de Medicion</div></th>
-					<th width="20%"><div class="text-center">Responsables</div></th>
-				</tr>
-			</thead>
-			<tbody>
-		    <tr ng-repeat="control in ct.controles">
-			    <td>{{control.descripcion}}</td>
-			    <td>{{control.descripcionTrabajo}}</td>
-			    <td>{{control.descripcionForma}}</td>
-			    <td>{{control.descripcionResponsables}}</td>
-		    </tr>
-			</tbody>
-		</table>
-	</div>
-</div> -->
+
 
 
 

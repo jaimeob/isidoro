@@ -23,34 +23,39 @@
 
 					<div id="ribbon">
 
-				<span class="ribbon-button-alignment"> 
+			<!-- 	<span class="ribbon-button-alignment"> 
 					<span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
-						<i class="fa fa-refresh"></i>
+						
 					</span> 
-				</span>
+				</span> -->
 
 				<!-- breadcrumb -->
 				<ol class="breadcrumb">
-					<li style="font-size: 18px;">
-						<a ui-sref = 'root.planes({id:mes.obra_id})'><strong >Planes</strong>
+					<li style="font-size: 20px;">
+						<a ui-sref = 'root.planes({id:mes.obra_id})'><strong >Plan de Negocio</strong>
 						</a>
 					</li>
-					<li style="font-size: 18px;">
-						<a ui-sref = 'root.control({id:mes.obra_id})' ><strong>Control de Acuerdos</strong>
+					<li style="font-size: 20px;">
+						<a ui-sref = 'root.control({id:mes.obra_id})'><strong>Acuerdos y Compromisos</strong>
 						</a>
 					</li>
-					<li style="font-size: 18px;">
-						<a ui-sref = 'root.costosDirectos({id:mes.obra_id})'  ><strong>Costos Directos</strong>
+					<li style="font-size: 20px;">
+						<a ui-sref = 'root.coordinacion({id:mes.obra_id})'  ><strong>Estatus Ejecutivo</strong>
 						</a>
 					</li>
-					<li style="font-size: 18px;">
+					<li style="font-size: 20px;">
+						<a ng-click="mes.cargar( mes.obra_id)" href="" ><strong>Análisis de Costo</strong>
+						</a>
+					</li>
+					<li style="font-size: 20px;">
 						<a ui-sref = 'root.GI({id:mes.obra_id})'  ><strong>Gastos Indirectos</strong>
 						</a>
 					</li>
-					<li style="font-size: 18px;">
+					
+					<li style="font-size: 20px;">
 						<a   ui-sref="root.costos ({id:mes.obra_id})"  ><strong>Conceptos</strong></a><br/>
 					</li>
-					<li style="font-size: 18px;">
+					<li style="font-size: 20px;">
 						<a  ui-sref="root.partidas ({id:mes.obra_id})" ><strong>Partidas</strong>
 						</a>
 					</li>
@@ -126,11 +131,11 @@
 	            <th class="details-control sorting_disabled" rowspan="1" colspan="1"  style="width: 1px;"></th>
 	            <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"  style="width: 88px;">
 	            <a href="" ng-show="!mes.action"  ng-click="mes.mostrarArchivos(mes.obra_id,mes.mes_id)" style="font-size: 15px;">PRESUPUESTOS</a></th>
-	            <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"  style="width: 73px;"><a href=""  ng-click="mes.mostrarArchivosPeriodos(mes.obra_id,mes.mes_id)" ng-show="!mes.gastoPer" style="font-size: 15px;">PERIODOS</a></th>
+	            <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"  style="width: 120px;"><a href=""  ng-click="mes.mostrarArchivosPeriodos(mes.obra_id,mes.mes_id)" ng-show="!mes.gastoPer" style="font-size: 15px;" >COSTOS Y GASTOS</a></th>
 	            <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 95px;"><a href=""  ng-click="mes.mostrarPagos(mes.obra_id,mes.mes_id)" ng-show="!mes.accionPago" style="font-size: 15px;">PAGOS A PROVEEDORES</a></th>
 	            <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 95px;"><a href=""  ng-click="mes.mostrarCobro(mes.obra_id,mes.mes_id)" ng-show="!mes.accionCobro" style="font-size: 15px;">	ESTIMACIONES</a></th>
 	            <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 95px;"><a href=""  ng-click="mes.mostrarValorContruccion(mes.obra_id,mes.mes_id)" ng-show="!mes.accionValor" style="font-size: 15px;">	VALOR DE CONSTRUCCIÓN</a></th>
-	             <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 95px;"><a href=""  ng-click="mes.mostrarResumen(mes.obra_id)" ng-show="!mes.accionResumen" style="font-size: 15px;">	RESUMEN</a></th>
+	             <!-- <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 95px;"><a href=""  ng-click="mes.mostrarResumen(mes.obra_id)" ng-show="!mes.accionResumen" style="font-size: 15px;">SITUACIÓN ACTUAL</a></th> -->
 	            </tr>
 	        	</thead>
 					</table>
@@ -149,7 +154,7 @@
 					<div class="col-sm-4">
 						<ul class="list-group no-margin">
 							<li ng-repeat="partida in mes.partidas" class="list-group-item">
-								<a href="" ng-click="mes.mostrarPresupuestos(partida.mes_id,partida._id)" style="font-size: 18px;" >{{partida.nombre}}</a>
+								<a href="" ng-click="mes.mostrarPresupuestos(mes.mes_id,partida._id)" style="font-size: 18px;" >{{partida.nombre}}</a>
 							</li>
 						</ul>
 					</div>
@@ -179,6 +184,7 @@
 					    	<input type="submit" ng-show="mes.thing"  ng-click="mes.guardarCosa(mes.cosa);" value="Guardar" class="btn btn-primary">
 					    	<input type="submit" ng-show="mes.botonEdit"  ng-click="mes.editarCo(mes.cosa);" value="Editar" class="btn btn-primary">
 					    	<input type="submit" ng-show="mes.actualizarCosita" ng-click="mes.actualizarCosa(mes.cosa);" value="Actualizar" class="btn btn-primary">
+
 					    </div>
 					</div>
 					<br/>
@@ -211,6 +217,7 @@
 												  </button>
 												  <ul class="dropdown-menu text-left">
 												    <li style="font-size: 15px;"><a href="#" ng-click="mes.editarCosa(cosa._id)"><i class="fa fa-pencil"></i> Editar</a></li>
+												    <li><a href="#" ng-click="mes.cambiarEstatusCosa(cosa._id)" style="font-size: 15px;"><i class="fa fa-trash"></i> Desactivar</a></li>
 												  <!-- <li><a href="#" ng-click="mes.cambiarEstatus(cosa._id)"><i class="fa fa-trash"></i> Desactivar</a></li> -->
 												  </ul>
 												</div>
@@ -420,7 +427,7 @@
         <thead>
             <tr role="row">
             <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"  style="width: 88px;">
-            <a href=""  ng-click="mes.gastoCampos(mes.mes_id,mes.obra_id); mes.input();" style="font-size: 15px;">GASTOS DE CAMPOS</a></th>
+            <a href=""  ng-click="mes.gastoCampos(mes.mes_id,mes.obra_id); mes.input();" style="font-size: 15px;">GASTOS DE CAMPO</a></th>
             <th tabindex="0" aria-controls="example" rowspan="1" colspan="1"  style="width: 73px;"><a href=""  ng-click="mes.gastoCostos(mes.mes_id,mes.obra_id)"  style="font-size: 15px;">COSTOS DIRECTOS</a></th>
       
             </tr>
@@ -720,9 +727,9 @@
 						   </thead>
 							<tbody>
 							<tr ng-repeat="cobro in mes.cobros">
-						        <th style="font-size: 18px;"><div class="text-center">{{cobro.cIva / 1.16 | currency}}</div></th>
+						        <th style="font-size: 18px;"><div class="text-center">{{cobro.cIva | currency}}</div></th>
 						        <th style="font-size: 18px;"><div class="text-center">{{cobro.cSinIva | currency}}</div></th>
-						        <th style="font-size: 18px;"><div class="text-center">{{cobro.cIva/1.16 + cobro.cSinIva | currency}}</div></th>
+						        <th style="font-size: 18px;"><div class="text-center">{{cobro.cIva + cobro.cSinIva | currency}}</div></th>
 						        <td style="font-size: 18px;">
 								    <div class="text-center">
 								    	<span ng-if="cobro.modo" style="font-size: 13px;" class="label label-success">
@@ -812,7 +819,7 @@
 
 
 <!-- //////////////////////////////////////////////// RESUMEN  //////////////////////////////////////////////////////////////// -->
-<div class="row" ng-show="!mes.Resumen">
+<!-- <div class="row" ng-show="!mes.Resumen">
 	<div class="co-sm-12">
 	<div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-2" data-widget-editbutton="false" role="widget">						
 		<header role="heading"><div class="jarviswidget-ctrls" role="menu"><a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> </div>
@@ -826,8 +833,7 @@
 					<table class="table table-hover">
 					<thead>
 							<tr>
-								<th style="font-size: 18px;">Obra con Iva</th>
-								<!-- <th style="font-size: 18px;">Saldo Inicial</th> -->
+								<th style="font-size: 18px;">{{mes.obra.nombre}}</th>
 								<th></th>
 								<th style="font-size: 18px;">Cargo</th>
 								<th style="font-size: 18px;">Abono</th>		
@@ -838,11 +844,10 @@
 						    <tr ng-repeat="plan in mes.planes">
 						        <td style="font-size: 15px;">Flujos de Efectivo</td>
 						        <td></td>
-						  <!--       <td style="font-size: 15px;">{{((((plan.totalFinalCostosDirectos)+((plan.totalFinalCostosDirectos * mes.cosas[0].costoIndirecto)/ 100)) + (((plan.totalFinalCostosDirectos)+((plan.totalFinalCostosDirectos * mes.cosas[0].costoIndirecto)/ 100)) * (mes.cosas[0].cargoAdicional/100))    +     (((plan.totalFinalCostosDirectos)+((plan.totalFinalCostosDirectos * mes.cosas[0].costoIndirecto)/ 100)) + (((plan.totalFinalCostosDirectos)+((plan.totalFinalCostosDirectos * mes.cosas[0].costoIndirecto)/ 100)) * (mes.cosas[0].cargoAdicional/100))) * (mes.cosas[0].cargoAdicional)/ 100 ) * (1/(1-((100/(100 -(10 + plan.isr)))*(plan.trema2/100)))) * plan.anticipoObras / 100)| currency}}</td> -->
 
 						        <td style="font-size: 15px;">{{mes.gastosMasCostos() | currency}}</td>
 						        <td style="font-size: 15px;">{{mes.cobrosTotales() | currency}}</td>
-						        <td style="font-size: 15px;">{{(mes.gastosMasCostos()) - (mes.cobrosTotales()) | currency}}</td>
+						        <td style="font-size: 15px;">{{(mes.cobrosTotales())-(mes.gastosMasCostos()) | currency}}</td>
 							</tr>
 							<tr>
 								 <td style="font-size: 15px;">Proveedores</td>
@@ -872,4 +877,4 @@
 	</div>
 		
 	</div>
-</div>
+</div> -->

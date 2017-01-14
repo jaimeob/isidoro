@@ -1,0 +1,562 @@
+<h1  style="color:#646464"> <i class="fa fa-reorder"></i> {{cor.obra.nombre}}</h1><br/>
+<h2 style="font-size: 18px;">Estatus de Areas</h2>
+<div class="row">
+
+
+					<div id="ribbon">
+
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li style="font-size: 16px;">
+						<a ng-click="cor.nuevoCoordinacion()"><strong >Administración - Técnica</strong>
+						</a>
+					</li>
+					<li style="font-size: 16px;" ng-click="cor.nuevoComercial()">
+						<a  ng-click="cor.newComercial()"><strong ng-click="cor.nuevoComercial()">Comercial - Administra</strong>
+						</a>
+					</li>
+
+					<li style="font-size: 16px;">
+						<a  ng-click="cor.newTecnica()"><strong>Técnica - Comercial</strong>
+						</a>
+					</li>
+					<li style="font-size: 16px;">
+						<a  ng-click="cor.newAdministracion()"><strong>Administración</strong>
+						</a>
+					</li>
+					<li style="font-size: 16px;">
+						<a  ng-click="cor.newComercialSeccion()"><strong> Comercial</strong>
+						</a>
+					</li>
+					<li style="font-size: 16px;">
+						<a  ng-click="cor.newTecnicaSeccion()"><strong>Técnica</strong>
+						</a>
+					</li>
+				</ol>
+				</div>
+
+
+
+
+	<div class="col-sm-12" >
+				<div ng-show="cor.verCoordinacion">
+			<form class="form-horizontal" role="form" data-parsley-validate>
+		  	<div class="well">	
+
+		  	<div class="row"> 
+		  	<div class="col-sm-12">
+		  	
+			  		<a href="" class="btn btn-primary" ng-click="cor.nuevoConceptoAdminTecnica()">Agregar Concepto</a> 
+			  		
+			  		<div class="well"  ng-show="cor.adminTecnica">
+			  		<div class="row">
+				  		<div class="col-sm-4">
+				  		
+						    <label style="font-size: 18px;">Nombre</label>
+					    	<input type="text" class="form-control" placeholder="Nombre" ng-model="cor.areas.nombreAdminTecnica" required>
+					    </div>
+					    <div class="col-sm-4"><br/><br/>
+				  		
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.guardarAreas(cor.areas)" value="Guardar" class="btn btn-primary" ng-show="!cor.edicionArea">
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.actualizarAreas(cor.areas)" value="Actualizar" class="btn btn-primary" ng-show="cor.edicionArea">
+					    </div>
+				    </div>
+
+			  		</div>  
+			   
+			  </div>  
+			 </div> <br/> 
+
+			    <div class="row">
+		       	<div class="col-sm-3">
+		       		
+							<ul class="list-group no-margin">
+								<li  class="list-group-item" ng-repeat="area in cor.areasAdminTec">
+									<a href="" ng-click="cor.textPermisos(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
+									<a class="pull-right btn btn-warning btn-xs" href="#" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+								</li>
+								<!-- <li  class="list-group-item">
+									<a href="" ng-click="cor.textTramites()" style="font-size: 18px;" >Trámites</a>
+								</li>
+							 -->
+							</ul>
+						</div>
+							<div class="col-sm-9">
+							<!-- ng-show="cor.verPermisos" -->
+							<div ng-show="cor.verPermisos">
+								<h4 ng-show="cor.verPermisos">Tema</h4><br/>	
+									<textarea ng-show="cor.verPermisos" class="form-control"  ng-model="cor.coordinacion.temaAdminTecnica"></textarea><br/>
+									<h4 ng-show="cor.verPermisos">Avances/Logros</h4><br/>	
+									<textarea ng-show="cor.verPermisos" class="form-control"  ng-model="cor.coordinacion.avancesAdminTecnica"></textarea><br/>
+									<h4 ng-show="cor.verPermisos">Desviaciones</h4><br/>	
+									<textarea ng-show="cor.verPermisos" class="form-control"  ng-model="cor.coordinacion.desviacionesAdminTecnica"></textarea><br/>
+									<h4 ng-show="cor.verPermisos">Causas</h4><br/>	
+									<textarea ng-show="cor.verPermisos" class="form-control"  ng-model="cor.coordinacion.causasAdminTecnica"></textarea><br/>
+									<h4 ng-show="cor.verPermisos">Acciones Correctivas</h4><br/>	
+									<textarea  ng-show="cor.verPermisos" class="form-control"  ng-model="cor.coordinacion.accionesAdminTecnica"></textarea><br/>
+									</div>
+						</div>
+	    	  </div>
+	    	  <div class="row">
+	<div class="col-sm-12">
+				<input type="submit" ng-click="cor.guardarCoordinacion(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verPermisos">
+				<input type="submit" ng-click="cor.guardarPersonal(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verPersonal">
+				<input type="submit" ng-click="cor.actualizar(cor.coordinacion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
+			</div>
+	</div>
+		  	</div>
+	  	</form>
+		</div>
+	
+
+	<!-- ///////////////////////////////////////// -->
+
+				<div ng-show="cor.panelComercial">
+			<form class="form-horizontal" role="form" data-parsley-validate>
+		  	<div class="well">
+		  		<div class="row"> 
+		  	<div class="col-sm-12">
+		  	
+			  		<a href="" class="btn btn-primary" ng-click="cor.nuevoConceptoAdminTecnica()">Agregar Concepto</a> 
+			  		
+			  		<div class="well"  ng-show="cor.adminTecnica">
+			  		<div class="row">
+				  		<div class="col-sm-4">
+				  		
+						    <label style="font-size: 18px;">Nombre</label>
+					    	<input type="text" class="form-control" placeholder="Nombre" ng-model="cor.areas.nombreAdminTecnica" required>
+					    </div>
+					    <div class="col-sm-4"><br/><br/>
+				  		
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.guardarAreasComercial(cor.areas)" value="Guardar" class="btn btn-primary" ng-show="!cor.edicionArea">
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.actualizarAreas(cor.areas)" value="Actualizar" class="btn btn-primary" ng-show="cor.edicionArea">
+					    </div>
+				    </div>
+
+			  		</div>  
+			   
+			  </div>  
+			 </div> <br/> 	    
+			    <div class="row">
+		       	<div class="col-sm-3">
+							<ul class="list-group no-margin">
+							<li  class="list-group-item" ng-repeat="area in cor.areasComercial">
+									<a href="" ng-click="cor.textverComercialAdmin(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
+									<a class="pull-right btn btn-warning btn-xs" href="#" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+								</li>
+								
+							</ul>
+						</div>
+							<div class="col-sm-9"><!-- ng-show="cor.verPermisos" -->
+								<!-- ////////////////////////////////////////////////////////////// -->
+									<div ng-show="cor.verComercialAdmin">
+									<h4 >Tema</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.temaComercialAdmin"></textarea><br/>
+									<h4 >Avances/Logros</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.avancesComercialAdmin"></textarea><br/>
+									<h4 >Desviaciones</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.desviacionesComercialAdmin"></textarea><br/>
+									<h4 >Causas</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.causasComercialAdmin"></textarea><br/>
+									<h4 >Acciones</h4><br/>	
+									<textarea   class="form-control"  ng-model="cor.coordinacion.accionesComercialAdmin"></textarea><br/>
+									</div>
+									<!-- ////////////////////////////////////////////////////////////// -->
+						
+						</div>
+	    	  </div>
+	    	  <div class="row">
+	<div class="col-sm-12">
+				<input type="submit" ng-click="cor.guardarCoordinacionComercialAdmin(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verComercialAdmin">
+				<input type="submit" ng-click="cor.actualizar(cor.coordinacion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
+			</div>
+	</div>
+		  	</div>
+	  	</form>
+		</div>
+
+	<!-- ///////////////////////////////////////// -->
+
+
+				<div ng-show="cor.verTecnica">
+			<form class="form-horizontal" role="form" data-parsley-validate>
+		  	<div class="well">
+
+
+		  	<div class="row"> 
+		  	<div class="col-sm-12">
+		  	
+			  		<a href="" class="btn btn-primary" ng-click="cor.nuevoConceptoAdminTecnica()">Agregar Concepto</a> 
+			  		
+			  		<div class="well"  ng-show="cor.adminTecnica">
+			  		<div class="row">
+				  		<div class="col-sm-4">
+				  		
+						    <label style="font-size: 18px;">Nombre</label>
+					    	<input type="text" class="form-control" placeholder="Nombre" ng-model="cor.areas.nombreAdminTecnica" required>
+					    </div>
+					    <div class="col-sm-4"><br/><br/>
+				  		
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.guardarTecnicasComercial(cor.areas)" value="Guardar" class="btn btn-primary" ng-show="!cor.edicionArea">
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.actualizarAreas(cor.areas)" value="Actualizar" class="btn btn-primary" ng-show="cor.edicionArea">
+					    </div>
+				    </div>
+
+			  		</div>  
+			   
+			  </div>  
+			 </div> <br/> 
+
+			    <div class="row">
+		       	<div class="col-sm-3">
+							<ul class="list-group no-margin">
+								<li  class="list-group-item" ng-repeat="area in cor.tecnicasComercial">
+									<a href="" ng-click="cor.textTecnicasComercial(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
+									<a class="pull-right btn btn-warning btn-xs" href="#" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+								</li>
+						    </ul>
+							
+						</div>
+							<div class="col-sm-9"><!-- ng-show="cor.verPermisos" -->
+							<!-- ////////////////////////////////////////////////////////////// -->
+									<div ng-show="cor.verTecnicaComercial">
+									<h4 >Tema</h4><br/>
+									<textarea  class="form-control"  ng-model="cor.coordinacion.temaTecnicaComercial"></textarea><br/>
+									<h4 >Avances/Logros</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.avancesTecnicaComercial"></textarea><br/>
+									<h4 >Desviaciones</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.desviacionesTecnicaComercial"></textarea><br/>
+									<h4 >Causas</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.causasTecnicaComercial"></textarea><br/>
+									<h4 >Acciones</h4><br/>	
+									<textarea   class="form-control"  ng-model="cor.coordinacion.accionesTecnicaComercial"></textarea><br/>
+									</div>
+							
+						</div>
+	    	  </div>
+	    	  <div class="row">
+	<div class="col-sm-12">
+				<input type="submit" ng-click="cor.guardarCoordinacionTecnicasComercial(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verTecnicaComercial">
+				<input type="submit" ng-click="cor.actualizar(cor.tecnica)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
+			</div>
+	</div>
+		  	</div>
+	  	</form>
+		</div>
+
+		<!-- /////////////////////////// -->
+
+
+		<div ng-show="cor.verAdministracion">
+			<form class="form-horizontal" role="form" data-parsley-validate>
+		  	<div class="well">	
+		  	<div class="row"> 
+		  	<div class="col-sm-12">
+		  	
+
+			  		<a href="" class="btn btn-primary" ng-click="cor.nuevoConceptoAdminTecnica()">Agregar Concepto</a> 
+			  		
+			  		<div class="well"  ng-show="cor.adminTecnica">
+			  		<div class="row">
+				  		<div class="col-sm-4">
+				  		
+						    <label style="font-size: 18px;">Nombre</label>
+					    	<input type="text" class="form-control" placeholder="Nombre" ng-model="cor.areas.nombreAdminTecnica" required>
+					    </div>
+					    <div class="col-sm-4"><br/><br/>
+				  		
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.guardarAreasAdmin(cor.areas)" value="Guardar" class="btn btn-primary" ng-show="!cor.edicionArea">
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.actualizarAreas(cor.areas)" value="Actualizar" class="btn btn-primary" ng-show="cor.edicionArea">
+					    </div>
+				    </div>
+
+			  		</div>  
+			   
+			  </div>  
+			 </div> <br/>     
+			    <div class="row">
+		       	<div class="col-sm-3">
+							<ul class="list-group no-margin">
+								<li  class="list-group-item" ng-repeat="area in cor.areasAdmin">
+									<a href="" ng-click="cor.textverAdmin(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
+									<a class="pull-right btn btn-warning btn-xs" href="#" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+								</li>
+							</ul>
+						</div>
+							<div class="col-sm-9"><!-- ng-show="cor.verPermisos" -->
+							<!-- ////////////////////////////////////////////////////////////// -->
+									<div ng-show="cor.verAdmin">
+									<h4 >Tema</h4><br/>
+									<textarea  class="form-control"  ng-model="cor.coordinacion.temaAdmin"></textarea><br/>
+									<h4 >Avances/Logros</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.avancesAdmin"></textarea><br/>
+									<h4 >Desviaciones</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.desviacionesAdmin"></textarea><br/>
+									<h4 >Causas</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.causasAdmin"></textarea><br/>
+									<h4 >Acciones</h4><br/>	
+									<textarea   class="form-control"  ng-model="cor.coordinacion.accionesAdmin"></textarea><br/>
+									</div>
+							
+						</div>
+			
+
+	    	  </div>
+	    	  <div class="row">
+	<div class="col-sm-12">
+				<input type="submit" ng-click="cor.guardarCoordinacionAdmin(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verAdmin">
+				<input type="submit" ng-click="cor.actualizar(cor.administracion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
+			</div>
+	</div>
+		  	</div>
+	  	</form>
+		</div>
+		<!-- /////////////////////////// -->
+
+		<div ng-show="cor.verComercialSeccion">
+			<form class="form-horizontal" role="form" data-parsley-validate>
+		  	<div class="well">
+
+		  			  	<div class="row"> 
+		  	<div class="col-sm-12">
+		  	
+
+			  		<a href="" class="btn btn-primary" ng-click="cor.nuevoConceptoAdminTecnica()">Agregar Concepto</a> 
+			  		
+			  		<div class="well"  ng-show="cor.adminTecnica">
+			  		<div class="row">
+				  		<div class="col-sm-4">
+				  		
+						    <label style="font-size: 18px;">Nombre</label>
+					    	<input type="text" class="form-control" placeholder="Nombre" ng-model="cor.areas.nombreAdminTecnica" required>
+					    </div>
+					    <div class="col-sm-4"><br/><br/>
+				  		
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.guardarAreasComercial(cor.areas)" value="Guardar" class="btn btn-primary" ng-show="!cor.edicionArea">
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.actualizarAreas(cor.areas)" value="Actualizar" class="btn btn-primary" ng-show="cor.edicionArea">
+					    </div>
+				    </div>
+
+			  		</div>  
+			   
+			  </div>  
+			 </div> <br/>	    
+			    <div class="row">
+		       	<div class="col-sm-3">
+							<ul class="list-group no-margin">
+							<li  class="list-group-item" ng-repeat="area in cor.areasComercial">
+									<a href="" ng-click="cor.textverComercial(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
+									<a class="pull-right btn btn-warning btn-xs" href="#" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+								</li>
+							
+							</ul>
+						</div>
+							<div class="col-sm-9"><!-- ng-show="cor.verPermisos" -->
+							<!-- ////////////////////////////////////////////////////////////// -->
+									<div ng-show="cor.verComercial">
+									<h4 >Tema</h4><br/>
+									<textarea  class="form-control"  ng-model="cor.coordinacion.temaComercial"></textarea><br/>
+									<h4 >Avances/Logros</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.avancesComercial"></textarea><br/>
+									<h4 >Desviaciones</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.desviacionesComercial"></textarea><br/>
+									<h4 >Causas</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.causasComercial"></textarea><br/>
+									<h4 >Acciones</h4><br/>	
+									<textarea   class="form-control"  ng-model="cor.coordinacion.accionesComercial"></textarea><br/>
+									</div>
+							
+						</div>
+	    	  </div>
+	    	  <div class="row">
+	<div class="col-sm-12">
+				<input type="submit" ng-click="cor.guardarCoordinacionComercial(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verComercial">
+				<input type="submit" ng-click="cor.actualizar(cor.comercialSeccion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
+			</div>
+	</div>
+		  	</div>
+	  	</form>
+		</div>
+		<!-- /////////////////////////// -->
+
+		<div ng-show="cor.verTecnicaSeccion">
+			<form class="form-horizontal" role="form" data-parsley-validate>
+		  	<div class="well">	
+		  	<div class="row"> 
+		  	<div class="col-sm-12">
+		  	
+
+			  		<a href="" class="btn btn-primary" ng-click="cor.nuevoConceptoAdminTecnica()">Agregar Concepto</a> 
+			  		
+			  		<div class="well"  ng-show="cor.adminTecnica">
+			  		<div class="row">
+				  		<div class="col-sm-4">
+				  		
+						    <label style="font-size: 18px;">Nombre</label>
+					    	<input type="text" class="form-control" placeholder="Nombre" ng-model="cor.areas.nombreAdminTecnica" required>
+					    </div>
+					    <div class="col-sm-4"><br/><br/>
+				  		
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.guardarAreasTecnicas(cor.areas)" value="Guardar" class="btn btn-primary" ng-show="!cor.edicionArea">
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.actualizarAreas(cor.areas)" value="Actualizar" class="btn btn-primary" ng-show="cor.edicionArea">
+					    </div>
+				    </div>
+
+			  		</div>  
+			   
+			  </div>  
+			 </div> <br/>     
+			    <div class="row">
+		       	<div class="col-sm-3">
+							<ul class="list-group no-margin">
+								<li  class="list-group-item" ng-repeat="area in cor.areasTecnicas">
+									<a href="" ng-click="cor.textverTecnica(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
+									<a class="pull-right btn btn-warning btn-xs" href="#" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+								</li>
+								
+							</ul>
+						</div>
+							<div class="col-sm-9"><!-- ng-show="cor.verPermisos" -->
+							<!-- ////////////////////////////////////////////////////////////// -->
+									<div ng-show="cor.verTecnicas">
+									<h4 >Tema</h4><br/>
+									<textarea  class="form-control"  ng-model="cor.coordinacion.temaTecnica"></textarea><br/>
+									<h4 >Avances/Logros</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.avancesTecnica"></textarea><br/>
+									<h4 >Desviaciones</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.desviacionesTecnica"></textarea><br/>
+									<h4 >Causas</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.causasTecnica"></textarea><br/>
+									<h4 >Acciones</h4><br/>	
+									<textarea   class="form-control"  ng-model="cor.coordinacion.accionesTecnica"></textarea><br/>
+									</div>
+							
+						</div>
+	    	  </div>
+	    	  <div class="row">
+	<div class="col-sm-12">
+				<input type="submit" ng-click="cor.guardarCoordinacionTecnicas(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verTecnicas">
+				<input type="submit" ng-click="cor.actualizar(cor.tecnicaSeccion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
+			</div>
+	</div>
+		  	</div>
+	  	</form>
+		</div>
+
+		<!-- /////////////////////////// -->
+
+		
+	</div>
+
+</div>
+<br/>
+	
+<!-- List -->
+
+<div class="row">
+
+	<div class="col-sm-12">
+<!-- <div>
+	<a class="btn btn-primary" ng-click="cor.verTodasCoordinaciones()">Ver todas</a>
+	</div><br/> -->
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th style="font-size: 18px;"><div class="text-center">Tema</div></th>
+					<th style="font-size: 18px;"><div class="text-center">Avances/Logros</div></th>
+					<th style="font-size: 18px;"><div class="text-center">Desviaciones</div></th>
+					<th style="font-size: 18px;"><div class="text-center">Causas</div></th>
+					<th style="font-size: 18px;"><div class="text-center">Acciones</div></th>
+					<th style="font-size: 18px;"><div class="text-center">Opciones</div></th>
+				
+				</tr>
+			</thead>
+			<tbody>
+		    <tr ng-repeat="cordina in cor.coordinacionesAdminTecnica" ng-show="cor.verPermisos" >
+			    <td style="font-size: 15px;">{{cordina.temaAdminTecnica}}</td>
+			    <td style="font-size: 15px;">{{cordina.avancesAdminTecnica}}</td>
+			    <td style="font-size: 15px;">{{cordina.desviacionesAdminTecnica}}</td>
+			    <td style="font-size: 15px;">{{cordina.causasAdminTecnica}}</td>
+			    <td style="font-size: 15px;">{{cordina.accionesAdminTecnica}}</td>
+			     <td>
+			    <a  class="btn btn-danger btn-xs" ng-click="cor.borrar(cordina._id)">Borrar</a>
+			    <a class="btn btn-warning btn-xs" ng-click="cor.editar(cordina._id)">Editar</a>
+			    </td>
+			    </tr>
+			    <!-- ////////////////////////////////////////////////////// -->
+			     <tr ng-repeat="cordina in cor.coordinacionesComercialAdmin" ng-show="cor.verComercialAdmin">
+			    <td style="font-size: 15px;">{{cordina.temaComercialAdmin}}</td>
+			    <td style="font-size: 15px;">{{cordina.avancesComercialAdmin}}</td>
+			    <td style="font-size: 15px;">{{cordina.desviacionesComercialAdmin}}</td>
+			    <td style="font-size: 15px;">{{cordina.causasComercialAdmin}}</td>
+			    <td style="font-size: 15px;">{{cordina.accionesComercialAdmin}}</td>
+			     <td>
+			    <a class="btn btn-danger btn-xs" ng-click="cor.borrar(cordina._id)">Borrar</a>
+			    <a class="btn btn-warning btn-xs" ng-click="cor.editar(cordina._id)">Editar</a>
+			    </td>
+			    </tr>
+			     <!-- ////////////////////////////////////////////////////// -->
+			     <tr ng-repeat="cordina in cor.coordinacionesTecnicaComercial" ng-show="cor.verTecnicaComercial">
+			    <td style="font-size: 15px;">{{cordina.temaTecnicaComercial}}</td>
+			    <td style="font-size: 15px;">{{cordina.avancesTecnicaComercial}}</td>
+			    <td style="font-size: 15px;">{{cordina.desviacionesTecnicaComercial}}</td>
+			    <td style="font-size: 15px;">{{cordina.causasTecnicaComercial}}</td>
+			    <td style="font-size: 15px;">{{cordina.accionesTecnicaComercial}}</td>
+			     <td>
+			    <a class="btn btn-danger btn-xs" ng-click="cor.borrar(cordina._id)">Borrar</a>
+			    <a class="btn btn-warning btn-xs" ng-click="cor.editar(cordina._id)">Editar</a>
+			    </td>
+			    </tr>
+			    <!-- ////////////////////////////////////////////////////// -->
+			     <tr ng-repeat="cordina in cor.coordinacionesAdmin" ng-show="cor.verAdmin">
+			    <td style="font-size: 15px;">{{cordina.temaAdmin}}</td>
+			    <td style="font-size: 15px;">{{cordina.avancesAdmin}}</td>
+			    <td style="font-size: 15px;">{{cordina.desviacionesAdmin}}</td>
+			    <td style="font-size: 15px;">{{cordina.causasAdmin}}</td>
+			    <td style="font-size: 15px;">{{cordina.accionesAdmin}}</td>
+			     <td>
+			    <a ng-show="cor.verAdmin" class="btn btn-danger btn-xs" ng-click="cor.borrar(cordina._id)">Borrar
+			    </a>
+			    <a class="btn btn-warning btn-xs" ng-click="cor.editar(cordina._id)">Editar</a>
+			    </td>
+			    </tr>
+			     <tr ng-repeat="cordina in cor.coordinacionesComercial" ng-show="cor.verComercial">
+			    <td style="font-size: 15px;">{{cordina.temaComercial}}</td>
+			    <td style="font-size: 15px;">{{cordina.avancesComercial}}</td>
+			    <td style="font-size: 15px;">{{cordina.desviacionesComercial}}</td>
+			    <td style="font-size: 15px;">{{cordina.causasComercial}}</td>
+			    <td style="font-size: 15px;">{{cordina.accionesComercial}}</td>
+			     <td>
+			    <a ng-show="cor.verComercial" class="btn btn-danger btn-xs" ng-click="cor.borrar(cordina._id)">Borrar
+			    </a>
+			    <a class="btn btn-warning btn-xs" ng-click="cor.editar(cordina._id)">Editar</a>
+			    </td>
+			    </tr>
+			    <tr ng-repeat="cordina in cor.coordinacionesTecnicas" ng-show="cor.verTecnicas">
+			    <td style="font-size: 15px;">{{cordina.temaTecnica}}</td>
+			    <td style="font-size: 15px;">{{cordina.avancesTecnica}}</td>
+			    <td style="font-size: 15px;">{{cordina.desviacionesTecnica}}</td>
+			    <td style="font-size: 15px;">{{cordina.causasTecnica}}</td>
+			    <td style="font-size: 15px;">{{cordina.accionesTecnica}}</td>
+			     <td>
+			    <a ng-show="cor.verTecnicas" class="btn btn-danger btn-xs" ng-click="cor.borrar(cordina._id)">Borrar
+			    </a>
+			    <a class="btn btn-warning btn-xs" ng-click="cor.editar(cordina._id)">Editar</a>
+			    </td>
+			    </tr>
+
+<!-- ///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+			</tbody>
+		</table>
+	
+		
+	</div>
+</div>
