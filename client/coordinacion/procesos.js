@@ -1,6 +1,6 @@
 angular.module("formulas")
-.controller("CoordinacionCtrl", CoordinacionCtrl);  
-function CoordinacionCtrl($scope, $meteor, $reactive, $state, $stateParams, toastr){
+.controller("ProcesosCtrl", ProcesosCtrl);  
+function ProcesosCtrl($scope, $meteor, $reactive, $state, $stateParams, toastr){
 let rc = $reactive(this).attach($scope);
   window = rc;
 
@@ -9,14 +9,14 @@ this.subscribe('users',()=>{
 	return Meteor.users.findOne[{ _id: Meteor.userId() }];
     });
 
-	this.subscribe('coordinacion',()=>{
+	this.subscribe('procesos',()=>{
 	return [{ obra_id : $stateParams.id,estatus : true}] 
     });
     	this.subscribe('comerciales',()=>{
 	return [{ obra_id : $stateParams.id,estatus : true}] 
     });
 
-      this.subscribe('areas',()=>{
+      this.subscribe('areasProcesos',()=>{
   return [{ obra_id : $stateParams.id,estatus : true}] 
     });
 
@@ -27,48 +27,48 @@ this.subscribe('users',()=>{
 
 
 
-  this.action = true;
+  this.action = true; 
 
   
 	this.helpers({
     areasAdminTec : () => {
-      return Areas.find({adminTec:true}).fetch();
+      return AreasProcesos.find({adminTec:true}).fetch();
     },
     comercialAdmin : () => {
-      return Areas.find({comercialAd:true}).fetch();
+      return AreasProcesos.find({comercialAd:true}).fetch();
     },
    areasAdmin : () => {
-      return Areas.find({areasAdmin:true}).fetch();
+      return AreasProcesos.find({areasAdmin:true}).fetch();
     },
      areasComercial : () => {
-      return Areas.find({comercial:true}).fetch();
+      return AreasProcesos.find({comercial:true}).fetch();
     },
     areasTecnicas : () => {
-      return Areas.find({tecnicas:true}).fetch();
+      return AreasProcesos.find({tecnicas:true}).fetch();
     },
 		tecnicasComercial : () => {
-		  return Areas.find({tecnicaComercial:true}).fetch();
+		  return AreasProcesos.find({tecnicaComercial:true}).fetch();
 	  },
 	  coordinaciones : () => {
-		  return Coordinacion.find().fetch();
+		  return Procesos.find().fetch();
 	  },
      coordinacionesComercialAdmin : () => {
-      return Coordinacion.find({comercialAdministracion:true}).fetch();
+      return Procesos.find({comercialAdministracion:true}).fetch();
     },
 	  coordinacionesAdminTecnica: () => {
-		  return Coordinacion.find({permisos:true}).fetch();
+		  return Procesos.find({permisos:true}).fetch();
 	  },
     coordinacionesTecnicaComercial: () => {
-      return Coordinacion.find({tecComer:true}).fetch();
+      return Procesos.find({tecComer:true}).fetch();
     },
      coordinacionesAdmin: () => {
-      return Coordinacion.find({administracion:true}).fetch();
+      return Procesos.find({administracion:true}).fetch();
     },
     coordinacionesComercial: () => {
-      return Coordinacion.find({comercialCoor:true}).fetch();
+      return Procesos.find({comercialCoor:true}).fetch();
     },
      coordinacionesTecnicas: () => {
-      return Coordinacion.find({tecnicasCoor:true}).fetch();
+      return Procesos.find({tecnicasCoor:true}).fetch();
     },
 
 
@@ -157,8 +157,8 @@ this.subscribe('users',()=>{
     this.verPermisos = false
     this.verTodas = false
     this.verComercialAdmin = false
-    this.verTecnicaComercial = false
-    this.coordinacionesTecnicaComercial = false
+    this.verTecnicaComercial = true
+    this.coordinacionesTecnicaComercial = true
     this.tecnica = {};	
     this.verTecnicaSeccion = false
     this.verTecnicas = false
@@ -214,7 +214,6 @@ this.subscribe('users',()=>{
     this.verTecnica = false
     this.verComercialSeccion = false
     this.verTecnicaSeccion = true
-    this.verTecnicas = false
     this.verAdministracion = false
     this.tecnicaSeccion = {};	
     this.guardarCo = false
@@ -353,9 +352,23 @@ this.subscribe('users',()=>{
     delete area._id;   
     Areas.update({_id:idTemp},{$set:area});
     this.adminTecnica = false;
-    this.edicionArea = false
-     };
+   
+    
+        
+  };
 
+
+	this.borrar = function(id)
+	{
+		var costo = Procesos.findOne({_id:id});
+		if(costo.estatus == true)
+			costo.estatus = false;
+		else
+			costo.estatus = true;
+		
+		Procesos.update({_id: id},{$set :  {estatus : costo.estatus}});
+    };
+		
       this.borrarArea = function(id)
   {
     var area = Areas.findOne({_id:id});
@@ -366,19 +379,6 @@ this.subscribe('users',()=>{
     
     Areas.update({_id: id},{$set :  {estatus : area.estatus}});
     };
-
-
-	this.borrar = function(id)
-	{
-		var costo = Coordinacion.findOne({_id:id});
-		if(costo.estatus == true)
-			costo.estatus = false;
-		else
-			costo.estatus = true;
-		
-		Coordinacion.update({_id: id},{$set :  {estatus : costo.estatus}});
-    };
-		
 
 
 
@@ -399,7 +399,7 @@ this.subscribe('users',()=>{
 		this.coordinacion.estatus = true;
 		coordinacion.obra_id = $stateParams.id;
 		console.log(this.coordinacion);
-		Coordinacion.insert(this.coordinacion);
+		Procesos.insert(this.coordinacion);
 		toastr.success(' Guardado.');
 		this.coordinacion = {}; 
 	  
@@ -417,7 +417,7 @@ this.subscribe('users',()=>{
     this.coordinacion.estatus = true;
     coordinacion.obra_id = $stateParams.id;
     console.log(this.coordinacion);
-    Coordinacion.insert(this.coordinacion);
+    Procesos.insert(this.coordinacion);
     toastr.success(' Guardado.');
     this.coordinacion = {}; 
     
@@ -435,7 +435,7 @@ this.subscribe('users',()=>{
     this.coordinacion.estatus = true;
     coordinacion.obra_id = $stateParams.id;
     console.log(this.coordinacion);
-    Coordinacion.insert(this.coordinacion);
+    Procesos.insert(this.coordinacion);
     toastr.success(' Guardado.');
     this.coordinacion = {}; 
     
@@ -453,7 +453,7 @@ this.subscribe('users',()=>{
     this.coordinacion.estatus = true;
     coordinacion.obra_id = $stateParams.id;
     console.log(this.coordinacion);
-    Coordinacion.insert(this.coordinacion);
+    Procesos.insert(this.coordinacion);
     toastr.success(' Guardado.');
     this.coordinacion = {}; 
     
@@ -471,7 +471,7 @@ this.subscribe('users',()=>{
     this.coordinacion.estatus = true;
     coordinacion.obra_id = $stateParams.id;
     console.log(this.coordinacion);
-    Coordinacion.insert(this.coordinacion);
+    Procesos.insert(this.coordinacion);
     toastr.success(' Guardado.');
     this.coordinacion = {}; 
     
@@ -489,7 +489,7 @@ this.subscribe('users',()=>{
     this.coordinacion.estatus = true;
     coordinacion.obra_id = $stateParams.id;
     console.log(this.coordinacion);
-    Coordinacion.insert(this.coordinacion);
+    Procesos.insert(this.coordinacion);
     toastr.success(' Guardado.');
     this.coordinacion = {}; 
     
@@ -507,7 +507,7 @@ this.subscribe('users',()=>{
     area.estatus = true;
     area.obra_id = $stateParams.id;
     console.log(area);
-    Areas.insert(area);
+    AreasProcesos.insert(area);
     toastr.success(' Guardado.');
     this.areas = {}; 
     this.adminTecnica = false
@@ -526,7 +526,7 @@ this.subscribe('users',()=>{
     area.estatus = true;
     area.obra_id = $stateParams.id;
     console.log(area);
-    Areas.insert(area);
+    AreasProcesos.insert(area);
     toastr.success(' Guardado.');
     this.areas = {}; 
     this.adminTecnica = false
@@ -543,7 +543,7 @@ this.subscribe('users',()=>{
     area.estatus = true;
     area.obra_id = $stateParams.id;
     console.log(area);
-    Areas.insert(area);
+    AreasProcesos.insert(area);
     toastr.success(' Guardado.');
     this.areas = {}; 
     this.adminTecnica = false
@@ -555,12 +555,12 @@ this.subscribe('users',()=>{
     _.each(rc.areas, function(costo){
       delete costo.$$hashKey;
     });
-    area.tecnicaComercial = true;
+    area.tecComer = true;
     area.usuario_id = Meteor.userId()
     area.estatus = true;
     area.obra_id = $stateParams.id;
     console.log(area);
-    Areas.insert(area);
+    AreasProcesos.insert(area);
     toastr.success(' Guardado.');
     this.areas = {}; 
     this.adminTecnica = false
@@ -578,7 +578,7 @@ this.subscribe('users',()=>{
     area.estatus = true;
     area.obra_id = $stateParams.id;
     console.log(area);
-    Areas.insert(area);
+    AreasProcesos.insert(area);
     toastr.success(' Guardado.');
     this.areas = {}; 
     this.adminTecnica = false
@@ -596,7 +596,7 @@ this.subscribe('users',()=>{
     area.estatus = true;
     area.obra_id = $stateParams.id;
     console.log(area);
-    Areas.insert(area);
+    AreasProcesos.insert(area);
     toastr.success(' Guardado.');
     this.areas = {}; 
     this.adminTecnica = false
@@ -611,68 +611,45 @@ this.subscribe('users',()=>{
     _.each(rc.areas, function(costo){
       delete costo.$$hashKey;
     });
-    area.comercial = true;
+    //area.comercial = true;
     area.usuario_id = Meteor.userId()
     area.estatus = true;
     area.obra_id = $stateParams.id;
     console.log(area);
-    Areas.insert(area);
+    AreasProcesos.insert(area);
     toastr.success(' Guardado.');
     this.areas = {}; 
     this.adminTecnica = false
-    
+    this.verComercialSeccion = false
 
     
 
   };
 
-
-
-
-  
-
-
-
-
-
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
 	this.verTodasCoordinaciones = function(){
 
-		///this.verTodas = true
-		this.verTodas = !this.verTodas;
-
-
+    this.verTodas = !this.verTodas;
     this.verPermisos = false
     this.verComercialAdmin = false;
     this.verTecnicaComercial = false
     this.verAdmin = false
     this.verTecnicaComercial = false;
-      this.panelComercial = false
+    this.panelComercial = false
     this.verCoordinacion = false
     this.verTecnica = false
     this.verComercialSeccion = false
     this.verTecnicaSeccion = false
     this.verAdministracion = false
-
-
-
-
-		this.panelComercial = false
+    this.panelComercial = false
     this.verCoordinacion = false
     this.verTecnica = false
     this.verComercialSeccion = false
     this.verTecnicaSeccion = false
     this.verAdmin = false
- this.verPermisos = false
-  
-
-    
-   
+    this.verPermisos = false
 
 	};
 

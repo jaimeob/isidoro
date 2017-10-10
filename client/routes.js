@@ -136,6 +136,11 @@ angular.module('formulas').config(['$injector', function ($injector) {
       templateUrl: 'client/planes/planes.ng.html',
       controller: 'PlanesCtrl as pl',
     })
+    .state('root.situacion', {
+      url: '/situacionEconomica/:id',
+      templateUrl: 'client/planes/situacion.ng.html',
+      controller: 'PlanesCtrl as pl',
+    })
     .state('root.planes2', {
       url: '/planes2/:id',
       templateUrl: 'client/planes2/planes2.ng.html',
@@ -200,5 +205,10 @@ angular.module('formulas').config(['$injector', function ($injector) {
       url: '/coordinacion/:id',
       templateUrl: 'client/coordinacion/coordinacion.ng.html',
       controller: 'CoordinacionCtrl as cor',
+    })
+       .state('root.procesos', {
+      url: '/procesos/:id',
+      templateUrl: 'client/coordinacion/procesos.ng.html',
+      controller: 'ProcesosCtrl as cor',
     });
 }]);     

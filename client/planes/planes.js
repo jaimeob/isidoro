@@ -2,6 +2,7 @@ angular.module('formulas')
 .controller('PlanesCtrl', PlanesCtrl);
 function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 	let rc = $reactive(this).attach($scope);
+	window = rc;
 
 	this.plan = {}
 	this.plan.costos = [];
@@ -1059,10 +1060,7 @@ totalPresupuestoTotal = 0.00;
 	    $('.collapse').collapse('show');
 	    this.nuevo = false;
 		
-		//_.each(rc.costosTotales, function(costo){
-			//rc.totalPor = costo.valor / rc.totalCosto ;
-		//});
-		//console.log("arreglo", rc.costosTotales)
+	
 	};	
 	
 	this.actualizar = function(plan,costos)
