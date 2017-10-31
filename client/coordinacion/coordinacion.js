@@ -10,7 +10,7 @@ this.subscribe('users',()=>{
     });
 
 	this.subscribe('coordinacion',()=>{
-	return [{ obra_id : $stateParams.id,estatus : true}] 
+	return [{ obra_id : $stateParams.id,estatus : true,area_id: this.getReactively('area_id')}] 
     });
     	this.subscribe('comerciales',()=>{
 	return [{ obra_id : $stateParams.id,estatus : true}] 
@@ -19,7 +19,6 @@ this.subscribe('users',()=>{
       this.subscribe('areas',()=>{
   return [{ obra_id : $stateParams.id,estatus : true}] 
     });
-
 
       this.subscribe('obra', () => {
   	return [{ _id : $stateParams.id, estatus : true}]
@@ -46,6 +45,9 @@ this.subscribe('users',()=>{
     areasTecnicas : () => {
       return Areas.find({tecnicas:true}).fetch();
     },
+    areasReuniones : () => {
+      return Areas.find({reuniones:true}).fetch();
+    },
 		tecnicasComercial : () => {
 		  return Areas.find({tecnicaComercial:true}).fetch();
 	  },
@@ -69,6 +71,9 @@ this.subscribe('users',()=>{
     },
      coordinacionesTecnicas: () => {
       return Coordinacion.find({tecnicasCoor:true}).fetch();
+    },
+    coordinacionesReuniones: () => {
+      return Coordinacion.find({reunionesCoor:true}).fetch();
     },
 
 
@@ -97,6 +102,7 @@ this.subscribe('users',()=>{
     this.verComercialAdmin = false
     this.coordinacionesTecnicaComercial = false
     this.verTecnicas = false
+    this.verReunionesSeccion = false;
 
 
     // this.guardarCo = false
@@ -120,6 +126,7 @@ this.subscribe('users',()=>{
     this.verTodas = false
     this.verComercialAdmin = false
     this.coordinacionesTecnicaComercial = false
+    this.verReunionesSeccion = false;
 
   };
 
@@ -139,12 +146,8 @@ this.subscribe('users',()=>{
      this.verComercialAdmin = false
      this.coordinacionesTecnicaComercial = false
      this.verTecnicas = false
-
-
- 
+     this.verReunionesSeccion = false;
   };
-
-  
 
   this.newTecnica = function()
   {
@@ -162,9 +165,8 @@ this.subscribe('users',()=>{
     this.tecnica = {};	
     this.verTecnicaSeccion = false
     this.verTecnicas = false
+    this.verReunionesSeccion = false;
     
-
- 
   };
   this.newAdministracion = function()
   {
@@ -182,8 +184,9 @@ this.subscribe('users',()=>{
       this.verTodas = false
       this.verPermisos = false
       this.verComercialAdmin = false
-      this.verTecnicaComercial = true
+      this.verTecnicaComercial = false
       this.coordinacionesTecnicaComercial = false
+      this.verReunionesSeccion = false;
  
 
  
@@ -205,6 +208,7 @@ this.subscribe('users',()=>{
      this.coordinacionesTecnicaComercial = false
      this.verTecnicaSeccion = false
      this.verTecnicas = false
+     this.verReunionesSeccion = false;
  
   };
   this.newTecnicaSeccion = function()
@@ -227,6 +231,31 @@ this.subscribe('users',()=>{
      this.verTecnicaComercial = false
      this.coordinacionesTecnicaComercial = false
      this.verAdmin = false
+     this.verReunionesSeccion = false;
+
+ 
+  };
+  this.reunionesSeccion = function()
+  {
+    this.panelComercial = false
+    this.verCoordinacion = false
+    this.verTecnica = false
+    this.verComercialSeccion = false
+    this.verTecnicaSeccion = false
+    this.verTecnicas = false
+    this.verAdministracion = false
+    this.reunionesSeccion = {}; 
+    this.guardarCo = false
+    this.guardarComer = false
+    this.guardarAdmin = false
+    this.guardarCom = false
+    this.verTodas = false
+    this.verPermisos = false
+    this.verComercialAdmin = false
+     this.verTecnicaComercial = false
+     this.coordinacionesTecnicaComercial = false
+     this.verAdmin = false
+     this.verReunionesSeccion = true;
 
  
   };
@@ -237,21 +266,18 @@ this.subscribe('users',()=>{
       this.verTecnicaComercial = false
     this.verAdmin = false
     this.verPermisos = true
-
      console.log(id); 
-    
   };
-
-     this.textverAdmin = function(id)
+     
+   this.textverAdmin = function(id)
   {
     this.area_id = id;
     this.verTecnicaComercial = false
     this.verAdmin = true
     this.verPermisos = false
-
-    
   };
-     this.textverTecnica = function(id)
+
+  this.textverTecnica = function(id)
   {
     this.area_id = id;
     this.verTecnicaComercial = false
@@ -316,16 +342,28 @@ this.subscribe('users',()=>{
     this.verComercial = false;
 
   };
+     this.textverReuniones = function(id)
+  {
+    this.verTecnicaComercial = false;
+     this.verPermisos = false
+    this.verComercialAdmin = false;
+     this.area_id = id;
+    this.verTecnicaComercial = false
+    this.verAdmin = false
+    this.verPermisos = false
+    this.verComercial = false
+    this.verTecnicas = false
+    this.verComercial = false;
+    this.verReuniones = true;
 
- 
-
-  
-  
+  };
 	
 	this.editar = function(id)
-	{
-    this.costo = Coordinacion.findOne({_id:id});
-	};
+  {
+    console.log("eñ id",id)
+    this.coordinacion = Coordinacion.findOne({_id:id});
+    this.action = false
+  };
   this.editarArea = function(id)
   {
       console.log(id)
@@ -342,9 +380,9 @@ this.subscribe('users',()=>{
 		delete costo._id;		
 		Coordinacion.update({_id:idTemp},{$set:costo});
 		$('.collapse').collapse('hide');
+    this.action = true
+    this.coordinacion = {};
      
-		
-				
 	};
   this.actualizarAreas = function(area)
   {
@@ -379,10 +417,6 @@ this.subscribe('users',()=>{
 		Coordinacion.update({_id: id},{$set :  {estatus : costo.estatus}});
     };
 		
-
-
-
- 
   
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -421,7 +455,6 @@ this.subscribe('users',()=>{
     toastr.success(' Guardado.');
     this.coordinacion = {}; 
     
-
   };
   this.guardarCoordinacionTecnicasComercial = function(coordinacion)
   {
@@ -439,7 +472,6 @@ this.subscribe('users',()=>{
     toastr.success(' Guardado.');
     this.coordinacion = {}; 
     
-
   };
    this.guardarCoordinacionAdmin = function(coordinacion)
   {
@@ -456,8 +488,6 @@ this.subscribe('users',()=>{
     Coordinacion.insert(this.coordinacion);
     toastr.success(' Guardado.');
     this.coordinacion = {}; 
-    
-
   };
   this.guardarCoordinacionComercial = function(coordinacion)
   {
@@ -474,8 +504,6 @@ this.subscribe('users',()=>{
     Coordinacion.insert(this.coordinacion);
     toastr.success(' Guardado.');
     this.coordinacion = {}; 
-    
-
   };
    this.guardarCoordinacionTecnicas = function(coordinacion)
   {
@@ -492,8 +520,22 @@ this.subscribe('users',()=>{
     Coordinacion.insert(this.coordinacion);
     toastr.success(' Guardado.');
     this.coordinacion = {}; 
-    
-
+  };
+   this.guardarCoordinacionReuniones = function(coordinacion)
+  {
+    _.each(rc.coordinaciones, function(costo){
+      delete costo.$$hashKey;
+    });
+    //this.control.costo_id = this.costo_id;
+    coordinacion.area_id = this.area_id;
+    coordinacion.reunionesCoor = true;
+    coordinacion.usuario_id = Meteor.userId()
+    this.coordinacion.estatus = true;
+    coordinacion.obra_id = $stateParams.id;
+    console.log(this.coordinacion);
+    Coordinacion.insert(this.coordinacion);
+    toastr.success(' Guardado.');
+    this.coordinacion = {}; 
   };
 
     this.guardarAreas = function(area)
@@ -511,10 +553,7 @@ this.subscribe('users',()=>{
     toastr.success(' Guardado.');
     this.areas = {}; 
     this.adminTecnica = false
-    
-
   };
-
 
     this.guardarAreasAdmin = function(area)
   {
@@ -531,7 +570,6 @@ this.subscribe('users',()=>{
     this.areas = {}; 
     this.adminTecnica = false
     
-
   };
    this.guardarAreasTecnicas = function(area)
   {
@@ -548,7 +586,6 @@ this.subscribe('users',()=>{
     this.areas = {}; 
     this.adminTecnica = false
     
-
   };
   this.guardarTecnicasComercial = function(area)
   {
@@ -564,9 +601,6 @@ this.subscribe('users',()=>{
     toastr.success(' Guardado.');
     this.areas = {}; 
     this.adminTecnica = false
-
-    
-
   };
   this.guardarComercialAdmin = function(area)
   {
@@ -582,8 +616,6 @@ this.subscribe('users',()=>{
     toastr.success(' Guardado.');
     this.areas = {}; 
     this.adminTecnica = false
-    
-
   };
 
    this.guardarAreasComercialAdmin = function(area)
@@ -601,8 +633,6 @@ this.subscribe('users',()=>{
     this.areas = {}; 
     this.adminTecnica = false
     //this.verComercialSeccion = true
-
-
   };
 
 
@@ -620,33 +650,33 @@ this.subscribe('users',()=>{
     toastr.success(' Guardado.');
     this.areas = {}; 
     this.adminTecnica = false
-    
-
-    
 
   };
 
-
-
-
-  
-
-
-
-
+    this.guardarAreasReuinones = function(area)
+  {
+    _.each(rc.areas, function(costo){
+      delete costo.$$hashKey;
+    });
+    area.reuniones = true;
+    area.usuario_id = Meteor.userId()
+    area.estatus = true;
+    area.obra_id = $stateParams.id;
+    console.log(area);
+    Areas.insert(area);
+    toastr.success(' Guardado.');
+    this.areas = {}; 
+    this.adminTecnica = false
+  };
 
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
 	this.verTodasCoordinaciones = function(){
 
 		///this.verTodas = true
 		this.verTodas = !this.verTodas;
-
-
     this.verPermisos = false
     this.verComercialAdmin = false;
     this.verTecnicaComercial = false
@@ -658,9 +688,7 @@ this.subscribe('users',()=>{
     this.verComercialSeccion = false
     this.verTecnicaSeccion = false
     this.verAdministracion = false
-
-
-
+    this.verReuniones = false;
 
 		this.panelComercial = false
     this.verCoordinacion = false
@@ -668,11 +696,7 @@ this.subscribe('users',()=>{
     this.verComercialSeccion = false
     this.verTecnicaSeccion = false
     this.verAdmin = false
- this.verPermisos = false
-  
-
-    
-   
+ this.verPermisos = false   
 
 	};
 

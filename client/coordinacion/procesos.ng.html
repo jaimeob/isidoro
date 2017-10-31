@@ -1,10 +1,7 @@
 <h1  style="color:#646464"> <i class="fa fa-reorder"></i> {{cor.obra.nombre}}</h1><br/>
 <h2 style="font-size: 18px;">Productividad</h2>
 <div class="row">
-
-
 					<div id="ribbon">
-
 				<!-- breadcrumb -->
 				<ol class="breadcrumb">
 					<li style="font-size: 16px;">
@@ -32,18 +29,21 @@
 						<a href="" ng-click="cor.newTecnicaSeccion()"><strong>Técnica</strong>
 						</a>
 					</li>
+					<li style="font-size: 16px;">
+						<a href="" ng-click="cor.reunionesSeccion()"><strong>Reuniones</strong>
+						</a>
+					</li>
+					<!-- <li style="font-size: 16px;">
+						<a href="" ng-click="cor.newTecnicaSeccion()"><strong>Reuniones</strong>
+						</a>
+					</li> -->
 				</ol>
 				</div>
-
-
-
-
 	<div class="col-sm-12" >
 				<div ng-show="cor.verCoordinacion">
 			<form class="form-horizontal" role="form" data-parsley-validate>
 
 				<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////ADMINITRACION TECNICA////////////////////////////////////////////////////////////// --> 
-
 
 		  	<div class="well">	
 
@@ -141,6 +141,7 @@
 							<li  class="list-group-item" ng-repeat="area in cor.comercialAdmin">
 									<a href="" ng-click="cor.textverComercialAdmin(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
 									<a class="pull-right btn btn-warning btn-xs" href="#" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+									<a class="pull-right btn btn-danger btn-xs" href="" ng-click="cor.borrarArea(area._id)"><i class="fa fa-trash  "></i></a>
 								</li>
 								
 							</ul>
@@ -208,6 +209,7 @@
 								<li  class="list-group-item" ng-repeat="area in cor.tecnicasComercial">
 									<a href="" ng-click="cor.textverTecnicaComercial(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
 									<a class="pull-right btn btn-warning btn-xs" href="#" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+									<a class="pull-right btn btn-danger btn-xs" href="" ng-click="cor.borrarArea(area._id)"><i class="fa fa-trash  "></i></a>
 								</li>
 						    </ul>
 							
@@ -232,7 +234,7 @@
 	    	  <div class="row">
 	<div class="col-sm-12">
 				<input type="submit" ng-click="cor.guardarCoordinacionTecnicasComercial(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verTecnicaComercial">
-				<input type="submit" ng-click="cor.actualizar(cor.tecnica)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
+				<input type="submit" ng-click="cor.actualizar(cor.coordinacion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
 			</div>
 	</div>
 		  	</div>
@@ -249,7 +251,7 @@
 		  	<div class="col-sm-12">
 	
 			  		
-			  		<div class="well"  ng-show="cor.adminTecnica">
+			  		<div class="well"  >
 			  		<div class="row">
 				  		<div class="col-sm-4">
 				  		
@@ -273,6 +275,7 @@
 								<li  class="list-group-item" ng-repeat="area in cor.areasAdmin">
 									<a href="" ng-click="cor.textverAdmin(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
 									<a class="pull-right btn btn-warning btn-xs" href="#" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+									<a class="pull-right btn btn-danger btn-xs" href="" ng-click="cor.borrarArea(area._id)"><i class="fa fa-trash  "></i></a>
 								</li>
 							</ul>
 						</div>
@@ -298,7 +301,7 @@
 	    	  <div class="row">
 	<div class="col-sm-12">
 				<input type="submit" ng-click="cor.guardarCoordinacionAdmin(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verAdmin">
-				<input type="submit" ng-click="cor.actualizar(cor.administracion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
+				<input type="submit" ng-click="cor.actualizar(cor.coordinacion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
 			</div>
 	</div>
 		  	</div>
@@ -336,6 +339,7 @@
 							<li  class="list-group-item" ng-repeat="area in cor.areasComercial">
 									<a href="" ng-click="cor.textverComercial(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
 									<a class="pull-right btn btn-warning btn-xs" href="#" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+									<a class="pull-right btn btn-danger btn-xs" href="" ng-click="cor.borrarArea(area._id)"><i class="fa fa-trash  "></i></a>
 								</li>
 							
 							</ul>
@@ -360,7 +364,7 @@
 	    	  <div class="row">
 	<div class="col-sm-12">
 				<input type="submit" ng-click="cor.guardarCoordinacionComercial(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verComercial">
-				<input type="submit" ng-click="cor.actualizar(cor.comercialSeccion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
+				<input type="submit" ng-click="cor.actualizar(cor.coordinacion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
 			</div>
 	</div>
 		  	</div>
@@ -393,6 +397,7 @@
 								<li  class="list-group-item" ng-repeat="area in cor.areasTecnicas">
 									<a href="" ng-click="cor.textverTecnica(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
 									<a class="pull-right btn btn-warning btn-xs" href="" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+									<a class="pull-right btn btn-danger btn-xs" href="" ng-click="cor.borrarArea(area._id)"><i class="fa fa-trash  "></i></a>
 								</li>
 								
 							</ul>
@@ -417,7 +422,7 @@
 	    	  <div class="row">
 	<div class="col-sm-12">
 				<input type="submit" ng-click="cor.guardarCoordinacionTecnicas(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verTecnicas">
-				<input type="submit" ng-click="cor.actualizar(cor.tecnicaSeccion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
+				<input type="submit" ng-click="cor.actualizar(cor.coordinacion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
 			</div>
 	</div>
 		  	</div>
@@ -425,6 +430,64 @@
 		</div>
 
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// --> 
+<!-- ///////////////////////////////Reuniones/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// --> 
+
+		<div ng-show="cor.verReunionesSeccion">
+			<form class="form-horizontal" role="form" data-parsley-validate>
+		  	<div class="well">	
+		  	<div class="row"> 
+		  	<div class="col-sm-12">
+			  		<div class="well">
+			  		<div class="row">
+				  		<div class="col-sm-4">
+						    <label style="font-size: 18px;">Nombre</label>
+					    	<input type="text" class="form-control" placeholder="Nombre" ng-model="cor.areas.nombreAdminTecnica" >
+					    </div>
+					    <div class="col-sm-4"><br/><br/>
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.guardarAreasReuinones(cor.areas)" value="Guardar" class="btn btn-primary" ng-show="!cor.edicionArea">
+						  <input type="submit" style="margin-top: -10px; " ng-click="cor.actualizarAreas(cor.areas)" value="Actualizar" class="btn btn-primary" ng-show="cor.edicionArea">
+					    </div>
+				    </div>
+			  		</div>  
+			  </div>  
+			 </div> <br/>     
+			    <div class="row">
+		       	<div class="col-sm-3">
+							<ul class="list-group no-margin">
+								<li  class="list-group-item" ng-repeat="area in cor.areasReuniones">
+									<a href="" ng-click="cor.textverReuniones(area._id)" style="font-size: 18px;" >{{area.nombreAdminTecnica}}</a>
+									<a class="pull-right btn btn-warning btn-xs" href="" ng-click="cor.editarArea(area._id)"><i class="fa fa-pencil  "></i></a>
+									<a class="pull-right btn btn-danger btn-xs" href="" ng-click="cor.borrarArea(area._id)"><i class="fa fa-trash  "></i></a>
+								</li>
+								
+							</ul>
+						</div>
+							<div class="col-sm-9">
+							
+									<div ng-show="cor.verReuniones">
+									<h4 >Tema</h4><br/>
+									<textarea  class="form-control"  ng-model="cor.coordinacion.temaReuniones"></textarea><br/>
+									<h4 >Avances/Logros</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.avancesReuniones"></textarea><br/>
+									<h4 >Desviaciones</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.desviacionesReuniones"></textarea><br/>
+									<h4 >Causas</h4><br/>	
+									<textarea  class="form-control"  ng-model="cor.coordinacion.causasReuniones"></textarea><br/>
+									<h4 >Acciones</h4><br/>	
+									<textarea   class="form-control"  ng-model="cor.coordinacion.accionesReuniones"></textarea><br/>
+									</div>
+
+						</div>
+	    	  </div>
+	    	  <div class="row">
+	<div class="col-sm-12">
+				<input type="submit" ng-click="cor.guardarCoordinacionReuniones(cor.coordinacion)" value="Guardar" class="btn btn-primary" ng-show="cor.verReuniones">
+				<input type="submit" ng-click="cor.actualizar(cor.coordinacion)" value="Actualizar" class="btn btn-primary" ng-show="!cor.action">	
+			</div>
+	</div>
+		  	</div>
+	  	</form>
+		</div>
 <!-- <div ng-show="cor.reuniones">
 			<form class="form-horizontal" role="form" data-parsley-validate>
 		  	<div class="well">	
@@ -582,12 +645,21 @@
 			    <a class="btn btn-warning btn-xs" ng-click="cor.editar(cordina._id)">Editar</a>
 			    </td>
 			    </tr>
+			    <tr ng-repeat="cordina in cor.coordinacionesReuniones" ng-show="cor.verReuniones">
+			    <td style="font-size: 15px;">{{cordina.temaReuniones}}</td>
+			    <td style="font-size: 15px;">{{cordina.avancesReuniones}}</td>
+			    <td style="font-size: 15px;">{{cordina.desviacionesReuniones}}</td>
+			    <td style="font-size: 15px;">{{cordina.causasReuniones}}</td>
+			    <td style="font-size: 15px;">{{cordina.accionesReuniones}}</td>
+			     <td>
+			    <a ng-show="cor.verTecnicas" class="btn btn-danger btn-xs" ng-click="cor.borrar(cordina._id)">Borrar
+			    </a>
+			    <a class="btn btn-warning btn-xs" ng-click="cor.editar(cordina._id)">Editar</a>
+			    </td>
+			    </tr>
 
 <!-- ///////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
-
-
-
 
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////// -->
