@@ -668,12 +668,12 @@
 									<th><div class="text-center"></div>{{}}</th>
 							    </tr> -->
 							    <tr>
-									<th style="font-size: 18px;"><div class="text-center">Estimaciones por cobrar</div></th>
+									<th style="font-size: 18px;"><div class="text-center">Facturas por cobrar</div></th>
 									<td style="font-size: 15px;"><div class="text-center" style="font-size: 15px;"></div>
 									{{pl.cargosObra() -pl.abonos() | currency}}</td>
 							    </tr>
 							    <tr>
-									<th style="font-size: 18px;"><div class="text-center">Obra ejecutada sin estimar</div></th>
+									<th style="font-size: 18px;"><div class="text-center">Producción sin facturar</div></th>
 									<td style="font-size: 15px;"><div class="text-center" style="font-size: 15px;"></div>
 									{{pl.cobroTotalFinalValor() - pl.jaime[0].ingresosObra | currency}}</td>
 							    </tr>
