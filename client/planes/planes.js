@@ -2,7 +2,7 @@ angular.module('formulas')
 .controller('PlanesCtrl', PlanesCtrl);
 function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 	let rc = $reactive(this).attach($scope);
-	window = rc;
+	window.rc = rc;
 
 	this.plan = {}
 	this.plan.costos = [];
@@ -70,10 +70,13 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
   this.action = true;  
   this.nuevo = true;
   
- // console.log($stateParams);
+ // //console.log($stateParams);
   this.helpers({
 	  planes : () => {
-		  return Planes.find();
+			var planes = Planes.find().fetch();
+			// rc.getReactively("planes")
+			return planes
+		  
 	  },
 	   meses : () => {
 		  return Meses.find();
@@ -144,7 +147,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 
 
 	  	 		
-	  	 		console.log("cosas",variable);
+	  	 	//	//console.log("cosas",variable);
 
 
 			return variable;
@@ -241,8 +244,8 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 
 
 
-       console.log("gastos", gastosIndirectoEmpresa);
-	//	console.log("final", final);
+       ////console.log("gastos", gastosIndirectoEmpresa);
+	//	//console.log("final", final);
 
 		return gastosIndirectoEmpresa;
 	},
@@ -262,16 +265,16 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  		   // var ingresosMes = 0
 
  		  _.each(rc.getReactively("obras"), function(obra){ 
- 		  	console.log("entro");
+ 		  //	//console.log("entro");
  			 _.each(rc.getReactively("meses"), function(mes){ 
- 			 	  	console.log("entro a los meses");
+ 			 	  	//console.log("entro a los meses");
  			 	
 				var totalGastoOficinaPorMes = 0;
 				var totalPorObra = 0;
 				var oficinas = GastosOficina.find({mes_id: mes._id,}).fetch(); 
  				_.each(oficinas, function(gasto){
  					totalGastoOficinaPorMes += gasto.importeFijo + gasto.importeVar;
- 					console.log("oficina mensual",totalGastoOficinaPorMes)
+ 					//console.log("oficina mensual",totalGastoOficinaPorMes)
  				});
 
  				var ingresosMes = 0
@@ -312,7 +315,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 					var cobros = Cobros.find({tipo:"valor"}).fetch();
 					_.each(cobros,function(cobro){
 						var obra_id=obra._id;
-						//console.log( mes.mes, obra.nombre, cobro)
+						////console.log( mes.mes, obra.nombre, cobro)
 						if( mes._id == cobro.mes_id)
 							totalIngresos += cobro.importeCobro
 					});
@@ -320,7 +323,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  				var porcentaje = ingresosMes / totalIngresos * 100;
  				var pago =  totalGastoOficinaPorMes * porcentaje/100
 
- 				//console.log(mes.mes,ingresosMes,totalIngresos)
+ 				////console.log(mes.mes,ingresosMes,totalIngresos)
  				
 
 
@@ -339,10 +342,10 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
        totalPago = {};
 			_.each(arreglin, function(arreglo){
 				
-				//console.log("arreglo", arreglo);
+				////console.log("arreglo", arreglo);
 				
 				if("undefined" == typeof totalPago[arreglo.obra_id]){
-				//	console.log("if");
+				//	//console.log("if");
 					totalPago[arreglo.obra_id] = {};
 
 					if (arreglo.pago > 0) {
@@ -355,19 +358,19 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 					
 				}else{
 					if (arreglo.pago > 0) {
-						//console.log("else")
+						////console.log("else")
 						totalPago[arreglo.obra_id].pago += arreglo.pago;
 					}
 				}
-				//console.log(totalPago);
+				////console.log(totalPago);
 				// if (arreglo.pago !=undefined) {
 
  			// 		}else{
  			// 			arreglo.pago = 0;
  			// 		}
 			});
-			//console.log("tatal pago", totalPago);
-		//	console.log("arreglo total", arreglin);
+			////console.log("tatal pago", totalPago);
+		//	//console.log("arreglo total", arreglin);
 
 			_.each(arreglin, function(arreglo){
 					if (isNaN(arreglo.porcentaje)) {
@@ -382,7 +385,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  					}
 
 			});
-			//console.log("totalPago", totalPago);
+			////console.log("totalPago", totalPago);
  			_.each(totalPago, function(pago){
  				_.each(arreglin, function(arreglo){
  					if (pago.obra_id == arreglo.obra_id) {
@@ -413,7 +416,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  					}
 
 			});
- 				console.log("calculo",arreglin);
+ 				//console.log("calculo",arreglin);
  				return arreglin;
 	  },
 
@@ -492,7 +495,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  			}); 
  				 	_.each(rc.indirectoMes2, function(indi){
  						 _.each(arreglin, function(arreglo){
- 						 	//console.log("indi", indi)
+ 						 	////console.log("indi", indi)
  				 		if (arreglo.obra_id == indi.obra_id) {
  				 			arreglo.ingresosMesTotales += indi.ingresosMesTotales;
  				 			arreglo.pago = indi.pago;
@@ -542,7 +545,7 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 	   			});
  		
             
- 				console.log("el arreglin zama",arregliZama);
+ 				//console.log("el arreglin zama",arregliZama);
  				return arregliZama;
 	  },
 
@@ -619,8 +622,8 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
  			});
 
 
- 		console.log("probando", ingresosTotalesPorObra);
- 		//console.log("resultado", ingresosPorObraConPorcentaje);
+ 		//console.log("probando", ingresosTotalesPorObra);
+ 		////console.log("resultado", ingresosPorObraConPorcentaje);
  		return ingresosTotalesPorObra; 
 	},
 
@@ -668,17 +671,17 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 	   		//var totalPer=0.00;
 	   	
 	   		_.each(rc.getReactively("planes"), function(plan){
-	   			//console.log("este es el plan",plan);
+	   			////console.log("este es el plan",plan);
 	   			_.each(plan.costos, function(costosPlan){
-	   				//console.log("costos plan",costosPlan);
+	   				////console.log("costos plan",costosPlan);
 	   				_.each(costosTotalesArreglos2, function(costoReal){
-	   				//	console.log("costos reales",costoReal);
+	   				//	//console.log("costos reales",costoReal);
 
 	   					if(costoReal.costo_id == costosPlan._id){
 	   						costoReal.factor = costosPlan.factor;
-	   						//console.log("costos de if",costoReal);
+	   						////console.log("costos de if",costoReal);
 	   					}
-	   					//console.log(costoReal);
+	   					////console.log(costoReal);
 	   				});
 	   			});
 	   		});
@@ -698,18 +701,18 @@ function PlanesCtrl($scope, $meteor, $reactive, $state, toastr, $stateParams) {
 		  			}
 		  		});	
 		  	});
-	   		//console.log("esto tengo", costosTotalesArreglos);
+	   		////console.log("esto tengo", costosTotalesArreglos);
 	   		var costosDirectosTotales = {};
 	   		
-	   		//console.log();
+	   		////console.log();
 	   		var zamaPresupuesto = 0.00;
 	   		_.each(costosTotalesArreglos2, function(costoTotal){
-	   			//console.log("entré") 
+	   			////console.log("entré") 
 	   			var totalPresupuestos = 0.00;
 
 	   			
 	   			if("undefined" == typeof costosDirectosTotales[costoTotal.partida]){
-	   			//	console.log("entré acá");
+	   			//	//console.log("entré acá");
 	   				costosDirectosTotales[costoTotal.partida] = {};
 
 	   				costosDirectosTotales[costoTotal.partida].partida = costoTotal.partida;
@@ -814,7 +817,7 @@ var totalP = 0.00;
 		 	      	});
 
 	   			});
- 				console.log("DOS",_.toArray(costosDirectosTotales));
+ 				//console.log("DOS",_.toArray(costosDirectosTotales));
 	   		return costosDirectosTotales;
 		},
 
@@ -864,17 +867,17 @@ var totalP = 0.00;
 	   		var totalPresupuestoTotal  = 0;
 	   		this.totalFinalCostosDirectos = 0.00;
 	   		_.each(rc.getReactively("planes"), function(plan){
-	   			//console.log("entro al plan",plan);
+	   			////console.log("entro al plan",plan);
 	   			_.each(plan.costos, function(costosPlan){
-	   				//console.log("entro papa",costosPlan);
+	   				////console.log("entro papa",costosPlan);
 	   				_.each(costosTotalesArreglos, function(costoTotal){
-	   					//console.log("entro al arreglo",costoTotal);
+	   					////console.log("entro al arreglo",costoTotal);
 	   					if(costoTotal.costo_id == costosPlan._id)
 	   					{
 	   						costoTotal.factor = costosPlan.factor;
 	   						costoTotal.presupuestoTotal = (costoTotal.total) - ((costoTotal.total * costosPlan.factor)/100);
 
-	   						//console.log("entro final", costoTotal);
+	   						////console.log("entro final", costoTotal);
 	   					}
 	   				})
 	   			})
@@ -889,13 +892,13 @@ var totalP = 0.00;
 
 totalPresupuestoTotal = 0.00;
 	   		_.each(costosTotalesArreglos, function(costoTotal){
-	   					//console.log("entro al arreglo",costoTotal);
+	   					////console.log("entro al arreglo",costoTotal);
 	   					//if(costoTotal.costo_id == costosPlan._id)
 	   					//{
 	   						totalPresupuestoTotal += costoTotal.presupuestoTotal
 	   						costoTotal.totalpreFinal =  totalPresupuestoTotal
 
-	   						//console.log("entro final", costoTotal);
+	   						////console.log("entro final", costoTotal);
 	   					//}
 	   				})
 
@@ -910,8 +913,8 @@ totalPresupuestoTotal = 0.00;
 	   		
 	   		costosTotalesArreglos.push({final : totalCosto, totalpre: totalPresupuestoTotal});
 	   		rc.costoTotalPres = costosTotalesArreglos[costosTotalesArreglos.length - 1].totalpre
-	   		//console.log("arreglo",costosTotalesArreglos);
-	   		console.log("arreglo",_.toArray(costosTotalesArreglos));
+	   		////console.log("arreglo",costosTotalesArreglos);
+	   		//console.log("arreglo",_.toArray(costosTotalesArreglos));
 	   		return costosTotales;
 		},
 
@@ -939,8 +942,8 @@ totalPresupuestoTotal = 0.00;
     		// rc.plan.costos.push({_id : costo._id, nombre : costo.nombre, factor : 0});
     		// //costo.presupuesto = costo.valor * costo.factor - costo.valor;
    		 // });
-  	   //  console.log("costos", costos);
-  	   //  console.log("plan costos",rc.plan);
+  	   //  //console.log("costos", costos);
+  	   //  //console.log("plan costos",rc.plan);
   	    return costos;
 		 
 	  },
@@ -978,7 +981,7 @@ totalPresupuestoTotal = 0.00;
  				});
  				ingresos.push({total : totalIngresos })
  				//
- 				//console.log(ingresos);
+ 				////console.log(ingresos);
  				return  ingresos;
 	  },
 
@@ -1009,7 +1012,7 @@ totalPresupuestoTotal = 0.00;
  this.guardar = function(costos)
 	{
 
-		console.log(costos);
+		//console.log(costos);
 		this.plan.usuario_id = Meteor.userId()
 		this.plan.totalFinalCostosDirectos = rc.totalFinalCostosDirectos;
 		   rc.plan.estatus = true;
@@ -1019,7 +1022,7 @@ totalPresupuestoTotal = 0.00;
 		 	delete costo.$$hashKey;
 		 });
 	   rc.plan.costos = costos;
-		console.log("objeto insertado en plan", rc.plan);
+		//console.log("objeto insertado en plan", rc.plan);
 		Planes.insert(rc.plan);		
 
 		toastr.success('Plan guardado.')
@@ -1032,7 +1035,7 @@ totalPresupuestoTotal = 0.00;
 
 	this.guardarPresupuesto = function(costos)
 	{
-		console.log(costos);	 
+		//console.log(costos);	 
 		//this.presupuesto.costo.value = 0.00;
 		this.presupuesto.estatus = true;
 		this.presupuesto.obra_id = this.obra_id;
@@ -1043,7 +1046,7 @@ totalPresupuestoTotal = 0.00;
 			delete costo.$$hashKey;
 		});
 		this.presupuesto.costos = costos;
-		console.log(this.presupuesto);
+		//console.log(this.presupuesto);
 		Presupuestos.insert(this.presupuesto);
 		toastr.success('presupuesto Agregado.');
 		this.presupuesto = {};
@@ -1065,7 +1068,7 @@ totalPresupuestoTotal = 0.00;
 	
 	this.actualizar = function(plan,costos)
 	{
-		console.log(costos);
+		//console.log(costos);
 		this.plan.totalFinalCostosDirectos = rc.totalFinalCostosDirectos;
 		rc.plan.costos = costos;
 		var idTemp = plan._id;
@@ -1076,12 +1079,12 @@ totalPresupuestoTotal = 0.00;
 		Planes.update({_id:idTemp},{$set:plan});
 		$('.collapse').collapse('hide');
 		this.nuevo = true;
-		console.log(rc.plan);
+		//console.log(rc.plan);
 	};
 this.actCam = true;
 	this.actualizarCambios = function(plan,costos,id)
 	{
-		console.log(costos);
+		//console.log(costos);
 		rc.plan.costos = costos;
 		var idTemp = plan._id;
 		delete plan._id;
@@ -1091,7 +1094,7 @@ this.actCam = true;
 		Planes.update({_id:idTemp},{$set:plan});
 		this.plan = Planes.findOne({_id:id});
 	
-		console.log(rc.plan);
+		//console.log(rc.plan);
 	};
 
 	this.editarCambios = function(id)
@@ -1104,7 +1107,7 @@ this.actCam = true;
 		//_.each(rc.costosTotales, function(costo){
 			//rc.totalPor = costo.valor / rc.totalCosto ;
 		//});
-		//console.log("arreglo", rc.costosTotales)
+		////console.log("arreglo", rc.costosTotales)
 	};	
 		
 	this.cambiarEstatus = function(id)
@@ -1146,7 +1149,7 @@ this.actCam = true;
 		var periodos = Periodos.find().fetch();
 		_.each(rc.getReactively("periodosPorObra"),function(periodo)
 		  {total += periodo.contadoIva + periodo.contadoSinIva});
-			//console.log(total);
+			////console.log(total);
 		return total
 	};
 	this.gastosMasCostosTotales = function()
@@ -1183,7 +1186,7 @@ this.cobrosTotales = function()
 		_.each(rc.getReactively("cobrosParaCobrar"),function(cobro)
 		  {total += cobro.cIva + cobro.cSinIva});
 		rc.cargo = total
-//console.log(total)
+////console.log(total)
 		return total
 	};
 	this.pagosProveedoresTotales = function()
@@ -1191,7 +1194,7 @@ this.cobrosTotales = function()
 		total = 0;
 		_.each(rc.getReactively("pagosTodos"),function(pago)
 		  {total += pago.pIva + pago.pSinIva});
-			//console.log(total);
+			////console.log(total);
 		return total
 	};
 
@@ -1200,7 +1203,7 @@ this.cobrosTotales = function()
 		total = 0;
 		oficinas = GastosOficina.find().fetch()
 		_.each(oficinas,function(gasto){total += gasto.importeFijo + gasto.importeVar});
-		//console.log(total)
+		////console.log(total)
 		return total
 	};
 	this.camposTotales2=function(){
@@ -1214,7 +1217,7 @@ this.cobrosTotales = function()
 
 	
 
-		//console.log(totalCobros)
+		////console.log(totalCobros)
 		return totalCobros
 	};
 
@@ -1231,9 +1234,9 @@ this.cobrosTotales = function()
 			});
 		});
 
-	//console.log(totalCobros)
+	////console.log(totalCobros)
 
-		//console.log(totalCobros)
+		////console.log(totalCobros)
 		return totalCobros
 	};
 
@@ -1250,9 +1253,9 @@ this.cobrosTotales = function()
 			});
 		});
 
-	//console.log(totalCobros)
+	////console.log(totalCobros)
 
-		//console.log(totalCobros)
+		////console.log(totalCobros)
 		return totalCobros
 	};
 
@@ -1263,7 +1266,7 @@ this.cobrosTotales = function()
 			_.each(cobros,function(cobro){
 					totalIngresos += cobro.cIva + cobro.cSinIva
 			})
-		//console.log(totalIngresos)
+		////console.log(totalIngresos)
 		return totalIngresos
  	};
 
@@ -1277,7 +1280,7 @@ this.cobrosTotales = function()
 					totalIngresos += cobro.cIva + cobro.cSinIva
 			
 			});
-		//console.log(totalIngresos)
+		////console.log(totalIngresos)
 		return totalIngresos
  	};
 
@@ -1291,7 +1294,7 @@ this.cobrosTotales = function()
 					totalIngresos += cobro.cIva + cobro.cSinIva
 			
 			});
-		//console.log(totalIngresos)
+		////console.log(totalIngresos)
 		return totalIngresos
  	};
 

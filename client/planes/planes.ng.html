@@ -145,7 +145,7 @@
 							    </tr>
 							    <tr>
 							    <th  width="20%" style="font-size: 18px;"><div class="text-center">ISR</div></th>
-							    <td  width="20%" style="font-size: 15px;">{{((pl.plan.ingresos)- (pl.totalFinalCostosDirectos) - (((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos))) * 0.3 | number : 2 }}</td>
+							    <td  width="20%" style="font-size: 15px;">{{((pl.plan.ingresos)- (pl.totalFinalCostosDirectos) - (((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos))) * (pl.plan.isr/100)| number : 2 }}</td>
 							    
 							    </tr>
 							    <tr>
@@ -156,14 +156,14 @@
 							    <tr>
 							    <th  width="20%" style="font-size: 18px;"><div class="text-center">Utilidad Neta</div></th>
 							    <td  width="20%" style="font-size: 15px;">{{(((pl.plan.ingresos)- (pl.totalFinalCostosDirectos) - (((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos))) - 
-							    (((pl.plan.ingresos)- (pl.totalFinalCostosDirectos) - (((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos))) * 0.3)-
+							    (((pl.plan.ingresos)- (pl.totalFinalCostosDirectos) - (((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos))) * (pl.plan.isr/100))-
 							     (((pl.plan.ingresos)- (pl.totalFinalCostosDirectos) - (((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos))) * 0.1 ))  | currency}}</td>
 							    
 							    </tr>
 							    <tr>
 							    <th  width="20%" style="font-size: 18px;"> <div class="text-center">Rentabilidad</div></th>
 							    <td  width="20%" style="font-size: 15px;">{{((((pl.plan.ingresos)- (pl.totalFinalCostosDirectos) - (((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos))) - 
-							    (((pl.plan.ingresos)- (pl.totalFinalCostosDirectos) - (((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos))) * 0.3)-
+							    (((pl.plan.ingresos)- (pl.totalFinalCostosDirectos) - (((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos))) * (pl.plan.isr/100))-
 							     (((pl.plan.ingresos)- (pl.totalFinalCostosDirectos) - (((pl.plan.ingresos) / (1/(1-((100/(100 -(10 + pl.plan.isr)))*(pl.plan.trema/100))))) -  (pl.totalFinalCostosDirectos))) * 0.1 ))) / (pl.plan.ingresos)*100 | number:2}}%</td>
 							    
 							    </tr>
@@ -500,8 +500,8 @@
 							<thead>
 							<tr>
 							<th style="font-size: 18px;"><div class="text-center">Estados de resultados</div></th>
-							<th style="font-size: 18px;"><div class="text-center">Proyectado</div></th>
-							<th> <div class="text-center" style="font-size: 18px;">Obra ejecutada</div></th>
+							<th style="font-size: 18px;"><div class="text-center">Ejecutado</div></th>
+							<th> <div class="text-center" style="font-size: 18px;">Ejecutado cobrado</div></th>
 							<th> <div class="text-center" style="font-size: 18px;">Economico Actual</div></th>
 							</tr>
 								<tr>
